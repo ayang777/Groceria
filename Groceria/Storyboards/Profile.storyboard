@@ -23,16 +23,38 @@
                                 <state key="normal" title="Sign Out">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="pressedSignOut:" destination="TkV-bC-Giv" eventType="touchUpInside" id="Emm-WZ-NxG"/>
+                                    <segue destination="flQ-lA-y1u" kind="presentation" identifier="logOut" animates="NO" modalPresentationStyle="fullScreen" id="XV2-bF-Bb1"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="xGf-nS-Rpa"/>
                     </view>
                     <navigationItem key="navigationItem" id="tHX-ep-TcD"/>
+                    <connections>
+                        <outlet property="signOutButton" destination="sOV-qa-J9u" id="Zzc-VQ-toM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NbS-SA-BmZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="133" y="108"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="cxa-ho-4HM">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="flQ-lA-y1u" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="eqk-Qd-D6g"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZIU-JR-mZ9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="861" y="-163"/>
         </scene>
         <!--Profile-->
         <scene sceneID="6I3-Hq-QWv">
@@ -41,8 +63,8 @@
                     <tabBarItem key="tabBarItem" title="Profile" image="profile" id="KkQ-PS-adP"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="PKa-UM-ND2">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="PKa-UM-ND2">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

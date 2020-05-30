@@ -7,21 +7,58 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Palo Alto-->
         <scene sceneID="Sn9-ru-XhF">
             <objects>
-                <viewController id="okw-Om-ydy" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tl1-vi-NmT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="okw-Om-ydy" customClass="InitialDashboardScreen" customModule="Groceria" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VqS-yx-uQp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d0h-EO-1Xk">
+                                <rect key="frame" x="218" y="391" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="ly0-V0-kCC" kind="show" id="ck8-03-zbT"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="uAa-pS-nF8"/>
                     </view>
-                    <navigationItem key="navigationItem" id="7ah-U8-jiN"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Palo Alto" id="7ah-U8-jiN">
+                        <barButtonItem key="backBarButtonItem" title=" " id="QPI-v2-zST"/>
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="ynG-7m-1OZ">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Tl1-vi-NmT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="981" y="-31"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="2gc-uB-GSF">
+            <objects>
+                <viewController id="ly0-V0-kCC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZpW-jM-o1U">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="wrV-zQ-GaT"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="7AA-mq-D2b">
+                        <barButtonItem key="backBarButtonItem" title=" " id="oZ5-qy-I56">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9FQ-3O-mAV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1731.8840579710147" y="-31.473214285714285"/>
         </scene>
         <!--Dashboard-->
         <scene sceneID="2Vg-J7-cx8">
@@ -30,8 +67,8 @@
                     <tabBarItem key="tabBarItem" title="Dashboard" image="dashboard" id="dtc-99-FYk"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="8Nk-I3-H2V">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8Nk-I3-H2V">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -46,5 +83,6 @@
     </scenes>
     <resources>
         <image name="dashboard" width="30" height="30"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
     </resources>
 </document>

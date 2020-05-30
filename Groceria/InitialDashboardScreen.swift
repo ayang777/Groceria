@@ -1,5 +1,5 @@
 //
-//  InitialProfileScreen.swift
+//  InitialDashboardScreen.swift
 //  Groceria
 //
 //  Created by Angela Luo on 5/30/20.
@@ -8,10 +8,8 @@
 
 import UIKit
 
-class InitialProfileScreen: UIViewController {
-    
-    @IBOutlet weak var signOutButton: UIButton!
-    
+class InitialDashboardScreen: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,23 +27,8 @@ class InitialProfileScreen: UIViewController {
             self.navigationController?.navigationBar.layoutIfNeeded()
         }
         
-        
-        //create drop shadow effect for login button
-        signOutButton.layer.shadowColor = UIColor.black.cgColor
-        signOutButton.layer.shadowRadius = 2.0
-        signOutButton.layer.shadowOpacity = 0.7
-        signOutButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        signOutButton.layer.masksToBounds = false
-        
-        let buttonColor1 = UIColor(red: 82.0/255.0, green: 152.0/255.0, blue: 217.0/255.0, alpha: 1.0)
-        let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
-        signOutButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
-        
     }
     
-    @IBAction func pressedSignOut(_ sender: Any) {
-        performSegue(withIdentifier: "logOut", sender: nil)
-    }
     
     //convert gradient layer to an image to set the top header's background
     func getImageFrom(gradientLayer:CAGradientLayer) -> UIImage? {
@@ -58,6 +41,5 @@ class InitialProfileScreen: UIViewController {
         UIGraphicsEndImageContext()
         return gradientImage
     }
-    
-    
+
 }
