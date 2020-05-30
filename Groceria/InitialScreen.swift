@@ -8,10 +8,11 @@
 
 import UIKit
 
-class InitialScreen: UIViewController {
+class InitialScreen: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var groceriaTitle: UILabel!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var signUpButton: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,14 +48,63 @@ class InitialScreen: UIViewController {
         let buttonColor1 = UIColor(red: 82.0/255.0, green: 152.0/255.0, blue: 217.0/255.0, alpha: 1.0)
         let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
         loginButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
+        
+        //add gesture to sign up button
+        let signUpGesture = UITapGestureRecognizer(target: self, action: #selector(InitialScreen.goToCreateAccount))
+        signUpButton.addGestureRecognizer(signUpGesture)
     }
+    
+    @IBAction func goToDashboard(_ sender: Any) {
+        performSegue(withIdentifier: "goToDashboardFromLogin", sender: nil)
+    }
+    
+    @objc func goToCreateAccount(gestureRecognizer: UIGestureRecognizer) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "CreateAccount")
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        print("textFieldShouldReturn")
+//        textField.resignFirstResponder()
+//        return true
+//    }
+//
+//    // It is called before text field become active
+//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+//        textField.backgroundColor = UIColor.lightGray
+//        return true
+//    }
+//
+//    // It is called when text field activated
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        print("textFieldDidBeginEditing")
+//    }
+//
+//    // It is called when text field going to inactive
+//    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+//        textField.backgroundColor = UIColor.white
+//        return true
+//    }
+//
+//    // It is called when text field is inactive
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        print("textFieldDidEndEditing")
+//    }
+//
+//    // It is called each time user type a character by keyboard
+//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+//        print(string)
+//        return true
+//    }
 
 
 }
 
 
-extension UIButton
-{
+extension UIButton {
     func applyGradient(colors: [CGColor])
     {
         let gradientLayer = CAGradientLayer()

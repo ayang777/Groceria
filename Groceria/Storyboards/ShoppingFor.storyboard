@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="AbL-4i-ANN">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="NeR-ov-zKu">
+            <objects>
+                <viewController id="HIR-gV-hUw" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8Cq-zv-4dl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="p6U-60-fDn"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="CbE-SX-xu7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dP6-SZ-fQH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="498.55072463768118" y="-12.053571428571429"/>
+        </scene>
+        <!--Shopping For-->
+        <scene sceneID="ApF-rS-d5p">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="AbL-4i-ANN" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Shopping For" image="shoppingfor" id="up1-R2-Ftc"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="2bI-wm-EBv">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="HIR-gV-hUw" kind="relationship" relationship="rootViewController" id="9TD-Bx-whC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zxe-Ux-oh9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-413.04347826086962" y="-12.053571428571429"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="shoppingfor" width="30" height="30"/>
+    </resources>
+</document>

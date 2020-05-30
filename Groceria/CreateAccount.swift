@@ -8,23 +8,60 @@
 
 import UIKit
 
-class CreateAccount: UIViewController {
+class CreateAccount: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var accountLabel: UILabel!
+    @IBOutlet weak var nextLabel: UILabel!
+    @IBOutlet weak var signInLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let gradient = CAGradientLayer()
+        gradient.frame = self.view.bounds
+        let color1 = UIColor(red:157.0/255.0, green: 115.0/255.0, blue:195.0/255.0, alpha:0.8)
+        let color2 = UIColor(red:218.0/255.0, green:93.0/255.0, blue:102.0/255.0, alpha:0.8)
+        gradient.colors = [color1.cgColor, color2.cgColor]
+        gradient.shouldRasterize = true
+        self.view.layer.insertSublayer(gradient, at:0)
+        
+        
+        //create drop shadow effect for Account title
+        accountLabel.layer.shadowColor = UIColor.gray.cgColor
+        accountLabel.layer.shadowRadius = 3.0
+        accountLabel.layer.shadowOpacity = 0.7
+        accountLabel.layer.shadowOffset = CGSize(width: 3, height: 3)
+        accountLabel.layer.masksToBounds = false
+        
+        //add gesture to next label
+        let goToAddressPage = UITapGestureRecognizer(target: self, action: #selector(CreateAccount.goToAddressPage))
+        nextLabel.addGestureRecognizer(goToAddressPage)
+        
+        
+        //add gesture to sign in label
+        let backToInitialScreen = UITapGestureRecognizer(target: self, action: #selector(CreateAccount.goBackToInitialScreen))
+        signInLabel.addGestureRecognizer(backToInitialScreen)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @objc func goBackToInitialScreen(gestureRecognizer: UIGestureRecognizer) {
+        self.dismiss(animated: true, completion: nil)
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "InitialScreen")
+//        vc.modalPresentationStyle = .fullScreen
+//        self.present(vc, animated: true, completion: nil)
     }
-    */
+    
+    
+    //might want to make this a navigation controller
+    @objc func goToAddressPage(gestureRecognizer: UIGestureRecognizer) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "AddressSignUp")
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+
 
 }
