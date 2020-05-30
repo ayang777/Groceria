@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		671990C92482398A00F65094 /* CreateAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671990C82482398A00F65094 /* CreateAccount.swift */; };
 		67A3D5B9246DC96700E05DC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D5B8246DC96700E05DC2 /* AppDelegate.swift */; };
 		67A3D5BB246DC96700E05DC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D5BA246DC96700E05DC2 /* SceneDelegate.swift */; };
 		67A3D5BD246DC96700E05DC2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D5BC246DC96700E05DC2 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		671990C82482398A00F65094 /* CreateAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccount.swift; sourceTree = "<group>"; };
 		67A3D5B5246DC96700E05DC2 /* Groceria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groceria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A3D5B8246DC96700E05DC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67A3D5BA246DC96700E05DC2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				67A3D5B8246DC96700E05DC2 /* AppDelegate.swift */,
 				67A3D5BA246DC96700E05DC2 /* SceneDelegate.swift */,
 				67A3D5BC246DC96700E05DC2 /* ViewController.swift */,
+				671990C82482398A00F65094 /* CreateAccount.swift */,
 				67A3D5BE246DC96700E05DC2 /* Main.storyboard */,
 				67A3D5C1246DC96A00E05DC2 /* Assets.xcassets */,
 				67A3D5C3246DC96A00E05DC2 /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 				67A3D5BD246DC96700E05DC2 /* ViewController.swift in Sources */,
 				67A3D5B9246DC96700E05DC2 /* AppDelegate.swift in Sources */,
 				67A3D5BB246DC96700E05DC2 /* SceneDelegate.swift in Sources */,
+				671990C92482398A00F65094 /* CreateAccount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

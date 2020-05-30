@@ -8,7 +8,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class InitialScreen: UIViewController {
+    
+    @IBOutlet weak var groceriaTitle: UILabel!
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +28,42 @@ class ViewController: UIViewController {
         gradient.shouldRasterize = true
         // backgroundGradientView.layer.addSublayer(gradient)
         self.view.layer.insertSublayer(gradient, at:0)
+        
+        
+        //create drop shadow effect for Groceria title
+        groceriaTitle.layer.shadowColor = UIColor.gray.cgColor
+        groceriaTitle.layer.shadowRadius = 3.0
+        groceriaTitle.layer.shadowOpacity = 0.7
+        groceriaTitle.layer.shadowOffset = CGSize(width: 3, height: 3)
+        groceriaTitle.layer.masksToBounds = false
+        
+        //create drop shadow effect for login button
+        loginButton.layer.shadowColor = UIColor.black.cgColor
+        loginButton.layer.shadowRadius = 2.0
+        loginButton.layer.shadowOpacity = 0.7
+        loginButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        loginButton.layer.masksToBounds = false
+        
+        let buttonColor1 = UIColor(red: 82.0/255.0, green: 152.0/255.0, blue: 217.0/255.0, alpha: 1.0)
+        let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
+        loginButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
     }
 
 
+}
+
+
+extension UIButton
+{
+    func applyGradient(colors: [CGColor])
+    {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = colors
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 0, y: 1)
+        gradientLayer.frame = self.bounds
+        gradientLayer.cornerRadius = self.layer.cornerRadius
+        self.layer.insertSublayer(gradientLayer, at: 0)
+    }
 }
 
