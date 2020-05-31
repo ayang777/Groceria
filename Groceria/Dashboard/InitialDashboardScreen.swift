@@ -13,6 +13,7 @@ class InitialDashboardScreen: UIViewController {
     var requests: [DashboardRequestModel] = []
     var cellName: String = ""
     var cellNumItems: Int = 0
+    var requestItems: [DashboardRequestModel.ShoppingItem] = []
     
     @IBOutlet weak var listOfRequests: UITableView!
     
@@ -49,15 +50,25 @@ class InitialDashboardScreen: UIViewController {
     func createRequests() -> [DashboardRequestModel] {
         var tempRequests: [DashboardRequestModel] = []
         
-        let request1 = DashboardRequestModel(name: "Jane Doe", numberOfItems: 4)
-        let request2 = DashboardRequestModel(name: "Jim Smith", numberOfItems: 2)
-        let request3 = DashboardRequestModel(name: "Angela Luo", numberOfItems: 10)
-        let request4 = DashboardRequestModel(name: "Anna Yang", numberOfItems: 7)
-        let request5 = DashboardRequestModel(name: "Michael Smith", numberOfItems: 1)
-        let request6 = DashboardRequestModel(name: "Jimmy Neutron", numberOfItems: 11)
-        let request7 = DashboardRequestModel(name: "Timmy Turner", numberOfItems: 5)
-        let request8 = DashboardRequestModel(name: "Persis Drell", numberOfItems: 4)
-        let request9 = DashboardRequestModel(name: "Ariana Grande", numberOfItems: 2)
+        let sampleItems1 = [DashboardRequestModel.ShoppingItem(title: "Eggs"), DashboardRequestModel.ShoppingItem(title: "Bread"), DashboardRequestModel.ShoppingItem(title: "Milk"), DashboardRequestModel.ShoppingItem(title: "Water")]
+        
+        let sampleItems2 = [DashboardRequestModel.ShoppingItem(title: "Carrots"), DashboardRequestModel.ShoppingItem(title: "Squash")]
+        
+        let sampleItems3 = [DashboardRequestModel.ShoppingItem(title: "Granola Bars")]
+        
+        let sampleItems4 = [DashboardRequestModel.ShoppingItem(title: "Orange Juice"), DashboardRequestModel.ShoppingItem(title: "Twinkies"), DashboardRequestModel.ShoppingItem(title: "Sandies"), DashboardRequestModel.ShoppingItem(title: "Gushers")]
+        
+        let sampleItems5 = [DashboardRequestModel.ShoppingItem(title: "Oreos"), DashboardRequestModel.ShoppingItem(title: "Milk")]
+        
+        let request1 = DashboardRequestModel(name: "Jane Doe", numberOfItems: 4, items: sampleItems1)
+        let request2 = DashboardRequestModel(name: "Jim Smith", numberOfItems: 2, items: sampleItems2)
+        let request3 = DashboardRequestModel(name: "Angela Luo", numberOfItems: 10, items: [])
+        let request4 = DashboardRequestModel(name: "Anna Yang", numberOfItems: 7, items: [])
+        let request5 = DashboardRequestModel(name: "Michael Smith", numberOfItems: 1, items: sampleItems3)
+        let request6 = DashboardRequestModel(name: "Jimmy Neutron", numberOfItems: 11, items: [])
+        let request7 = DashboardRequestModel(name: "Timmy Turner", numberOfItems: 5, items: [])
+        let request8 = DashboardRequestModel(name: "Persis Drell", numberOfItems: 4, items: sampleItems4)
+        let request9 = DashboardRequestModel(name: "Ariana Grande", numberOfItems: 2, items: sampleItems5)
         
         
         tempRequests.append(request1)
@@ -107,18 +118,22 @@ extension InitialDashboardScreen: UITableViewDataSource, UITableViewDelegate {
         return 88 //height of a single list item
     }
     
+    //called when a cell is selected
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         cellName = requests[indexPath.row].nameOfPerson
         cellNumItems = requests[indexPath.row].numberOfItems
+        requestItems = requests[indexPath.row].items
         performSegue(withIdentifier: "goToSingleRequestView", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    //pass data to the next view controller
     override func prepare(for segue: UIStoryboardSegue, sender: (Any)?) {
         if (segue.identifier == "goToSingleRequestView") {
             let viewController = segue.destination as! SingleRequestView
             viewController.name = cellName
             viewController.numItems = cellNumItems
+            viewController.items = requestItems
         }
 
     }
