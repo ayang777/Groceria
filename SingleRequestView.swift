@@ -19,6 +19,7 @@ class SingleRequestView: UIViewController {
     var name: String = ""
     var numItems: Int = 0
     var items: [DashboardRequestModel.ShoppingItem] = []
+    var request: DashboardRequestModel = DashboardRequestModel(name: "", numberOfItems: 0, items: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +80,20 @@ class SingleRequestView: UIViewController {
         return gradientImage
     }
     
+    
+    @IBAction func fulfillRequest(_ sender: Any) {
+        let navController = tabBarController?.viewControllers![1] as! UINavigationController
+        let vc = navController.topViewController as! InitialShoppingForScreen
+        
+        vc.isShoppingFor = true
+        vc.listOfRequests.append(request)
+
+        vc.setUpConditionalScreen()
+        
+        tabBarController?.selectedIndex = 1
+    }
+    
+    
 }
 
 
@@ -95,6 +110,13 @@ extension SingleRequestView: UITableViewDataSource, UITableViewDelegate {
         cell.setItem(item: item)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let message = items[indexPath.row].extraInfo ?? "None"
+        let alert = UIAlertController(title: "Additional Details", message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
 //    {
@@ -103,10 +125,7 @@ extension SingleRequestView: UITableViewDataSource, UITableViewDelegate {
 
     //called when a cell is selected
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        cellName = requests[indexPath.row].nameOfPerson
-//        cellNumItems = requests[indexPath.row].numberOfItems
-//        performSegue(withIdentifier: "goToSingleRequestView", sender: self)
-//        tableView.deselectRow(at: indexPath, animated: true)
+//        print("pressed")
 //    }
 
     //pass data to the next view controller

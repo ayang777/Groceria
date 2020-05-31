@@ -10,33 +10,44 @@ import UIKit
 
 class InitialMyItemsScreen: UIViewController {
     
-    var hasItems: Bool = false
+    var hasItems: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //setting up header gradient
-        let gradient = CAGradientLayer()
-        gradient.frame = self.navigationController!.navigationBar.bounds
-        let color1 = UIColor(red:157.0/255.0, green: 115.0/255.0, blue:195.0/255.0, alpha:0.8)
-        let color2 = UIColor(red:218.0/255.0, green:93.0/255.0, blue:102.0/255.0, alpha:0.8)
-        gradient.colors = [color1.cgColor, color2.cgColor]
-        gradient.shouldRasterize = true
-        
-        if let image = getImageFrom(gradientLayer: gradient) {
-            self.navigationController!.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
-            self.navigationController?.navigationBar.shadowImage = UIImage()
-            self.navigationController?.navigationBar.layoutIfNeeded()
-        }
-
+        setUpConditionalScreen()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setUpConditionalScreen()
+    }
+    
+    func setUpConditionalScreen() {
+        clearScreen()
         if hasItems {
-            print("hello")
-        } else {
-            for view in self.view.subviews {
-                view.removeFromSuperview()
+            //setting up header gradient
+            let gradient = CAGradientLayer()
+            gradient.frame = self.navigationController!.navigationBar.bounds
+            let color1 = UIColor(red:157.0/255.0, green: 115.0/255.0, blue:195.0/255.0, alpha:0.8)
+            let color2 = UIColor(red:218.0/255.0, green:93.0/255.0, blue:102.0/255.0, alpha:0.8)
+            gradient.colors = [color1.cgColor, color2.cgColor]
+            gradient.shouldRasterize = true
+            
+            if let image = getImageFrom(gradientLayer: gradient) {
+                self.navigationController!.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
+                self.navigationController?.navigationBar.shadowImage = UIImage()
+                self.navigationController?.navigationBar.layoutIfNeeded()
             }
+        } else {
             setUpEmptyScreen()
         }
+    }
+    
+    
+    func clearScreen() {
+        for view in self.view.subviews {
+            view.removeFromSuperview()
+        }
+        self.view.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
     }
     
     

@@ -14,10 +14,21 @@
                     <view key="view" contentMode="scaleToFill" id="56l-TB-BGo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsL-uj-XLq">
+                                <rect key="frame" x="141" y="123" width="132" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="30"/>
+                                <color key="textColor" red="0.85490196080000003" green="0.36470588240000001" blue="0.40000000000000002" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="yny-Mx-az4"/>
                     </view>
-                    <navigationItem key="navigationItem" id="t8B-tV-GLm"/>
+                    <navigationItem key="navigationItem" id="t8B-tV-GLm">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="U9z-oT-z5c"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zzb-Cx-lvP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -46,5 +57,6 @@
     </scenes>
     <resources>
         <image name="myitems" width="30" height="30"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
     </resources>
 </document>

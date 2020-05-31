@@ -14,6 +14,7 @@ class InitialDashboardScreen: UIViewController {
     var cellName: String = ""
     var cellNumItems: Int = 0
     var requestItems: [DashboardRequestModel.ShoppingItem] = []
+    var request: DashboardRequestModel = DashboardRequestModel(name: "", numberOfItems: 0, items: [])
     
     @IBOutlet weak var listOfRequests: UITableView!
     
@@ -50,7 +51,7 @@ class InitialDashboardScreen: UIViewController {
     func createRequests() -> [DashboardRequestModel] {
         var tempRequests: [DashboardRequestModel] = []
         
-        let sampleItems1 = [DashboardRequestModel.ShoppingItem(title: "Eggs"), DashboardRequestModel.ShoppingItem(title: "Bread"), DashboardRequestModel.ShoppingItem(title: "Milk"), DashboardRequestModel.ShoppingItem(title: "Water")]
+        let sampleItems1 = [DashboardRequestModel.ShoppingItem(title: "Eggs", extraInfo: "one dozen, triple A eggs"), DashboardRequestModel.ShoppingItem(title: "Bread"), DashboardRequestModel.ShoppingItem(title: "Milk", extraInfo: "2 percent"), DashboardRequestModel.ShoppingItem(title: "Water")]
         
         let sampleItems2 = [DashboardRequestModel.ShoppingItem(title: "Carrots"), DashboardRequestModel.ShoppingItem(title: "Squash")]
         
@@ -123,6 +124,7 @@ extension InitialDashboardScreen: UITableViewDataSource, UITableViewDelegate {
         cellName = requests[indexPath.row].nameOfPerson
         cellNumItems = requests[indexPath.row].numberOfItems
         requestItems = requests[indexPath.row].items
+        request = requests[indexPath.row]
         performSegue(withIdentifier: "goToSingleRequestView", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -134,6 +136,7 @@ extension InitialDashboardScreen: UITableViewDataSource, UITableViewDelegate {
             viewController.name = cellName
             viewController.numItems = cellNumItems
             viewController.items = requestItems
+            viewController.request = request
         }
     }
 }

@@ -30,6 +30,7 @@
 		67A3D5C5246DC96A00E05DC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A3D5C3246DC96A00E05DC2 /* LaunchScreen.storyboard */; };
 		67AF5AF124838C0C0076A876 /* InitialShoppingForScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AF5AF024838C0C0076A876 /* InitialShoppingForScreen.swift */; };
 		67AF5AF32483A1980076A876 /* InitialMyItemsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AF5AF22483A1980076A876 /* InitialMyItemsScreen.swift */; };
+		67AF5AF5248434CC0076A876 /* CreateRequest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67AF5AF4248434CC0076A876 /* CreateRequest.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		67A3D5C6246DC96A00E05DC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67AF5AF024838C0C0076A876 /* InitialShoppingForScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialShoppingForScreen.swift; sourceTree = "<group>"; };
 		67AF5AF22483A1980076A876 /* InitialMyItemsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialMyItemsScreen.swift; sourceTree = "<group>"; };
+		67AF5AF4248434CC0076A876 /* CreateRequest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateRequest.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				671990CF2482610100F65094 /* Profile.storyboard */,
 				671990D12482622300F65094 /* ShoppingFor.storyboard */,
 				671990D32482626100F65094 /* MyItems.storyboard */,
+				67AF5AF4248434CC0076A876 /* CreateRequest.storyboard */,
 				671990CD2482602E00F65094 /* Dashboard.storyboard */,
 				67A3D5C3246DC96A00E05DC2 /* LaunchScreen.storyboard */,
 			);
@@ -212,6 +215,7 @@
 				671990D42482626100F65094 /* MyItems.storyboard in Resources */,
 				67A3D5C2246DC96A00E05DC2 /* Assets.xcassets in Resources */,
 				671990D02482610100F65094 /* Profile.storyboard in Resources */,
+				67AF5AF5248434CC0076A876 /* CreateRequest.storyboard in Resources */,
 				67A3D5C0246DC96700E05DC2 /* Main.storyboard in Resources */,
 				671990D22482622300F65094 /* ShoppingFor.storyboard in Resources */,
 				671990CE2482602E00F65094 /* Dashboard.storyboard in Resources */,

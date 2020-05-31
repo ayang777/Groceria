@@ -30,9 +30,11 @@ class DashboardRequestModel {
         var extraInfo: String?
         var picture: UIImage?
         
-        init(title: String) {
+        init(title: String, extraInfo: String? = nil, picture: UIImage? = nil) {
             self.id = UUID()
             self.title = title
+            self.extraInfo = extraInfo
+            self.picture = picture
         }
     }
 }

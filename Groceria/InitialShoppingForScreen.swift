@@ -10,31 +10,62 @@ import UIKit
 
 class InitialShoppingForScreen: UIViewController {
     
-    var isShoppingFor: Bool = true
+    @Published var isShoppingFor: Bool = false
+    var listOfRequests: [DashboardRequestModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpConditionalScreen()
         
-        //setting up header gradient
-        let gradient = CAGradientLayer()
-        gradient.frame = self.navigationController!.navigationBar.bounds
-        let color1 = UIColor(red:157.0/255.0, green: 115.0/255.0, blue:195.0/255.0, alpha:0.8)
-        let color2 = UIColor(red:218.0/255.0, green:93.0/255.0, blue:102.0/255.0, alpha:0.8)
-        gradient.colors = [color1.cgColor, color2.cgColor]
-        gradient.shouldRasterize = true
-        
-        if let image = getImageFrom(gradientLayer: gradient) {
-            self.navigationController!.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
-            self.navigationController?.navigationBar.shadowImage = UIImage()
-            self.navigationController?.navigationBar.layoutIfNeeded()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setUpConditionalScreen()
+    }
+    
+    func clearScreen() {
+        for view in self.view.subviews {
+            view.removeFromSuperview()
         }
-
+        self.view.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+    }
+    
+    
+    func setUpConditionalScreen() {
+        clearScreen()
         if isShoppingFor {
-            print("hello")
-        } else {
-            for view in self.view.subviews {
-                view.removeFromSuperview()
+            self.navigationController?.isNavigationBarHidden = false
+            
+            //setting up header gradient
+            let gradient = CAGradientLayer()
+            gradient.frame = self.navigationController!.navigationBar.bounds
+            let color1 = UIColor(red:157.0/255.0, green: 115.0/255.0, blue:195.0/255.0, alpha:0.8)
+            let color2 = UIColor(red:218.0/255.0, green:93.0/255.0, blue:102.0/255.0, alpha:0.8)
+            gradient.colors = [color1.cgColor, color2.cgColor]
+            gradient.shouldRasterize = true
+            
+            if let image = getImageFrom(gradientLayer: gradient) {
+                self.navigationController!.navigationBar.setBackgroundImage(image, for: UIBarMetrics.default)
+                self.navigationController?.navigationBar.shadowImage = UIImage()
+                self.navigationController?.navigationBar.layoutIfNeeded()
             }
+            
+            //testing
+            let topLabel = UILabel(frame: CGRect(x: 70, y: 351, width: 299, height: 60))
+            topLabel.textAlignment = .center
+            topLabel.text = listOfRequests[0].nameOfPerson
+            topLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
+            topLabel.sizeToFit()
+            self.view.addSubview(topLabel)
+            
+            let label = UILabel(frame: CGRect(x: 100, y: 100, width: 299, height: 60))
+            label.textAlignment = .center
+            label.text = String(listOfRequests.count)
+            label.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
+            label.sizeToFit()
+            self.view.addSubview(label)
+            
+        } else {
             setUpEmptyScreen()
         }
     }
