@@ -41,6 +41,7 @@ class InitialProfileScreen: UIViewController {
         let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
         signOutButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
         
+        
     }
     
     @IBAction func pressedSignOut(_ sender: Any) {

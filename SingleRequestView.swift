@@ -1,5 +1,5 @@
 //
-//  InitialDashboardScreen.swift
+//  SingleRequestView.swift
 //  Groceria
 //
 //  Created by Angela Luo on 5/30/20.
@@ -8,11 +8,18 @@
 
 import UIKit
 
-class InitialDashboardScreen: UIViewController {
+class SingleRequestView: UIViewController {
 
+    @IBOutlet weak var nameOfPerson: UILabel!
+    @IBOutlet weak var storeName: UILabel!
+    @IBOutlet weak var numberOfItems: UILabel!
+    
+    var name: String = ""
+    var numItems: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         //setting up header gradient
         let gradient = CAGradientLayer()
         gradient.frame = self.navigationController!.navigationBar.bounds
@@ -27,8 +34,12 @@ class InitialDashboardScreen: UIViewController {
             self.navigationController?.navigationBar.layoutIfNeeded()
         }
         
+        nameOfPerson.text = name
+        nameOfPerson.sizeToFit()
+        
+        numberOfItems.text = "Items: \(numItems)"
+        numberOfItems.sizeToFit()
     }
-    
     
     //convert gradient layer to an image to set the top header's background
     func getImageFrom(gradientLayer:CAGradientLayer) -> UIImage? {
@@ -41,5 +52,5 @@ class InitialDashboardScreen: UIViewController {
         UIGraphicsEndImageContext()
         return gradientImage
     }
-
+    
 }
