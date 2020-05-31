@@ -10,7 +10,7 @@
         <!--Palo Alto-->
         <scene sceneID="Sn9-ru-XhF">
             <objects>
-                <viewController id="okw-Om-ydy" customClass="InitialDashboardScreen" customModule="Groceria" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InitialDashboardScreen" id="okw-Om-ydy" customClass="InitialDashboardScreen" customModule="Groceria" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VqS-yx-uQp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

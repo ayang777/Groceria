@@ -135,6 +135,5 @@ extension InitialDashboardScreen: UITableViewDataSource, UITableViewDelegate {
             viewController.numItems = cellNumItems
             viewController.items = requestItems
         }
-
     }
 }

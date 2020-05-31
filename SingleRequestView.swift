@@ -48,6 +48,13 @@ class SingleRequestView: UIViewController {
         view.insertSubview(backgroundView, at: 0)
         
         
+        //create drop shadow effect for login button
+        fulfillButton.layer.shadowColor = UIColor.black.cgColor
+        fulfillButton.layer.shadowRadius = 2.0
+        fulfillButton.layer.shadowOpacity = 0.7
+        fulfillButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        fulfillButton.layer.masksToBounds = false
+        
         let buttonColor1 = UIColor(red: 82.0/255.0, green: 152.0/255.0, blue: 217.0/255.0, alpha: 1.0)
         let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
         fulfillButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])

@@ -20,12 +20,16 @@
 		671990E12483385200F65094 /* SingleRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671990E02483385200F65094 /* SingleRequestView.swift */; };
 		671990E32483657A00F65094 /* ShoppingItemInactiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671990E22483657900F65094 /* ShoppingItemInactiveCell.swift */; };
 		671990E5248373B100F65094 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671990E4248373B100F65094 /* SettingsTableViewController.swift */; };
+		671990E92483847D00F65094 /* ShoppingForNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671990E82483847D00F65094 /* ShoppingForNavigationController.swift */; };
+		671990EB2483863800F65094 /* EmptyShoppingForScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671990EA2483863700F65094 /* EmptyShoppingForScreen.swift */; };
 		67A3D5B9246DC96700E05DC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D5B8246DC96700E05DC2 /* AppDelegate.swift */; };
 		67A3D5BB246DC96700E05DC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D5BA246DC96700E05DC2 /* SceneDelegate.swift */; };
 		67A3D5BD246DC96700E05DC2 /* InitialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D5BC246DC96700E05DC2 /* InitialScreen.swift */; };
 		67A3D5C0246DC96700E05DC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A3D5BE246DC96700E05DC2 /* Main.storyboard */; };
 		67A3D5C2246DC96A00E05DC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67A3D5C1246DC96A00E05DC2 /* Assets.xcassets */; };
 		67A3D5C5246DC96A00E05DC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A3D5C3246DC96A00E05DC2 /* LaunchScreen.storyboard */; };
+		67AF5AF124838C0C0076A876 /* InitialShoppingForScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AF5AF024838C0C0076A876 /* InitialShoppingForScreen.swift */; };
+		67AF5AF32483A1980076A876 /* InitialMyItemsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AF5AF22483A1980076A876 /* InitialMyItemsScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +46,8 @@
 		671990E02483385200F65094 /* SingleRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRequestView.swift; sourceTree = SOURCE_ROOT; };
 		671990E22483657900F65094 /* ShoppingItemInactiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemInactiveCell.swift; sourceTree = "<group>"; };
 		671990E4248373B100F65094 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		671990E82483847D00F65094 /* ShoppingForNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShoppingForNavigationController.swift; path = Storyboards/ShoppingForNavigationController.swift; sourceTree = "<group>"; };
+		671990EA2483863700F65094 /* EmptyShoppingForScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmptyShoppingForScreen.swift; path = Storyboards/EmptyShoppingForScreen.swift; sourceTree = "<group>"; };
 		67A3D5B5246DC96700E05DC2 /* Groceria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groceria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A3D5B8246DC96700E05DC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67A3D5BA246DC96700E05DC2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +56,8 @@
 		67A3D5C1246DC96A00E05DC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		67A3D5C4246DC96A00E05DC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		67A3D5C6246DC96A00E05DC2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		67AF5AF024838C0C0076A876 /* InitialShoppingForScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialShoppingForScreen.swift; sourceTree = "<group>"; };
+		67AF5AF22483A1980076A876 /* InitialMyItemsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialMyItemsScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,10 +133,14 @@
 		67A3D5B7246DC96700E05DC2 /* Groceria */ = {
 			isa = PBXGroup;
 			children = (
+				671990EA2483863700F65094 /* EmptyShoppingForScreen.swift */,
 				671990E72483752C00F65094 /* Main */,
 				671990CC24825B3900F65094 /* Storyboards */,
 				67A3D5B8246DC96700E05DC2 /* AppDelegate.swift */,
 				67A3D5BA246DC96700E05DC2 /* SceneDelegate.swift */,
+				671990E82483847D00F65094 /* ShoppingForNavigationController.swift */,
+				67AF5AF024838C0C0076A876 /* InitialShoppingForScreen.swift */,
+				67AF5AF22483A1980076A876 /* InitialMyItemsScreen.swift */,
 				671990E6248374BF00F65094 /* Profile */,
 				671990E22483657900F65094 /* ShoppingItemInactiveCell.swift */,
 				671990DD24832CFF00F65094 /* Dashboard */,
@@ -216,13 +228,17 @@
 				671990DC2483216F00F65094 /* DashboardRequestModel.swift in Sources */,
 				671990D82482F72700F65094 /* InitialDashboardScreen.swift in Sources */,
 				67A3D5BD246DC96700E05DC2 /* InitialScreen.swift in Sources */,
+				67AF5AF124838C0C0076A876 /* InitialShoppingForScreen.swift in Sources */,
 				67A3D5B9246DC96700E05DC2 /* AppDelegate.swift in Sources */,
 				671990E32483657A00F65094 /* ShoppingItemInactiveCell.swift in Sources */,
 				671990D624826C0B00F65094 /* InitialProfileScreen.swift in Sources */,
+				67AF5AF32483A1980076A876 /* InitialMyItemsScreen.swift in Sources */,
 				67A3D5BB246DC96700E05DC2 /* SceneDelegate.swift in Sources */,
+				671990E92483847D00F65094 /* ShoppingForNavigationController.swift in Sources */,
 				671990E12483385200F65094 /* SingleRequestView.swift in Sources */,
 				671990E5248373B100F65094 /* SettingsTableViewController.swift in Sources */,
 				671990C92482398A00F65094 /* CreateAccount.swift in Sources */,
+				671990EB2483863800F65094 /* EmptyShoppingForScreen.swift in Sources */,
 				671990DA24831F7300F65094 /* DashboardRequestCell.swift in Sources */,
 				671990CB248252AD00F65094 /* AddressSignUp.swift in Sources */,
 			);
