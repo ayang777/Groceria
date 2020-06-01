@@ -11,12 +11,12 @@ import UIKit
 class InitialShoppingForScreen: UIViewController {
     
     @Published var isShoppingFor: Bool = false
+    
     var listOfRequests: [DashboardRequestModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpConditionalScreen()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,7 +29,6 @@ class InitialShoppingForScreen: UIViewController {
         }
         self.view.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
     }
-    
     
     func setUpConditionalScreen() {
         clearScreen()
@@ -50,24 +49,33 @@ class InitialShoppingForScreen: UIViewController {
                 self.navigationController?.navigationBar.layoutIfNeeded()
             }
             
-            //testing
-            let topLabel = UILabel(frame: CGRect(x: 70, y: 351, width: 299, height: 60))
-            topLabel.textAlignment = .center
-            topLabel.text = listOfRequests[0].nameOfPerson
-            topLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
-            topLabel.sizeToFit()
-            self.view.addSubview(topLabel)
-            
-            let label = UILabel(frame: CGRect(x: 100, y: 100, width: 299, height: 60))
-            label.textAlignment = .center
-            label.text = String(listOfRequests.count)
-            label.font = UIFont(name: "HelveticaNeue-Bold", size: 25)
-            label.sizeToFit()
-            self.view.addSubview(label)
-            
+            let shoppingForLabel = UILabel(frame: CGRect(x: 38, y: 125, width: 180, height: 34))
+            shoppingForLabel.textAlignment = .center
+            shoppingForLabel.text = "Shopping for:"
+            shoppingForLabel.textColor = UIColor(red:218.0/255.0, green:93.0/255.0, blue:102.0/255.0, alpha:1.0)
+            shoppingForLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 28)
+            shoppingForLabel.sizeToFit()
+            self.view.addSubview(shoppingForLabel)
+            createCollectionView()
         } else {
             setUpEmptyScreen()
         }
+    }
+    
+    
+    func createCollectionView() {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        //layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        layout.itemSize = CGSize(width: 360, height: 84)
+        
+        let myCollectionView:UICollectionView = UICollectionView(frame: CGRect(x: 20, y: 177, width: 374, height: 636), collectionViewLayout: layout)
+        myCollectionView.dataSource = self
+        myCollectionView.delegate = self
+        myCollectionView.register(ShoppingForRequestCell.self, forCellWithReuseIdentifier: "shoppingForCell")
+        myCollectionView.backgroundColor = UIColor.white
+        myCollectionView.showsVerticalScrollIndicator = false
+        self.view.addSubview(myCollectionView)
+
     }
     
     
@@ -143,16 +151,84 @@ class InitialShoppingForScreen: UIViewController {
     @objc func goToDashboard(sender: UIButton!) {
         tabBarController?.selectedIndex = 0
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
+extension InitialShoppingForScreen: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return listOfRequests.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "shoppingForCell", for: indexPath) as! ShoppingForRequestCell
+        
+        cell.contentView.layer.cornerRadius = 4.0
+        cell.contentView.backgroundColor = .white
+        cell.contentView.layer.borderWidth = 1.0
+        cell.contentView.layer.borderColor = UIColor(red: 222.0/255.0, green: 222.0/255.0, blue: 222.0/255.0, alpha: 1.0).cgColor
+        cell.contentView.layer.masksToBounds = false
+        
+        let title = UILabel()
+        title.frame = CGRect(x: 20, y: 18, width: 100, height: 50)
+        title.text = listOfRequests[indexPath.row].nameOfPerson
+        title.font = UIFont(name: "HelveticaNeue-Medium", size: 24)
+        title.sizeToFit()
+        cell.contentView.addSubview(title)
+        
+        let numItems = UILabel()
+        numItems.frame = CGRect(x: 20, y: 49, width: 100, height: 50)
+        numItems.text = "\(listOfRequests[indexPath.row].numberOfItems) items"
+        numItems.font = UIFont(name: "HelveticaNeue-Light", size: 17)
+        numItems.sizeToFit()
+        cell.contentView.addSubview(numItems)
+        
+        let rightArrow = UIImageView()
+        rightArrow.clipsToBounds = true
+        rightArrow.image = UIImage(named: "right-arrow")
+        rightArrow.frame = CGRect(x: cell.contentView.frame.maxX - 45, y: cell.contentView.frame.midY - 31/2.0, width: 31, height: 31)
+        cell.contentView.addSubview(rightArrow)
+        
+        //create drop shadow
+        cell.layer.shadowColor = UIColor.gray.cgColor
+        cell.layer.shadowOffset = CGSize(width: 3, height: 3.0)
+        cell.layer.shadowRadius = 2.0
+        cell.layer.shadowOpacity = 0.7
+        cell.layer.masksToBounds = false
+        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
+        
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 18
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "ShoppingFor", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ShoppingForSingleRequestView") as! ShoppingForSingleRequestView
+        vc.request = listOfRequests[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    //highlight cell when pressed
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        UIView.animate(withDuration: 0.2) {
+            if let cell = collectionView.cellForItem(at: indexPath) as? ShoppingForRequestCell {
+                cell.contentView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 0.5)
+            }
+        }
+    }
+
+    //unhighlight cell
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        UIView.animate(withDuration: 0.2) {
+            if let cell = collectionView.cellForItem(at: indexPath) as? ShoppingForRequestCell {
+                cell.contentView.backgroundColor = .white
+            }
+        }
+    }
+
+}
+

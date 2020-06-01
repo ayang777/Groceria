@@ -10,7 +10,7 @@ import UIKit
 
 class InitialMyItemsScreen: UIViewController {
     
-    var hasItems: Bool = true
+    var hasItems: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()

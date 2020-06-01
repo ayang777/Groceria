@@ -29,12 +29,17 @@ class DashboardRequestModel {
         var title: String
         var extraInfo: String?
         var picture: UIImage?
+        var checked = false
         
         init(title: String, extraInfo: String? = nil, picture: UIImage? = nil) {
             self.id = UUID()
             self.title = title
             self.extraInfo = extraInfo
             self.picture = picture
+        }
+        
+        mutating func toggleChecked() {
+            self.checked.toggle()
         }
     }
 }
