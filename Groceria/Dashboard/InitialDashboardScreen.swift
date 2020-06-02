@@ -98,6 +98,12 @@ class InitialDashboardScreen: UIViewController {
         return gradientImage
     }
 
+    @IBAction func goToCreateNewRequestScreen(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "CreateRequest", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "CreateAccount")
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
 }
 
 

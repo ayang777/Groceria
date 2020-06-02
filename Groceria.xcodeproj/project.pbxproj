@@ -21,7 +21,6 @@
 		671990E32483657A00F65094 /* ShoppingItemInactiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671990E22483657900F65094 /* ShoppingItemInactiveCell.swift */; };
 		671990E5248373B100F65094 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671990E4248373B100F65094 /* SettingsTableViewController.swift */; };
 		671990E92483847D00F65094 /* ShoppingForNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671990E82483847D00F65094 /* ShoppingForNavigationController.swift */; };
-		671990EB2483863800F65094 /* EmptyShoppingForScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671990EA2483863700F65094 /* EmptyShoppingForScreen.swift */; };
 		671C5A5224861B1E00AE4A2C /* FriendsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C5A5124861B1E00AE4A2C /* FriendsScreenView.swift */; };
 		671C5A5624861C5600AE4A2C /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C5A5524861C5600AE4A2C /* FriendsViewModel.swift */; };
 		671C5A582486262700AE4A2C /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C5A572486262700AE4A2C /* FriendsCell.swift */; };
@@ -35,6 +34,7 @@
 		67AF5AF124838C0C0076A876 /* InitialShoppingForScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AF5AF024838C0C0076A876 /* InitialShoppingForScreen.swift */; };
 		67AF5AF32483A1980076A876 /* InitialMyItemsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AF5AF22483A1980076A876 /* InitialMyItemsScreen.swift */; };
 		67AF5AF5248434CC0076A876 /* CreateRequest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67AF5AF4248434CC0076A876 /* CreateRequest.storyboard */; };
+		67B0F418248638E700CDC7CD /* CreateNewRequestScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B0F417248638E700CDC7CD /* CreateNewRequestScreen.swift */; };
 		67B3959E24857C760071EB2C /* ShoppingForSingleRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B3959D24857C760071EB2C /* ShoppingForSingleRequestView.swift */; };
 		67B395A02485841E0071EB2C /* ShoppingForActiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B3959F2485841E0071EB2C /* ShoppingForActiveCell.swift */; };
 /* End PBXBuildFile section */
@@ -54,7 +54,6 @@
 		671990E22483657900F65094 /* ShoppingItemInactiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingItemInactiveCell.swift; sourceTree = "<group>"; };
 		671990E4248373B100F65094 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		671990E82483847D00F65094 /* ShoppingForNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingForNavigationController.swift; sourceTree = "<group>"; };
-		671990EA2483863700F65094 /* EmptyShoppingForScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmptyShoppingForScreen.swift; path = Storyboards/EmptyShoppingForScreen.swift; sourceTree = "<group>"; };
 		671C5A5124861B1E00AE4A2C /* FriendsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsScreenView.swift; sourceTree = "<group>"; };
 		671C5A5524861C5600AE4A2C /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
 		671C5A572486262700AE4A2C /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
@@ -70,6 +69,7 @@
 		67AF5AF024838C0C0076A876 /* InitialShoppingForScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialShoppingForScreen.swift; sourceTree = "<group>"; };
 		67AF5AF22483A1980076A876 /* InitialMyItemsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialMyItemsScreen.swift; sourceTree = "<group>"; };
 		67AF5AF4248434CC0076A876 /* CreateRequest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateRequest.storyboard; sourceTree = "<group>"; };
+		67B0F417248638E700CDC7CD /* CreateNewRequestScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateNewRequestScreen.swift; path = Storyboards/CreateNewRequestScreen.swift; sourceTree = "<group>"; };
 		67B3959D24857C760071EB2C /* ShoppingForSingleRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingForSingleRequestView.swift; sourceTree = "<group>"; };
 		67B3959F2485841E0071EB2C /* ShoppingForActiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingForActiveCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -152,7 +152,7 @@
 		67A3D5B7246DC96700E05DC2 /* Groceria */ = {
 			isa = PBXGroup;
 			children = (
-				671990EA2483863700F65094 /* EmptyShoppingForScreen.swift */,
+				67B0F417248638E700CDC7CD /* CreateNewRequestScreen.swift */,
 				671990E72483752C00F65094 /* Main */,
 				671990CC24825B3900F65094 /* Storyboards */,
 				67A3D5B8246DC96700E05DC2 /* AppDelegate.swift */,
@@ -271,7 +271,7 @@
 				671990E12483385200F65094 /* SingleRequestView.swift in Sources */,
 				671990E5248373B100F65094 /* SettingsTableViewController.swift in Sources */,
 				671990C92482398A00F65094 /* CreateAccount.swift in Sources */,
-				671990EB2483863800F65094 /* EmptyShoppingForScreen.swift in Sources */,
+				67B0F418248638E700CDC7CD /* CreateNewRequestScreen.swift in Sources */,
 				671C5A5224861B1E00AE4A2C /* FriendsScreenView.swift in Sources */,
 				671990DA24831F7300F65094 /* DashboardRequestCell.swift in Sources */,
 				671C5A582486262700AE4A2C /* FriendsCell.swift in Sources */,
