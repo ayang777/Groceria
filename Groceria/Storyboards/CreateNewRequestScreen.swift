@@ -12,10 +12,17 @@ class CreateNewRequestScreen: UIViewController {
 
     @IBOutlet weak var addItemButton: UIButton!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var storeTextField: UITextField!
+    @IBOutlet weak var shoppingItemTableView: UITableView!
     
+    var shoppingItems: [DashboardRequestModel.ShoppingItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        shoppingItemTableView.dataSource = self
+        shoppingItemTableView.delegate = self
         
         //setting up header gradient
         let gradient = CAGradientLayer()
@@ -52,6 +59,19 @@ class CreateNewRequestScreen: UIViewController {
         let buttonColor3 = UIColor(red: 255.0/255.0, green: 181.0/255.0, blue: 186.0/255.0, alpha: 1.0)
         let buttonColor4 = UIColor(red: 218.0/255.0, green: 93.0/255.0, blue: 102.0/255.0, alpha: 1.0)
         submitButton.applyGradient(colors: [buttonColor3.cgColor, buttonColor4.cgColor])
+        
+        //add bottom border for textfield
+        let borderLayer = CALayer()
+        borderLayer.backgroundColor = UIColor.gray.cgColor
+        borderLayer.frame = CGRect(x: nameTextField.frame.minX, y: nameTextField.frame.maxY, width: nameTextField.frame.width, height: 1)
+
+        view.layer.addSublayer(borderLayer)
+        
+        let borderLayer2 = CALayer()
+        borderLayer2.backgroundColor = UIColor.gray.cgColor
+        borderLayer2.frame = CGRect(x: storeTextField.frame.minX, y: storeTextField.frame.maxY, width: storeTextField.frame.width, height: 1)
+
+        view.layer.addSublayer(borderLayer2)
     }
     
     //convert gradient layer to an image to set the top header's background
@@ -70,6 +90,50 @@ class CreateNewRequestScreen: UIViewController {
     @IBAction func dismiss(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @objc func alertTextFieldDidChange(field: UITextField){
+        let alertController:UIAlertController = self.presentedViewController as! UIAlertController;
+        let textField: UITextField  = alertController.textFields![0];
+        let addAction: UIAlertAction = alertController.actions[1];
+        addAction.isEnabled = (textField.text?.count)! > 0;
+
+    }
+    
+    
+    @IBAction func addItemPopup(_ sender: Any) {
+        let alert = UIAlertController(title: "Add Item", message: "", preferredStyle: UIAlertController.Style.alert)
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Name of item"
+            textField.addTarget(self, action: #selector(self.alertTextFieldDidChange(field:)), for: UIControl.Event.editingChanged)
+        }
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Additional Details"
+            
+        }
+        
+        //need to also allow user to upload an image ??
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        let addAction = UIAlertAction(title: "Add", style: UIAlertAction.Style.default, handler: { action in
+            let firstTextField = alert.textFields![0] as UITextField
+            let secondTextField = alert.textFields![1] as UITextField
+            var description: String? = secondTextField.text!
+            if description == "" {
+                description = nil
+            }
+            let newItem = DashboardRequestModel.ShoppingItem(title: firstTextField.text ?? "No title", extraInfo: description)
+            self.shoppingItems.append(newItem)
+            let indexPath = IndexPath(row: self.shoppingItems.count - 1, section: 0)
+            self.shoppingItemTableView.insertRows(at: [indexPath], with: .automatic)
+        })
+        
+        addAction.isEnabled = false
+        alert.addAction(addAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 
@@ -80,4 +144,41 @@ class CreateNewRequestScreen: UIViewController {
     }
     */
 
+}
+
+
+
+extension CreateNewRequestScreen: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return shoppingItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let item = shoppingItems[indexPath.row]
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "NewShoppingItemCell") as! NewShoppingItemCell
+        cell.setItem(item: item)
+        return cell
+    }
+    
+    //called when a cell is selected
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //somehow let user edit here ?
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let message = shoppingItems[indexPath.row].extraInfo ?? "None"
+        let alert = UIAlertController(title: "Additional Details", message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    //swipe to delete
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        shoppingItems.remove(at: indexPath.row)
+        let indexPaths = [indexPath]
+        tableView.deleteRows(at: indexPaths, with: .automatic)
+    }
+    
 }
