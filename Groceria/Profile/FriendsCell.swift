@@ -16,6 +16,7 @@ class FriendsCell: UITableViewCell {
     
     func setFriend(currfriend: FriendsViewModel) {
         nameOfPerson.text = currfriend.nameOfPerson
+        nameOfPerson.sizeToFit()
     }
 
 }

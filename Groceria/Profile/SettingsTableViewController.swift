@@ -23,21 +23,15 @@ class SettingsTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-    // MARK: - Table view data source
 
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        return 0
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        return 0
-//    }
-    
     
     //called when a cell is selected
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 1 {
+            let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "FriendsScreenView") as! FriendsScreenView
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
 

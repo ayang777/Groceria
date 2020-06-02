@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jat-LQ-8AN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jat-LQ-8AN">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -56,7 +56,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="xGf-nS-Rpa"/>
                     </view>
-                    <navigationItem key="navigationItem" id="tHX-ep-TcD"/>
+                    <navigationItem key="navigationItem" id="tHX-ep-TcD">
+                        <barButtonItem key="backBarButtonItem" title=" " id="ewX-9H-YdB"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="signOutButton" destination="sOV-qa-J9u" id="Zzc-VQ-toM"/>
                     </connections>
@@ -117,11 +119,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="dRl-BD-Wz1" kind="popoverPresentation" popoverAnchorView="qrn-MV-rIm" id="N9j-9F-Tv5">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="80" id="M8j-1d-kh2">
                                         <rect key="frame" x="0.0" y="188" width="414" height="80"/>
@@ -163,9 +160,9 @@
         <!--Friends Screen View-->
         <scene sceneID="byZ-eL-FR0">
             <objects>
-                <viewController storyboardIdentifier="FriendsScreenView" id="dRl-BD-Wz1" customClass="FriendsScreenView" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FriendsScreenView" id="dRl-BD-Wz1" customClass="FriendsScreenView" customModule="Groceria" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sau-yP-imv">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="272"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nSg-YM-X9z">
