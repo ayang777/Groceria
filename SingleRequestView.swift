@@ -21,6 +21,9 @@ class SingleRequestView: UIViewController {
     var items: [DashboardRequestModel.ShoppingItem] = []
     var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [])
     
+    var indexPath: IndexPath = IndexPath()
+    var delegate: SingleRequestViewDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,13 +97,21 @@ class SingleRequestView: UIViewController {
         
         vc.isShoppingFor = true
         vc.listOfRequests.append(request)
-
         vc.setUpConditionalScreen()
+        
+        self.delegate?.deleteRequestOnFulfillment(at: indexPath)
+        
         
         tabBarController?.selectedIndex = 1
     }
     
     
+}
+
+
+protocol SingleRequestViewDelegate
+{
+    func deleteRequestOnFulfillment(at index: IndexPath)
 }
 
 

@@ -16,6 +16,8 @@ class InitialDashboardScreen: UIViewController {
     var requestItems: [DashboardRequestModel.ShoppingItem] = []
     var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [])
     
+    var indexPathSelected: IndexPath = IndexPath()
+    
     @IBOutlet weak var listOfRequests: UITableView!
     
     override func viewDidLoad() {
@@ -131,6 +133,9 @@ extension InitialDashboardScreen: UITableViewDataSource, UITableViewDelegate {
         cellNumItems = requests[indexPath.row].numberOfItems
         requestItems = requests[indexPath.row].items
         request = requests[indexPath.row]
+        
+        indexPathSelected = indexPath
+        
         performSegue(withIdentifier: "goToSingleRequestView", sender: self)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -143,6 +148,10 @@ extension InitialDashboardScreen: UITableViewDataSource, UITableViewDelegate {
             viewController.numItems = cellNumItems
             viewController.items = requestItems
             viewController.request = request
+            
+
+            viewController.indexPath = indexPathSelected
+            viewController.delegate = self
         }
         
         if segue.identifier == "goToCreateRequestFromDashboard" {
@@ -150,5 +159,13 @@ extension InitialDashboardScreen: UITableViewDataSource, UITableViewDelegate {
             let firstView = navController.viewControllers.first as! CreateNewRequestScreen
             firstView.tabBar = tabBarController
         }
+    }
+}
+
+
+extension InitialDashboardScreen: SingleRequestViewDelegate {
+    func deleteRequestOnFulfillment(at index: IndexPath) {
+        requests.remove(at: index.row)
+        listOfRequests.deleteRows(at: [index], with: .automatic)
     }
 }
