@@ -26,6 +26,7 @@
 		671C5A582486262700AE4A2C /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C5A572486262700AE4A2C /* FriendsCell.swift */; };
 		6723CF7A2484FA76006B6429 /* ShoppingForRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6723CF792484FA76006B6429 /* ShoppingForRequestCell.swift */; };
 		675A5C782487632600098D3E /* SingleMyRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675A5C772487632600098D3E /* SingleMyRequestView.swift */; };
+		675A5C7A2487A48500098D3E /* YourShopperIsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675A5C792487A48500098D3E /* YourShopperIsScreen.swift */; };
 		6766C73324874DD600D54682 /* MyRequestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6766C73224874DD600D54682 /* MyRequestsCell.swift */; };
 		67A3D5B9246DC96700E05DC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D5B8246DC96700E05DC2 /* AppDelegate.swift */; };
 		67A3D5BB246DC96700E05DC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D5BA246DC96700E05DC2 /* SceneDelegate.swift */; };
@@ -62,6 +63,7 @@
 		671C5A572486262700AE4A2C /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		6723CF792484FA76006B6429 /* ShoppingForRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingForRequestCell.swift; sourceTree = "<group>"; };
 		675A5C772487632600098D3E /* SingleMyRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMyRequestView.swift; sourceTree = "<group>"; };
+		675A5C792487A48500098D3E /* YourShopperIsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourShopperIsScreen.swift; sourceTree = "<group>"; };
 		6766C73224874DD600D54682 /* MyRequestsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRequestsCell.swift; sourceTree = "<group>"; };
 		67A3D5B5246DC96700E05DC2 /* Groceria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groceria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A3D5B8246DC96700E05DC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			children = (
 				67AF5AF22483A1980076A876 /* InitialMyItemsScreen.swift */,
 				675A5C772487632600098D3E /* SingleMyRequestView.swift */,
+				675A5C792487A48500098D3E /* YourShopperIsScreen.swift */,
 				6766C73224874DD600D54682 /* MyRequestsCell.swift */,
 			);
 			path = MyItems;
@@ -302,6 +305,7 @@
 				67B0F418248638E700CDC7CD /* CreateNewRequestScreen.swift in Sources */,
 				671C5A5224861B1E00AE4A2C /* FriendsScreenView.swift in Sources */,
 				671990DA24831F7300F65094 /* DashboardRequestCell.swift in Sources */,
+				675A5C7A2487A48500098D3E /* YourShopperIsScreen.swift in Sources */,
 				671C5A582486262700AE4A2C /* FriendsCell.swift in Sources */,
 				671990CB248252AD00F65094 /* AddressSignUp.swift in Sources */,
 				67B395A02485841E0071EB2C /* ShoppingForActiveCell.swift in Sources */,

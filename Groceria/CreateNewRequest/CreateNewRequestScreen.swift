@@ -157,7 +157,7 @@ class CreateNewRequestScreen: UIViewController {
         let vc = navController.topViewController as! InitialMyItemsScreen
         
         vc.hasItems = true
-        vc.listOfRequests.append(newRequest)
+        vc.listOfUnfulfilledRequests.append(newRequest)
 
         vc.setUpConditionalScreen()
         
