@@ -192,7 +192,7 @@
         <!--Dashboard-->
         <scene sceneID="2Vg-J7-cx8">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="99n-2I-ost" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="dashboardNavController" automaticallyAdjustsScrollViewInsets="NO" id="99n-2I-ost" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Dashboard" image="dashboard" id="dtc-99-FYk"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>

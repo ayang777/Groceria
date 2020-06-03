@@ -183,6 +183,11 @@ class InitialMyItemsScreen: UIViewController {
         let navController = storyboard.instantiateViewController(withIdentifier: "createRequestNavController") as! UINavigationController
         let first = navController.viewControllers.first as! CreateNewRequestScreen
         first.tabBar = tabBarController
+        
+        let navController2 = tabBarController?.viewControllers?[0] as! UINavigationController
+        let first2 = navController2.viewControllers.first as! InitialDashboardScreen
+        
+        first.delegate = first2
         navController.modalPresentationStyle = .fullScreen
         self.present(navController, animated: true, completion: nil)
     }
@@ -285,6 +290,10 @@ extension InitialMyItemsScreen: UICollectionViewDelegate, UICollectionViewDataSo
             let navController = segue.destination as! UINavigationController
             let firstView = navController.viewControllers.first as! CreateNewRequestScreen
             firstView.tabBar = tabBarController
+            
+            let navController2 = tabBarController?.viewControllers?[0] as! UINavigationController
+            let first2 = navController2.viewControllers.first as! InitialDashboardScreen
+            firstView.delegate = first2
         }
     }
 

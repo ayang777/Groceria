@@ -20,6 +20,8 @@ class CreateNewRequestScreen: UIViewController {
     
     var tabBar: UITabBarController?
     
+    var delegate: CreateRequestDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -159,6 +161,8 @@ class CreateNewRequestScreen: UIViewController {
 
         vc.setUpConditionalScreen()
         
+        delegate?.addRequestToDashboard(request: newRequest)
+        
         
     }
     
@@ -210,4 +214,9 @@ extension CreateNewRequestScreen: UITableViewDataSource, UITableViewDelegate {
         tableView.deleteRows(at: indexPaths, with: .automatic)
     }
     
+}
+
+
+protocol CreateRequestDelegate {
+    func addRequestToDashboard(request: DashboardRequestModel)
 }

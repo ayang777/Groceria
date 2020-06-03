@@ -109,8 +109,7 @@ class SingleRequestView: UIViewController {
 }
 
 
-protocol SingleRequestViewDelegate
-{
+protocol SingleRequestViewDelegate {
     func deleteRequestOnFulfillment(at index: IndexPath)
 }
 

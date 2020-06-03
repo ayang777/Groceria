@@ -149,7 +149,6 @@ extension InitialDashboardScreen: UITableViewDataSource, UITableViewDelegate {
             viewController.items = requestItems
             viewController.request = request
             
-
             viewController.indexPath = indexPathSelected
             viewController.delegate = self
         }
@@ -158,6 +157,7 @@ extension InitialDashboardScreen: UITableViewDataSource, UITableViewDelegate {
             let navController = segue.destination as! UINavigationController
             let firstView = navController.viewControllers.first as! CreateNewRequestScreen
             firstView.tabBar = tabBarController
+            firstView.delegate = self
         }
     }
 }
@@ -167,5 +167,15 @@ extension InitialDashboardScreen: SingleRequestViewDelegate {
     func deleteRequestOnFulfillment(at index: IndexPath) {
         requests.remove(at: index.row)
         listOfRequests.deleteRows(at: [index], with: .automatic)
+    }
+}
+
+
+extension InitialDashboardScreen: CreateRequestDelegate {
+    func addRequestToDashboard(request: DashboardRequestModel) {
+        requests.append(request)
+        print("hello")
+        print(listOfRequests)
+        listOfRequests.insertRows(at: [IndexPath(row: requests.count-1, section: 0)], with: .automatic)
     }
 }
