@@ -11,11 +11,26 @@ import UIKit
 
 class FriendsScreenView: UIViewController {
     var friends: [FriendsViewModel] = []
+    var notifs: [FriendsViewModel] = []
+    var friendsClicked = true
+    
     var cellName: String = ""
     var cellEmail: String = ""
     
     @IBOutlet weak var listOfFriends: UITableView!
 
+    @IBAction func friendsTapped(_ sender: Any) {
+        friendsClicked = true
+        friends = makeFriends()
+        listOfFriends.reloadData()
+    }
+    
+    @IBAction func notifsTapped(_ sender: Any) {
+        friendsClicked = false
+        notifs = newFriends()
+        listOfFriends.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,8 +38,8 @@ class FriendsScreenView: UIViewController {
         listOfFriends.delegate = self
         
         friends = makeFriends()
+        notifs = newFriends()
     }
-    
     
     func makeFriends() -> [FriendsViewModel] {
         var tempFriends: [FriendsViewModel] = []
@@ -33,8 +48,7 @@ class FriendsScreenView: UIViewController {
         let request2 = FriendsViewModel(name: "Marc Tessier-Lavigne", email: "marctl@stanford.edu")
         let request3 = FriendsViewModel(name: "Angela Luo", email: "angluo@stanford.edu")
         let request4 = FriendsViewModel(name: "Anna Yang", email: "ayang7@stanford.edu")
-        
-        
+      
         tempFriends.append(request1)
         tempFriends.append(request2)
         tempFriends.append(request3)
@@ -43,33 +57,42 @@ class FriendsScreenView: UIViewController {
         return tempFriends
     }
     
+    func newFriends() -> [FriendsViewModel] {
+        var newFriends: [FriendsViewModel] = []
     
-    //convert gradient layer to an image to set the top header's background
-//    func getImageFrom(gradientLayer:CAGradientLayer) -> UIImage? {
-//        var gradientImage:UIImage?
-//        UIGraphicsBeginImageContext(gradientLayer.frame.size)
-//        if let context = UIGraphicsGetCurrentContext() {
-//            gradientLayer.render(in: context)
-//            gradientImage = UIGraphicsGetImageFromCurrentImageContext()?.resizableImage(withCapInsets: UIEdgeInsets.zero, resizingMode: .stretch)
-//        }
-//        UIGraphicsEndImageContext()
-//        return gradientImage
-//    }
+        let request1 = FriendsViewModel(name: "Riva Brubaker-Cole ", email: "stanforddog@stanford.edu")
+        let request2 = FriendsViewModel(name: "Susie Brubaker-Cole", email: "vpstudentaffairs@stanford.edu")
+        
+        newFriends.append(request1)
+        newFriends.append(request2)
+        
+        return newFriends
+    }
 
 }
 
 
 extension FriendsScreenView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friends.count
+        
+        return friendsClicked ? friends.count : notifs.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let friend = friends[indexPath.row]
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as! FriendsCell
-        cell.setFriend(currfriend: friend)
-        return cell
+        if friendsClicked {
+            let friend = friends[indexPath.row]
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as! FriendsCell
+            cell.setFriend(currfriend: friend)
+            return cell
+        } else {
+            let notif = notifs[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier:
+                "FriendsCell") as! FriendsCell
+            cell.setFriend(currfriend:notif)
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
