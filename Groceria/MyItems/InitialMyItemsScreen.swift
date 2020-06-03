@@ -12,11 +12,39 @@ class InitialMyItemsScreen: UIViewController {
     
     @Published var hasItems: Bool = false
     
-    var listOfRequests: [DashboardRequestModel] = []
+    var listOfUnfulfilledRequests: [DashboardRequestModel] = []
+    
+    var listOfRequestsInProgress: [DashboardRequestModel] = []
+    
+    var isInProgressClicked = false
+    
+    var collectionView: UICollectionView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpConditionalScreen()
+        
+        listOfRequestsInProgress = createFakeRequests()
+    }
+    
+    func createFakeRequests() -> [DashboardRequestModel] {
+        var tempRequests: [DashboardRequestModel] = []
+        
+        let sampleItems1 = [DashboardRequestModel.ShoppingItem(title: "Eggs", extraInfo: "one dozen, triple A eggs"), DashboardRequestModel.ShoppingItem(title: "Bread"), DashboardRequestModel.ShoppingItem(title: "Milk", extraInfo: "2 percent"), DashboardRequestModel.ShoppingItem(title: "Water")]
+        
+        let sampleItems2 = [DashboardRequestModel.ShoppingItem(title: "Carrots"), DashboardRequestModel.ShoppingItem(title: "Squash")]
+        
+        let sampleItems3 = [DashboardRequestModel.ShoppingItem(title: "Granola Bars")]
+        
+        let request1 = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: "Quick Run", store: "Safeway", numberOfItems: 4, items: sampleItems1)
+        let request2 = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: "Unnamed", numberOfItems: 2, items: sampleItems2)
+        let request3 = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: "Cheap Eats", store: "Walmart", numberOfItems: 1, items:sampleItems3)
+
+        tempRequests.append(request1)
+        tempRequests.append(request2)
+        tempRequests.append(request3)
+
+        return tempRequests
     }
 
     
@@ -54,9 +82,10 @@ class InitialMyItemsScreen: UIViewController {
             let button1 = UIButton(frame: CGRect(x: 56, y: 167, width: 151, height: 30))
             button1.layer.borderWidth = 1
             button1.layer.borderColor = UIColor.black.cgColor
-            button1.setTitle("In Progress", for: .normal)
+            button1.setTitle("Unfulfilled", for: .normal)
             button1.setTitleColor(UIColor.black, for: .normal)
-            button1.addTarget(self, action: #selector(inProgressPressed), for: .touchUpInside)
+            button1.backgroundColor = !isInProgressClicked ? UIColor.lightGray : UIColor.white
+            button1.addTarget(self, action: #selector(unfulfilledPressed), for: .touchUpInside)
 
             self.view.addSubview(button1)
             
@@ -64,9 +93,10 @@ class InitialMyItemsScreen: UIViewController {
             let button2 = UIButton(frame: CGRect(x: 207, y: 167, width: 151, height: 30))
             button2.layer.borderWidth = 1
             button2.layer.borderColor = UIColor.black.cgColor
-            button2.setTitle("Unfulfilled", for: .normal)
+            button2.setTitle("In Progress", for: .normal)
             button2.setTitleColor(UIColor.black, for: .normal)
-            button2.addTarget(self, action: #selector(unfulfilledPressed), for: .touchUpInside)
+            button2.backgroundColor = isInProgressClicked ? UIColor.lightGray : UIColor.white
+            button2.addTarget(self, action: #selector(inProgressPressed), for: .touchUpInside)
 
             self.view.addSubview(button2)
             
@@ -78,12 +108,16 @@ class InitialMyItemsScreen: UIViewController {
     }
     
     @objc func inProgressPressed(sender: UIButton!) {
-      print("Button tapped progress")
+        self.isInProgressClicked = true
+        collectionView?.reloadData()
+        setUpConditionalScreen()
     }
     
     
     @objc func unfulfilledPressed(sender: UIButton!) {
-      print("Button tapped fulfill")
+        self.isInProgressClicked = false
+        collectionView?.reloadData()
+        setUpConditionalScreen()
     }
     
     @IBAction func goToCreateRequest(_ sender: Any) {
@@ -99,6 +133,7 @@ class InitialMyItemsScreen: UIViewController {
         layout.itemSize = CGSize(width: 360, height: 84)
         
         let myCollectionView:UICollectionView = UICollectionView(frame: CGRect(x: 20, y: 227, width: 374, height: 586), collectionViewLayout: layout)
+        collectionView = myCollectionView
         myCollectionView.dataSource = self
         myCollectionView.delegate = self
         myCollectionView.register(MyRequestsCell.self, forCellWithReuseIdentifier: "MyRequestsCell")
@@ -210,7 +245,7 @@ class InitialMyItemsScreen: UIViewController {
 extension InitialMyItemsScreen: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listOfRequests.count
+        return !isInProgressClicked ? listOfUnfulfilledRequests.count : listOfRequestsInProgress.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -224,14 +259,14 @@ extension InitialMyItemsScreen: UICollectionViewDelegate, UICollectionViewDataSo
         
         let title = UILabel()
         title.frame = CGRect(x: 20, y: 18, width: 100, height: 50)
-        title.text = listOfRequests[indexPath.row].nameOfRequest
+        title.text = !isInProgressClicked ? listOfUnfulfilledRequests[indexPath.row].nameOfRequest : listOfRequestsInProgress[indexPath.row].nameOfRequest
         title.font = UIFont(name: "HelveticaNeue-Medium", size: 24)
         title.sizeToFit()
         cell.contentView.addSubview(title)
         
         let numItems = UILabel()
         numItems.frame = CGRect(x: 20, y: 49, width: 100, height: 50)
-        numItems.text = "\(listOfRequests[indexPath.row].numberOfItems) items"
+        numItems.text = "\(!isInProgressClicked ? listOfUnfulfilledRequests[indexPath.row].numberOfItems : listOfRequestsInProgress[indexPath.row].numberOfItems) items"
         numItems.font = UIFont(name: "HelveticaNeue-Light", size: 17)
         numItems.sizeToFit()
         cell.contentView.addSubview(numItems)
@@ -260,9 +295,18 @@ extension InitialMyItemsScreen: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "MyItems", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "SingleMyRequestView") as! SingleMyRequestView
-        vc.request = listOfRequests[indexPath.row]
-        self.navigationController?.pushViewController(vc, animated: true)
+        if !isInProgressClicked {
+            let vc = storyboard.instantiateViewController(withIdentifier: "SingleMyRequestView") as! SingleMyRequestView
+            vc.request = listOfUnfulfilledRequests[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = storyboard.instantiateViewController(withIdentifier: "YourShopperIsScreen") as! YourShopperIsScreen
+            vc.request = listOfRequestsInProgress[indexPath.row]
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        //will need to push a new view controller for list of requests in progress
+        
     }
     
     //highlight cell when pressed
