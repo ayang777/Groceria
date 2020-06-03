@@ -17,8 +17,11 @@ class FriendsScreenView: UIViewController {
     var cellName: String = ""
     var cellEmail: String = ""
     
+    @IBOutlet weak var addFriendView: UIImageView!
     @IBOutlet weak var listOfFriends: UITableView!
+    @IBOutlet weak var requestButton: UIButton!
 
+    
     @IBAction func friendsTapped(_ sender: Any) {
         friendsClicked = true
         friends = makeFriends()
@@ -34,13 +37,49 @@ class FriendsScreenView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Table view of friends and notifs
         listOfFriends.dataSource = self
         listOfFriends.delegate = self
-        
         friends = makeFriends()
         notifs = newFriends()
+        self.addFriendPopup.layer.cornerRadius = 10
+        
     }
     
+    // Friend popups
+    @IBOutlet var addFriendPopup: UIView!
+    let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.dark))
+    
+    @IBAction func popButton(_ sender: Any) {
+        blurView.frame = self.view.bounds
+        self.view.addSubview(blurView)
+        self.view.addSubview(addFriendPopup)
+        addFriendPopup.center = self.view.center
+        //only apply the blur if the user hasn't disabled transparency effects
+        //create drop shadow effect for login button
+        requestButton.layer.shadowColor = UIColor.black.cgColor
+        requestButton.layer.shadowRadius = 2.0
+        requestButton.layer.shadowOpacity = 0.7
+        requestButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        requestButton.layer.masksToBounds = false
+        
+        let buttonColor1 = UIColor(red: 82.0/255.0, green: 152.0/255.0, blue: 217.0/255.0, alpha: 1.0)
+        let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
+        requestButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
+    }
+    
+    @IBAction func closeFriendPopup(_ sender: Any) {
+        self.addFriendPopup.removeFromSuperview()
+        self.blurView.removeFromSuperview()
+    }
+    
+    @IBAction func requestFriendPopup(_ sender: Any) {
+        self.addFriendPopup.removeFromSuperview()
+        self.blurView.removeFromSuperview()
+    }
+    
+    
+    // Table for Friends
     func makeFriends() -> [FriendsViewModel] {
         var tempFriends: [FriendsViewModel] = []
     
