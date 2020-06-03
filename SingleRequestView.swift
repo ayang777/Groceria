@@ -19,7 +19,7 @@ class SingleRequestView: UIViewController {
     var name: String = ""
     var numItems: Int = 0
     var items: [DashboardRequestModel.ShoppingItem] = []
-    var request: DashboardRequestModel = DashboardRequestModel(name: "", numberOfItems: 0, items: [])
+    var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +66,13 @@ class SingleRequestView: UIViewController {
         
         numberOfItems.text = "Items: \(numItems)"
         numberOfItems.sizeToFit()
+        
+        var store = request.store ?? ""
+        if store == "" {
+            store = "None"
+        }
+        storeName.text = "Store: \(store)"
+        storeName.sizeToFit()
     }
     
     //convert gradient layer to an image to set the top header's background

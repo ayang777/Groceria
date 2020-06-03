@@ -14,13 +14,18 @@ class DashboardRequestModel {
     var nameOfPerson: String
     var numberOfItems: Int
     var store: String?
+    var nameOfRequest: String
+    
+    //need to know if visible to public or not
     
     var items: [ShoppingItem]
     
-    init(name: String, numberOfItems: Int, items: [ShoppingItem]) {
-        self.nameOfPerson = name
+    init(namePerson: String, nameRequest: String, store: String? = nil, numberOfItems: Int, items: [ShoppingItem]) {
+        self.nameOfRequest = nameRequest
+        self.nameOfPerson = namePerson
         self.numberOfItems = numberOfItems
         self.items = items
+        self.store = store
     }
     
     

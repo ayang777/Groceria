@@ -80,7 +80,7 @@
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="ynG-7m-1OZ">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="knL-oQ-5za" kind="presentation" modalPresentationStyle="fullScreen" id="Kge-uA-v1H"/>
+                                <segue destination="knL-oQ-5za" kind="presentation" identifier="goToCreateRequestFromDashboard" modalPresentationStyle="fullScreen" id="Kge-uA-v1H"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -52,6 +52,9 @@
                                         <integer key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="submitRequest:" destination="tCn-qa-S96" eventType="touchUpInside" id="Dc9-db-GZR"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name of Request" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hkf-gN-CTS">
                                 <rect key="frame" x="34" y="180" width="346" height="34"/>
@@ -134,7 +137,7 @@
         <!--Navigation Controller-->
         <scene sceneID="zw7-zK-Y25">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Fsc-mu-CKh" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="createRequestNavController" automaticallyAdjustsScrollViewInsets="NO" id="Fsc-mu-CKh" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bzM-bO-QcQ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

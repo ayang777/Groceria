@@ -14,7 +14,7 @@ class InitialDashboardScreen: UIViewController {
     var cellName: String = ""
     var cellNumItems: Int = 0
     var requestItems: [DashboardRequestModel.ShoppingItem] = []
-    var request: DashboardRequestModel = DashboardRequestModel(name: "", numberOfItems: 0, items: [])
+    var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [])
     
     @IBOutlet weak var listOfRequests: UITableView!
     
@@ -61,15 +61,15 @@ class InitialDashboardScreen: UIViewController {
         
         let sampleItems5 = [DashboardRequestModel.ShoppingItem(title: "Oreos"), DashboardRequestModel.ShoppingItem(title: "Milk")]
         
-        let request1 = DashboardRequestModel(name: "Jane Doe", numberOfItems: 4, items: sampleItems1)
-        let request2 = DashboardRequestModel(name: "Jim Smith", numberOfItems: 2, items: sampleItems2)
-        let request3 = DashboardRequestModel(name: "Angela Luo", numberOfItems: 10, items: [])
-        let request4 = DashboardRequestModel(name: "Anna Yang", numberOfItems: 7, items: [])
-        let request5 = DashboardRequestModel(name: "Michael Smith", numberOfItems: 1, items: sampleItems3)
-        let request6 = DashboardRequestModel(name: "Jimmy Neutron", numberOfItems: 11, items: [])
-        let request7 = DashboardRequestModel(name: "Timmy Turner", numberOfItems: 5, items: [])
-        let request8 = DashboardRequestModel(name: "Persis Drell", numberOfItems: 4, items: sampleItems4)
-        let request9 = DashboardRequestModel(name: "Ariana Grande", numberOfItems: 2, items: sampleItems5)
+        let request1 = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: "random", store: "Safeway", numberOfItems: 4, items: sampleItems1)
+        let request2 = DashboardRequestModel(namePerson: "Jim Smith", nameRequest: "random", numberOfItems: 2, items: sampleItems2)
+        let request3 = DashboardRequestModel(namePerson: "Angela Luo", nameRequest: "random", numberOfItems: 10, items: [])
+        let request4 = DashboardRequestModel(namePerson: "Anna Yang", nameRequest: "random", numberOfItems: 7, items: [])
+        let request5 = DashboardRequestModel(namePerson: "Michael Smith", nameRequest: "random", numberOfItems: 1, items: sampleItems3)
+        let request6 = DashboardRequestModel(namePerson: "Jimmy Neutron", nameRequest: "random", numberOfItems: 11, items: [])
+        let request7 = DashboardRequestModel(namePerson: "Timmy Turner", nameRequest: "random", numberOfItems: 5, items: [])
+        let request8 = DashboardRequestModel(namePerson: "Persis Drell", nameRequest: "random", store: "Trader Joes", numberOfItems: 4, items: sampleItems4)
+        let request9 = DashboardRequestModel(namePerson: "Ariana Grande", nameRequest: "random", numberOfItems: 2, items: sampleItems5)
         
         
         tempRequests.append(request1)
@@ -98,12 +98,12 @@ class InitialDashboardScreen: UIViewController {
         return gradientImage
     }
 
-    @IBAction func goToCreateNewRequestScreen(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "CreateRequest", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "CreateAccount")
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
-    }
+//    @IBAction func goToCreateNewRequestScreen(_ sender: Any) {
+//        let storyboard = UIStoryboard(name: "CreateRequest", bundle: nil)
+//        let vc = storyboard.instantiateViewController(withIdentifier: "CreateAccount")
+//        vc.modalPresentationStyle = .fullScreen
+//        self.present(vc, animated: true, completion: nil)
+//    }
 }
 
 
@@ -143,6 +143,12 @@ extension InitialDashboardScreen: UITableViewDataSource, UITableViewDelegate {
             viewController.numItems = cellNumItems
             viewController.items = requestItems
             viewController.request = request
+        }
+        
+        if segue.identifier == "goToCreateRequestFromDashboard" {
+            let navController = segue.destination as! UINavigationController
+            let firstView = navController.viewControllers.first as! CreateNewRequestScreen
+            firstView.tabBar = tabBarController
         }
     }
 }

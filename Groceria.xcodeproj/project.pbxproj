@@ -25,6 +25,8 @@
 		671C5A5624861C5600AE4A2C /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C5A5524861C5600AE4A2C /* FriendsViewModel.swift */; };
 		671C5A582486262700AE4A2C /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C5A572486262700AE4A2C /* FriendsCell.swift */; };
 		6723CF7A2484FA76006B6429 /* ShoppingForRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6723CF792484FA76006B6429 /* ShoppingForRequestCell.swift */; };
+		675A5C782487632600098D3E /* SingleMyRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675A5C772487632600098D3E /* SingleMyRequestView.swift */; };
+		6766C73324874DD600D54682 /* MyRequestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6766C73224874DD600D54682 /* MyRequestsCell.swift */; };
 		67A3D5B9246DC96700E05DC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D5B8246DC96700E05DC2 /* AppDelegate.swift */; };
 		67A3D5BB246DC96700E05DC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D5BA246DC96700E05DC2 /* SceneDelegate.swift */; };
 		67A3D5BD246DC96700E05DC2 /* InitialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D5BC246DC96700E05DC2 /* InitialScreen.swift */; };
@@ -59,6 +61,8 @@
 		671C5A5524861C5600AE4A2C /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
 		671C5A572486262700AE4A2C /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		6723CF792484FA76006B6429 /* ShoppingForRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingForRequestCell.swift; sourceTree = "<group>"; };
+		675A5C772487632600098D3E /* SingleMyRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMyRequestView.swift; sourceTree = "<group>"; };
+		6766C73224874DD600D54682 /* MyRequestsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRequestsCell.swift; sourceTree = "<group>"; };
 		67A3D5B5246DC96700E05DC2 /* Groceria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groceria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A3D5B8246DC96700E05DC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67A3D5BA246DC96700E05DC2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,7 +74,7 @@
 		67AF5AF024838C0C0076A876 /* InitialShoppingForScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialShoppingForScreen.swift; sourceTree = "<group>"; };
 		67AF5AF22483A1980076A876 /* InitialMyItemsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialMyItemsScreen.swift; sourceTree = "<group>"; };
 		67AF5AF4248434CC0076A876 /* CreateRequest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CreateRequest.storyboard; sourceTree = "<group>"; };
-		67B0F417248638E700CDC7CD /* CreateNewRequestScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateNewRequestScreen.swift; path = Storyboards/CreateNewRequestScreen.swift; sourceTree = "<group>"; };
+		67B0F417248638E700CDC7CD /* CreateNewRequestScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewRequestScreen.swift; sourceTree = "<group>"; };
 		67B0F4192486DC9400CDC7CD /* NewShoppingItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShoppingItemCell.swift; sourceTree = "<group>"; };
 		67B3959D24857C760071EB2C /* ShoppingForSingleRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingForSingleRequestView.swift; sourceTree = "<group>"; };
 		67B3959F2485841E0071EB2C /* ShoppingForActiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingForActiveCell.swift; sourceTree = "<group>"; };
@@ -135,6 +139,25 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		6766C7302487484B00D54682 /* CreateNewRequest */ = {
+			isa = PBXGroup;
+			children = (
+				67B0F4192486DC9400CDC7CD /* NewShoppingItemCell.swift */,
+				67B0F417248638E700CDC7CD /* CreateNewRequestScreen.swift */,
+			);
+			path = CreateNewRequest;
+			sourceTree = "<group>";
+		};
+		6766C7312487487700D54682 /* MyItems */ = {
+			isa = PBXGroup;
+			children = (
+				67AF5AF22483A1980076A876 /* InitialMyItemsScreen.swift */,
+				675A5C772487632600098D3E /* SingleMyRequestView.swift */,
+				6766C73224874DD600D54682 /* MyRequestsCell.swift */,
+			);
+			path = MyItems;
+			sourceTree = "<group>";
+		};
 		67A3D5AC246DC96700E05DC2 = {
 			isa = PBXGroup;
 			children = (
@@ -154,14 +177,13 @@
 		67A3D5B7246DC96700E05DC2 /* Groceria */ = {
 			isa = PBXGroup;
 			children = (
-				67B0F417248638E700CDC7CD /* CreateNewRequestScreen.swift */,
-				67B0F4192486DC9400CDC7CD /* NewShoppingItemCell.swift */,
+				6766C7312487487700D54682 /* MyItems */,
+				6766C7302487484B00D54682 /* CreateNewRequest */,
 				671990E72483752C00F65094 /* Main */,
 				671990CC24825B3900F65094 /* Storyboards */,
 				67A3D5B8246DC96700E05DC2 /* AppDelegate.swift */,
 				67A3D5BA246DC96700E05DC2 /* SceneDelegate.swift */,
 				67B3959C24857B500071EB2C /* ShoppingFor */,
-				67AF5AF22483A1980076A876 /* InitialMyItemsScreen.swift */,
 				671990E6248374BF00F65094 /* Profile */,
 				671990DD24832CFF00F65094 /* Dashboard */,
 				67A3D5C1246DC96A00E05DC2 /* Assets.xcassets */,
@@ -259,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				671990DC2483216F00F65094 /* DashboardRequestModel.swift in Sources */,
+				6766C73324874DD600D54682 /* MyRequestsCell.swift in Sources */,
 				671990D82482F72700F65094 /* InitialDashboardScreen.swift in Sources */,
 				671C5A5624861C5600AE4A2C /* FriendsViewModel.swift in Sources */,
 				67A3D5BD246DC96700E05DC2 /* InitialScreen.swift in Sources */,
@@ -268,6 +291,7 @@
 				671990E32483657A00F65094 /* ShoppingItemInactiveCell.swift in Sources */,
 				67B3959E24857C760071EB2C /* ShoppingForSingleRequestView.swift in Sources */,
 				671990D624826C0B00F65094 /* InitialProfileScreen.swift in Sources */,
+				675A5C782487632600098D3E /* SingleMyRequestView.swift in Sources */,
 				67AF5AF32483A1980076A876 /* InitialMyItemsScreen.swift in Sources */,
 				67A3D5BB246DC96700E05DC2 /* SceneDelegate.swift in Sources */,
 				6723CF7A2484FA76006B6429 /* ShoppingForRequestCell.swift in Sources */,

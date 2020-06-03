@@ -18,6 +18,8 @@ class CreateNewRequestScreen: UIViewController {
     
     var shoppingItems: [DashboardRequestModel.ShoppingItem] = []
     
+    var tabBar: UITabBarController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -132,6 +134,33 @@ class CreateNewRequestScreen: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func submitRequest(_ sender: Any) {
+        //update dashboard requests
+        //update my items
+        self.dismiss(animated: true, completion: nil)
+        
+        var nameRequest = nameTextField.text ?? ""
+        if nameRequest == "" {
+            nameRequest = "Unnamed"
+        }
+        var storeName: String? = storeTextField.text ?? ""
+        if storeName == "" {
+            storeName = nil
+        }
+        
+        let newRequest = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: nameRequest, store: storeName, numberOfItems: shoppingItems.count, items: shoppingItems)
+        
+        let navController = tabBar!.viewControllers![2] as! UINavigationController
+        //let navController = tabBarController?.viewControllers![2] as! UINavigationController
+        let vc = navController.topViewController as! InitialMyItemsScreen
+        
+        vc.hasItems = true
+        vc.listOfRequests.append(newRequest)
+
+        vc.setUpConditionalScreen()
+        
+        
+    }
     
     
     /*
