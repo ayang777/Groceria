@@ -20,22 +20,29 @@ class FriendsScreenView: UIViewController {
     @IBOutlet weak var addFriendView: UIImageView!
     @IBOutlet weak var listOfFriends: UITableView!
     @IBOutlet weak var requestButton: UIButton!
-
+    @IBOutlet weak var friendsButton: UIButton!
+    @IBOutlet weak var notifsButton: UIButton!
+    
     
     @IBAction func friendsTapped(_ sender: Any) {
         friendsClicked = true
         friends = makeFriends()
+        friendsButton.backgroundColor = UIColor.lightGray
+        notifsButton.backgroundColor = UIColor.white
         listOfFriends.reloadData()
     }
     
     @IBAction func notifsTapped(_ sender: Any) {
         friendsClicked = false
         notifs = newFriends()
+        notifsButton.backgroundColor = UIColor.lightGray
+        friendsButton.backgroundColor = UIColor.white
         listOfFriends.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        friendsButton.backgroundColor = UIColor.lightGray
         
         // Table view of friends and notifs
         listOfFriends.dataSource = self
@@ -44,6 +51,14 @@ class FriendsScreenView: UIViewController {
         notifs = newFriends()
         self.addFriendPopup.layer.cornerRadius = 10
         
+    }
+    
+    // when cell is clicked
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SingleFriendViewController") as! SingleFriendViewController
+        self.navigationController?.pushViewController(vc, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     // Friend popups
