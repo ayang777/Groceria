@@ -10,7 +10,13 @@ import Foundation
 import UIKit
 
 
-class DashboardRequestModel {
+class DashboardRequestModel: Identifiable, Equatable {
+    var id: UUID
+    
+    static func == (lhs: DashboardRequestModel, rhs: DashboardRequestModel) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     var nameOfPerson: String
     var numberOfItems: Int
     var store: String?
@@ -21,6 +27,7 @@ class DashboardRequestModel {
     var items: [ShoppingItem]
     
     init(namePerson: String, nameRequest: String, store: String? = nil, numberOfItems: Int, items: [ShoppingItem]) {
+        self.id = UUID()
         self.nameOfRequest = nameRequest
         self.nameOfPerson = namePerson
         self.numberOfItems = numberOfItems

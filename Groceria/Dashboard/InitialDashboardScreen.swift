@@ -174,8 +174,6 @@ extension InitialDashboardScreen: SingleRequestViewDelegate {
 extension InitialDashboardScreen: CreateRequestDelegate {
     func addRequestToDashboard(request: DashboardRequestModel) {
         requests.append(request)
-        print("hello")
-        print(listOfRequests)
         listOfRequests.insertRows(at: [IndexPath(row: requests.count-1, section: 0)], with: .automatic)
     }
 }

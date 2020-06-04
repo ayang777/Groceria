@@ -10,11 +10,15 @@ import UIKit
 
 class SingleMyRequestView: UIViewController {
 
-    @IBOutlet weak var editButton: UIButton!
+    
+    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var nameOfRequestLabel: UILabel!
     @IBOutlet weak var storeLabel: UILabel!
     @IBOutlet weak var numItemsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    
+    var indexPath: IndexPath = IndexPath()
+    var delegate: SingleMyRequestViewDelegate?
     
     var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [])
     
@@ -33,15 +37,15 @@ class SingleMyRequestView: UIViewController {
         
         
         //create drop shadow effect for login button
-        editButton.layer.shadowColor = UIColor.black.cgColor
-        editButton.layer.shadowRadius = 2.0
-        editButton.layer.shadowOpacity = 0.7
-        editButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        editButton.layer.masksToBounds = false
+        deleteButton.layer.shadowColor = UIColor.black.cgColor
+        deleteButton.layer.shadowRadius = 2.0
+        deleteButton.layer.shadowOpacity = 0.7
+        deleteButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        deleteButton.layer.masksToBounds = false
         
         let buttonColor1 = UIColor(red: 82.0/255.0, green: 152.0/255.0, blue: 217.0/255.0, alpha: 1.0)
         let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
-        editButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
+        deleteButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
         
         
         nameOfRequestLabel.text = request.nameOfRequest
@@ -59,9 +63,25 @@ class SingleMyRequestView: UIViewController {
         
     }
     
+    
+    @IBAction func deleteRequest(_ sender: Any) {
+        let alert = UIAlertController(title: "Are you sure want to delete this request?", message: "", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        let addAction = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { action in
+            self.delegate?.deleteRequestOnTap(at: self.indexPath)
+            _ = self.navigationController?.popViewController(animated: true)
+        })
+        alert.addAction(addAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
 
 }
 
+protocol SingleMyRequestViewDelegate {
+    func deleteRequestOnTap(at index: IndexPath)
+}
 
 
 extension SingleMyRequestView: UITableViewDataSource, UITableViewDelegate {

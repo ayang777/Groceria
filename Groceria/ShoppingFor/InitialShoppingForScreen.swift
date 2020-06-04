@@ -34,7 +34,6 @@ class InitialShoppingForScreen: UIViewController {
         clearScreen()
         if isShoppingFor {
             self.navigationController?.isNavigationBarHidden = false
-            
             //setting up header gradient
             let gradient = CAGradientLayer()
             gradient.frame = self.navigationController!.navigationBar.bounds

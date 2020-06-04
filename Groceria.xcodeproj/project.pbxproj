@@ -28,6 +28,9 @@
 		675A5C782487632600098D3E /* SingleMyRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675A5C772487632600098D3E /* SingleMyRequestView.swift */; };
 		675A5C7A2487A48500098D3E /* YourShopperIsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675A5C792487A48500098D3E /* YourShopperIsScreen.swift */; };
 		6766C73324874DD600D54682 /* MyRequestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6766C73224874DD600D54682 /* MyRequestsCell.swift */; };
+		6777D6AA2488CBEE00F819DD /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6777D6A92488CBEE00F819DD /* CameraViewController.swift */; };
+		6777D6AC2488D5AB00F819DD /* ReceiptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6777D6AB2488D5AB00F819DD /* ReceiptViewController.swift */; };
+		6777D6AE2488FB6500F819DD /* DeliveringToScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6777D6AD2488FB6500F819DD /* DeliveringToScreen.swift */; };
 		67A3D5B9246DC96700E05DC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D5B8246DC96700E05DC2 /* AppDelegate.swift */; };
 		67A3D5BB246DC96700E05DC2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D5BA246DC96700E05DC2 /* SceneDelegate.swift */; };
 		67A3D5BD246DC96700E05DC2 /* InitialScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A3D5BC246DC96700E05DC2 /* InitialScreen.swift */; };
@@ -65,6 +68,9 @@
 		675A5C772487632600098D3E /* SingleMyRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMyRequestView.swift; sourceTree = "<group>"; };
 		675A5C792487A48500098D3E /* YourShopperIsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourShopperIsScreen.swift; sourceTree = "<group>"; };
 		6766C73224874DD600D54682 /* MyRequestsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRequestsCell.swift; sourceTree = "<group>"; };
+		6777D6A92488CBEE00F819DD /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		6777D6AB2488D5AB00F819DD /* ReceiptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReceiptViewController.swift; path = Groceria/Storyboards/ReceiptViewController.swift; sourceTree = SOURCE_ROOT; };
+		6777D6AD2488FB6500F819DD /* DeliveringToScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveringToScreen.swift; sourceTree = "<group>"; };
 		67A3D5B5246DC96700E05DC2 /* Groceria.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Groceria.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A3D5B8246DC96700E05DC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67A3D5BA246DC96700E05DC2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -198,11 +204,14 @@
 		67B3959C24857B500071EB2C /* ShoppingFor */ = {
 			isa = PBXGroup;
 			children = (
+				6777D6AB2488D5AB00F819DD /* ReceiptViewController.swift */,
 				67AF5AF024838C0C0076A876 /* InitialShoppingForScreen.swift */,
 				67B3959D24857C760071EB2C /* ShoppingForSingleRequestView.swift */,
 				67B3959F2485841E0071EB2C /* ShoppingForActiveCell.swift */,
 				6723CF792484FA76006B6429 /* ShoppingForRequestCell.swift */,
 				671990E82483847D00F65094 /* ShoppingForNavigationController.swift */,
+				6777D6A92488CBEE00F819DD /* CameraViewController.swift */,
+				6777D6AD2488FB6500F819DD /* DeliveringToScreen.swift */,
 			);
 			path = ShoppingFor;
 			sourceTree = "<group>";
@@ -285,6 +294,7 @@
 			files = (
 				671990DC2483216F00F65094 /* DashboardRequestModel.swift in Sources */,
 				6766C73324874DD600D54682 /* MyRequestsCell.swift in Sources */,
+				6777D6AE2488FB6500F819DD /* DeliveringToScreen.swift in Sources */,
 				671990D82482F72700F65094 /* InitialDashboardScreen.swift in Sources */,
 				671C5A5624861C5600AE4A2C /* FriendsViewModel.swift in Sources */,
 				67A3D5BD246DC96700E05DC2 /* InitialScreen.swift in Sources */,
@@ -300,6 +310,7 @@
 				6723CF7A2484FA76006B6429 /* ShoppingForRequestCell.swift in Sources */,
 				671990E92483847D00F65094 /* ShoppingForNavigationController.swift in Sources */,
 				671990E12483385200F65094 /* SingleRequestView.swift in Sources */,
+				6777D6AA2488CBEE00F819DD /* CameraViewController.swift in Sources */,
 				671990E5248373B100F65094 /* SettingsTableViewController.swift in Sources */,
 				671990C92482398A00F65094 /* CreateAccount.swift in Sources */,
 				67B0F418248638E700CDC7CD /* CreateNewRequestScreen.swift in Sources */,
@@ -307,6 +318,7 @@
 				671990DA24831F7300F65094 /* DashboardRequestCell.swift in Sources */,
 				675A5C7A2487A48500098D3E /* YourShopperIsScreen.swift in Sources */,
 				671C5A582486262700AE4A2C /* FriendsCell.swift in Sources */,
+				6777D6AC2488D5AB00F819DD /* ReceiptViewController.swift in Sources */,
 				671990CB248252AD00F65094 /* AddressSignUp.swift in Sources */,
 				67B395A02485841E0071EB2C /* ShoppingForActiveCell.swift in Sources */,
 			);
@@ -463,7 +475,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.angluo.Groceria;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -482,7 +494,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = edu.stanford.angluo.Groceria;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
