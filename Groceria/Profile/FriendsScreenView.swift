@@ -13,12 +13,15 @@ class FriendsScreenView: UIViewController {
     var friends: [FriendsViewModel] = []
     var notifs: [FriendsViewModel] = []
     var friendsClicked = true
-    
     var cellName: String = ""
     var cellEmail: String = ""
+    var indexPathSelected: IndexPath = IndexPath()
+    
+    var receivedIndex: IndexPath = IndexPath()
     
     @IBOutlet weak var addFriendView: UIImageView!
     @IBOutlet weak var listOfFriends: UITableView!
+    
     @IBOutlet weak var requestButton: UIButton!
     @IBOutlet weak var friendsButton: UIButton!
     @IBOutlet weak var notifsButton: UIButton!
@@ -26,7 +29,7 @@ class FriendsScreenView: UIViewController {
     
     @IBAction func friendsTapped(_ sender: Any) {
         friendsClicked = true
-        friends = makeFriends()
+        //friends = makeFriends()
         friendsButton.backgroundColor = UIColor.lightGray
         notifsButton.backgroundColor = UIColor.white
         listOfFriends.reloadData()
@@ -34,7 +37,7 @@ class FriendsScreenView: UIViewController {
     
     @IBAction func notifsTapped(_ sender: Any) {
         friendsClicked = false
-        notifs = newFriends()
+        // notifs = newFriends()
         notifsButton.backgroundColor = UIColor.lightGray
         friendsButton.backgroundColor = UIColor.white
         listOfFriends.reloadData()
@@ -49,16 +52,15 @@ class FriendsScreenView: UIViewController {
         listOfFriends.delegate = self
         friends = makeFriends()
         notifs = newFriends()
+        
+        // Delete friend if needed
+//        indexPathSelected = receivedIndex
+//        deletedFriend(index: indexPathSelected)
+        
         self.addFriendPopup.layer.cornerRadius = 10
         
-    }
-    
-    // when cell is clicked
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "SingleFriendViewController") as! SingleFriendViewController
-        self.navigationController?.pushViewController(vc, animated: true)
-        tableView.deselectRow(at: indexPath, animated: true)
+        print(friends)
+        
     }
     
     // Friend popups
@@ -122,9 +124,33 @@ class FriendsScreenView: UIViewController {
         
         return newFriends
     }
-
+    
+    
+    
+    // delete friend
+//    override func prepare(for segue:UIStoryboardSegue, sender: Any?) {
+//        print("hi")
+//        if segue.identifier == "showSingleFriendViewController" {
+//            let singleFriendViewController = segue.destination as! SingleFriendViewController
+//            singleFriendViewController.delegate = self
+//        }
+//    }
+//
+    func deletedFriend(index: IndexPath) {
+        if index != [] {
+            friends.remove(at: index.row)
+            listOfFriends.deleteRows(at: [index], with: .automatic)
+        }
+    }
 }
 
+// StackOverflow how-to-check-if-indexpath-is-valid
+extension UITableView {
+
+    func hasRowAtIndexPath(indexPath: NSIndexPath) -> Bool {
+        return indexPath.section < self.numberOfSections && indexPath.row < self.numberOfRows(inSection: indexPath.section)
+    }
+}
 
 extension FriendsScreenView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -153,5 +179,29 @@ extension FriendsScreenView: UITableViewDataSource, UITableViewDelegate {
     {
         return 88 //height of a single list item
     }
+    
+    // when cell is clicked
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "SingleFriendViewController") as! SingleFriendViewController
+        if friendsClicked {
+            vc.friend = friends[indexPath.row]
+        } else {
+            vc.friend = notifs[indexPath.row]
+        }
+        vc.indexPathSelected = indexPath
+        
+        // vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
+//
+//extension FriendsScreenView: DeleteFriendDelegate {
+//    func deletedFriend(at index: IndexPath) {
+//        friends.remove(at: index.row)
+//        listOfFriends.deleteRows(at: [index], with: .automatic)
+//    }
+//}
 
