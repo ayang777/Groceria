@@ -25,6 +25,7 @@
 		671C5A5624861C5600AE4A2C /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C5A5524861C5600AE4A2C /* FriendsViewModel.swift */; };
 		671C5A582486262700AE4A2C /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C5A572486262700AE4A2C /* FriendsCell.swift */; };
 		6723CF7A2484FA76006B6429 /* ShoppingForRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6723CF792484FA76006B6429 /* ShoppingForRequestCell.swift */; };
+		6726A7182488D6D500D902FC /* SingleFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6726A7172488D6D500D902FC /* SingleFriendViewController.swift */; };
 		675A5C782487632600098D3E /* SingleMyRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675A5C772487632600098D3E /* SingleMyRequestView.swift */; };
 		675A5C7A2487A48500098D3E /* YourShopperIsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675A5C792487A48500098D3E /* YourShopperIsScreen.swift */; };
 		6766C73324874DD600D54682 /* MyRequestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6766C73224874DD600D54682 /* MyRequestsCell.swift */; };
@@ -62,6 +63,7 @@
 		671C5A5524861C5600AE4A2C /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
 		671C5A572486262700AE4A2C /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		6723CF792484FA76006B6429 /* ShoppingForRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingForRequestCell.swift; sourceTree = "<group>"; };
+		6726A7172488D6D500D902FC /* SingleFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingleFriendViewController.swift; path = Groceria/Profile/SingleFriendViewController.swift; sourceTree = SOURCE_ROOT; };
 		675A5C772487632600098D3E /* SingleMyRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMyRequestView.swift; sourceTree = "<group>"; };
 		675A5C792487A48500098D3E /* YourShopperIsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourShopperIsScreen.swift; sourceTree = "<group>"; };
 		6766C73224874DD600D54682 /* MyRequestsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRequestsCell.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 		671990E6248374BF00F65094 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				6726A7172488D6D500D902FC /* SingleFriendViewController.swift */,
 				671990E4248373B100F65094 /* SettingsTableViewController.swift */,
 				671C5A5124861B1E00AE4A2C /* FriendsScreenView.swift */,
 				671C5A5524861C5600AE4A2C /* FriendsViewModel.swift */,
@@ -287,6 +290,7 @@
 				6766C73324874DD600D54682 /* MyRequestsCell.swift in Sources */,
 				671990D82482F72700F65094 /* InitialDashboardScreen.swift in Sources */,
 				671C5A5624861C5600AE4A2C /* FriendsViewModel.swift in Sources */,
+				6726A7182488D6D500D902FC /* SingleFriendViewController.swift in Sources */,
 				67A3D5BD246DC96700E05DC2 /* InitialScreen.swift in Sources */,
 				67B0F41A2486DC9400CDC7CD /* NewShoppingItemCell.swift in Sources */,
 				67AF5AF124838C0C0076A876 /* InitialShoppingForScreen.swift in Sources */,

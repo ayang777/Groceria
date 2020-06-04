@@ -267,7 +267,9 @@
                     </view>
                     <connections>
                         <outlet property="addFriendPopup" destination="ndf-Iv-Wq6" id="HTK-ry-vDB"/>
+                        <outlet property="friendsButton" destination="jqQ-iW-zLJ" id="8uq-LH-gcx"/>
                         <outlet property="listOfFriends" destination="nSg-YM-X9z" id="BjX-Ye-vpN"/>
+                        <outlet property="notifsButton" destination="YCU-Kf-LYC" id="Xa9-d4-SDd"/>
                         <outlet property="requestButton" destination="Xke-BO-lRN" id="YJp-YX-gMY"/>
                     </connections>
                 </viewController>
@@ -347,6 +349,51 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="1927.5362318840582" y="83.705357142857139"/>
+        </scene>
+        <!--Single Friend View Controller-->
+        <scene sceneID="LgV-ZO-N3Z">
+            <objects>
+                <viewController storyboardIdentifier="SingleFriendViewController" id="uAI-Rz-YdP" customClass="SingleFriendViewController" customModule="Groceria" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lIa-L8-fKc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PvJ-uQ-fbe">
+                                <rect key="frame" x="111" y="146" width="193" height="193"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FFX-2f-tts">
+                                <rect key="frame" x="172" y="433" width="70" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="urN-a3-zrd">
+                                <rect key="frame" x="174" y="505" width="67" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZVg-e2-LIk">
+                                <rect key="frame" x="148" y="708" width="119" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                <state key="normal" title="Delete Friend"/>
+                                <connections>
+                                    <action selector="deleteFriend:" destination="uAI-Rz-YdP" eventType="touchUpInside" id="DZQ-Tc-ndJ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Jzn-Pa-lnT"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T52-e2-7oW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2752.1739130434785" y="85.714285714285708"/>
         </scene>
         <!--Main-->
         <scene sceneID="cxa-ho-4HM">
