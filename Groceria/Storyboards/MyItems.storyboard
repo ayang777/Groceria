@@ -147,7 +147,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.058823529409999999" green="0.2156862745" blue="0.38431372549999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                                <state key="normal" title="Edit">
+                                <state key="normal" title="Delete">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -155,6 +155,9 @@
                                         <integer key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="deleteRequest:" destination="gVd-2m-XHu" eventType="touchUpInside" id="Tq5-t0-J26"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rTv-8I-NJg">
                                 <rect key="frame" x="40" y="253" width="337" height="437"/>
@@ -189,7 +192,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="CzL-mw-wWM"/>
                     <connections>
-                        <outlet property="editButton" destination="jHY-hd-v8Q" id="c2s-Rx-chA"/>
+                        <outlet property="deleteButton" destination="jHY-hd-v8Q" id="qpe-jt-jQB"/>
                         <outlet property="nameOfRequestLabel" destination="mrx-KB-TfI" id="dBK-tH-Gw2"/>
                         <outlet property="numItemsLabel" destination="8yt-h1-e1r" id="7zj-dk-Tdg"/>
                         <outlet property="storeLabel" destination="T4I-8a-dsT" id="gcr-Qu-WqF"/>

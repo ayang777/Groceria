@@ -298,15 +298,14 @@ extension InitialMyItemsScreen: UICollectionViewDelegate, UICollectionViewDataSo
         if !isInProgressClicked {
             let vc = storyboard.instantiateViewController(withIdentifier: "SingleMyRequestView") as! SingleMyRequestView
             vc.request = listOfUnfulfilledRequests[indexPath.row]
+            vc.indexPath = indexPath
+            vc.delegate = self
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             let vc = storyboard.instantiateViewController(withIdentifier: "YourShopperIsScreen") as! YourShopperIsScreen
             vc.request = listOfRequestsInProgress[indexPath.row]
             self.navigationController?.pushViewController(vc, animated: true)
         }
-        
-        //will need to push a new view controller for list of requests in progress
-        
     }
     
     //highlight cell when pressed
@@ -341,5 +340,22 @@ extension InitialMyItemsScreen: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
 
+}
+
+
+extension InitialMyItemsScreen: SingleMyRequestViewDelegate {
+    func deleteRequestOnTap(at index: IndexPath) {
+        let navController2 = tabBarController?.viewControllers?[0] as! UINavigationController
+        let first2 = navController2.viewControllers.first as! InitialDashboardScreen
+        
+        if let dashboardIndex = first2.requests.firstIndex(of: listOfUnfulfilledRequests[index.row]) {
+            first2.requests.remove(at: dashboardIndex)
+            first2.listOfRequests.deleteRows(at: [IndexPath(row: dashboardIndex, section: 0)], with: .automatic)
+        }
+        
+        listOfUnfulfilledRequests.remove(at: index.row)
+        collectionView?.reloadData()
+        setUpConditionalScreen()
+    }
 }
 

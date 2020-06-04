@@ -19,11 +19,12 @@ class ShoppingForSingleRequestView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         shoppingListTableView.delegate = self
         shoppingListTableView.dataSource = self
 
         navigationItem.backBarButtonItem?.title = " "
+        
         nameLabel.text = request.nameOfPerson
         nameLabel.sizeToFit()
         
@@ -43,6 +44,33 @@ class ShoppingForSingleRequestView: UIViewController {
         let buttonColor1 = UIColor(red: 82.0/255.0, green: 152.0/255.0, blue: 217.0/255.0, alpha: 1.0)
         let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
         uploadReceiptButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
+    }
+    
+    @objc func alertTextFieldDidChange(field: UITextField){
+        let alertController:UIAlertController = self.presentedViewController as! UIAlertController;
+        let textField: UITextField  = alertController.textFields![0];
+        let addAction: UIAlertAction = alertController.actions[1];
+        addAction.isEnabled = (textField.text?.count)! > 0;
+
+    }
+    
+    @IBAction func finishedShopping(_ sender: Any) {
+        let alert = UIAlertController(title: "Thanks for shopping!", message: "Please input the total amount of the purchase.", preferredStyle: UIAlertController.Style.alert)
+        alert.addTextField { (textField : UITextField!) -> Void in
+            textField.placeholder = "Amount"
+            textField.addTarget(self, action: #selector(self.alertTextFieldDidChange(field:)), for: UIControl.Event.editingChanged)
+        }
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        let addAction = UIAlertAction(title: "Add", style: UIAlertAction.Style.default, handler: { action in
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DeliveringToScreen") as! DeliveringToScreen
+            vc.name = self.request.nameOfPerson
+            self.navigationController?.pushViewController(vc, animated: true)
+        })
+        
+        addAction.isEnabled = false
+        alert.addAction(addAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
 
