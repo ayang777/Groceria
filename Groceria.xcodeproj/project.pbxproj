@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34499CB12B7E0622B550EAFD /* Pods_Groceria.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 303BF30B42774281DC65FFCA /* Pods_Groceria.framework */; };
 		671990C92482398A00F65094 /* CreateAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671990C82482398A00F65094 /* CreateAccount.swift */; };
 		671990CB248252AD00F65094 /* AddressSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671990CA248252AD00F65094 /* AddressSignUp.swift */; };
 		671990CE2482602E00F65094 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 671990CD2482602E00F65094 /* Dashboard.storyboard */; };
@@ -26,6 +27,7 @@
 		671C5A582486262700AE4A2C /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C5A572486262700AE4A2C /* FriendsCell.swift */; };
 		6723CF7A2484FA76006B6429 /* ShoppingForRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6723CF792484FA76006B6429 /* ShoppingForRequestCell.swift */; };
 		6726A7182488D6D500D902FC /* SingleFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6726A7172488D6D500D902FC /* SingleFriendViewController.swift */; };
+		6754126624896E0400BD32B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6754126524896E0400BD32B4 /* GoogleService-Info.plist */; };
 		675A5C782487632600098D3E /* SingleMyRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675A5C772487632600098D3E /* SingleMyRequestView.swift */; };
 		675A5C7A2487A48500098D3E /* YourShopperIsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675A5C792487A48500098D3E /* YourShopperIsScreen.swift */; };
 		6766C73324874DD600D54682 /* MyRequestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6766C73224874DD600D54682 /* MyRequestsCell.swift */; };
@@ -48,6 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		303BF30B42774281DC65FFCA /* Pods_Groceria.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Groceria.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		671990C82482398A00F65094 /* CreateAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccount.swift; sourceTree = "<group>"; };
 		671990CA248252AD00F65094 /* AddressSignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSignUp.swift; sourceTree = "<group>"; };
 		671990CD2482602E00F65094 /* Dashboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dashboard.storyboard; sourceTree = "<group>"; };
@@ -67,6 +70,7 @@
 		671C5A572486262700AE4A2C /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		6723CF792484FA76006B6429 /* ShoppingForRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingForRequestCell.swift; sourceTree = "<group>"; };
 		6726A7172488D6D500D902FC /* SingleFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingleFriendViewController.swift; path = Groceria/Profile/SingleFriendViewController.swift; sourceTree = SOURCE_ROOT; };
+		6754126524896E0400BD32B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		675A5C772487632600098D3E /* SingleMyRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMyRequestView.swift; sourceTree = "<group>"; };
 		675A5C792487A48500098D3E /* YourShopperIsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourShopperIsScreen.swift; sourceTree = "<group>"; };
 		6766C73224874DD600D54682 /* MyRequestsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRequestsCell.swift; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 		67B0F4192486DC9400CDC7CD /* NewShoppingItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShoppingItemCell.swift; sourceTree = "<group>"; };
 		67B3959D24857C760071EB2C /* ShoppingForSingleRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingForSingleRequestView.swift; sourceTree = "<group>"; };
 		67B3959F2485841E0071EB2C /* ShoppingForActiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingForActiveCell.swift; sourceTree = "<group>"; };
+		69F3E552D67591159F969A44 /* Pods-Groceria.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceria.debug.xcconfig"; path = "Target Support Files/Pods-Groceria/Pods-Groceria.debug.xcconfig"; sourceTree = "<group>"; };
+		F47DFEDF080CBBD4B06CE2D3 /* Pods-Groceria.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceria.release.xcconfig"; path = "Target Support Files/Pods-Groceria/Pods-Groceria.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,12 +101,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34499CB12B7E0622B550EAFD /* Pods_Groceria.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		38206D81A47A3AE9D3FD6544 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				69F3E552D67591159F969A44 /* Pods-Groceria.debug.xcconfig */,
+				F47DFEDF080CBBD4B06CE2D3 /* Pods-Groceria.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		671990CC24825B3900F65094 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +191,8 @@
 			children = (
 				67A3D5B7246DC96700E05DC2 /* Groceria */,
 				67A3D5B6246DC96700E05DC2 /* Products */,
+				38206D81A47A3AE9D3FD6544 /* Pods */,
+				FB207837D78D3467668DBEF1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -200,6 +218,7 @@
 				671990DD24832CFF00F65094 /* Dashboard */,
 				67A3D5C1246DC96A00E05DC2 /* Assets.xcassets */,
 				67A3D5C6246DC96A00E05DC2 /* Info.plist */,
+				6754126524896E0400BD32B4 /* GoogleService-Info.plist */,
 			);
 			path = Groceria;
 			sourceTree = "<group>";
@@ -219,6 +238,14 @@
 			path = ShoppingFor;
 			sourceTree = "<group>";
 		};
+		FB207837D78D3467668DBEF1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				303BF30B42774281DC65FFCA /* Pods_Groceria.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -226,9 +253,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 67A3D5C9246DC96A00E05DC2 /* Build configuration list for PBXNativeTarget "Groceria" */;
 			buildPhases = (
+				EAED77123943FA21B995236B /* [CP] Check Pods Manifest.lock */,
 				67A3D5B1246DC96700E05DC2 /* Sources */,
 				67A3D5B2246DC96700E05DC2 /* Frameworks */,
 				67A3D5B3246DC96700E05DC2 /* Resources */,
+				233C6CADB00B7E50FC584944 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -279,6 +308,7 @@
 			files = (
 				67A3D5C5246DC96A00E05DC2 /* LaunchScreen.storyboard in Resources */,
 				671990D42482626100F65094 /* MyItems.storyboard in Resources */,
+				6754126624896E0400BD32B4 /* GoogleService-Info.plist in Resources */,
 				67A3D5C2246DC96A00E05DC2 /* Assets.xcassets in Resources */,
 				671990D02482610100F65094 /* Profile.storyboard in Resources */,
 				67AF5AF5248434CC0076A876 /* CreateRequest.storyboard in Resources */,
@@ -289,6 +319,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		233C6CADB00B7E50FC584944 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Groceria/Pods-Groceria-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Groceria/Pods-Groceria-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Groceria/Pods-Groceria-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EAED77123943FA21B995236B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Groceria-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		67A3D5B1246DC96700E05DC2 /* Sources */ = {
@@ -466,6 +538,7 @@
 		};
 		67A3D5CA246DC96A00E05DC2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69F3E552D67591159F969A44 /* Pods-Groceria.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -485,6 +558,7 @@
 		};
 		67A3D5CB246DC96A00E05DC2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F47DFEDF080CBBD4B06CE2D3 /* Pods-Groceria.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
