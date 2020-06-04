@@ -8,9 +8,6 @@
 
 import UIKit
 
-//protocol DeleteFriendDelegate: AnyObject {
-//    func deletedFriend(at index: IndexPath)
-//}
 
 class SingleFriendViewController: UIViewController {
     var indexPathSelected: IndexPath = IndexPath()
@@ -19,10 +16,9 @@ class SingleFriendViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     
-    // weak var delegate: DeleteFriendDelegate? = nil
 
-    // make this weak variable so no strong reference cycle
-    // weak var delegate: deleteDelegate? = nil
+    var index: IndexPath = IndexPath()
+    var delegate: DeleteFriendDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,22 +35,14 @@ class SingleFriendViewController: UIViewController {
     }
     
     @IBOutlet weak var deletedFriend: UIButton!
-    override func prepare(for segue:UIStoryboardSegue, sender: Any?) {
-        let secondViewController = segue.destination as! FriendsScreenView
-        secondViewController.receivedIndex = indexPathSelected
-        // secondViewController.delegate = self
-    }
 
-//    @IBAction func deletedFriend(_ sender: Any) {
-//        self.delegate?.deletedFriend(at: indexPathSelected)
-//
-//        // _ = self.navigationController?.popViewController(animated: true)
-//    }
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-//    {
-//        if let vc = segue.destination as? FriendsScreenView {
-//            vc.currFriend = friend
-//        }
-//    }
+    @IBAction func deleteFriend(_ sender: Any) {
+        delegate?.deleteFriend(at: index)
+        
+    }
     
+}
+
+protocol DeleteFriendDelegate {
+    func deleteFriend(at index: IndexPath)
 }

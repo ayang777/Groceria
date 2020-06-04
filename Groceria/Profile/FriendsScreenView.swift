@@ -187,6 +187,8 @@ extension FriendsScreenView: UITableViewDataSource, UITableViewDelegate {
         let vc = storyboard.instantiateViewController(withIdentifier: "SingleFriendViewController") as! SingleFriendViewController
         if friendsClicked {
             vc.friend = friends[indexPath.row]
+            vc.index = indexPath
+            vc.delegate = self
         } else {
             vc.friend = notifs[indexPath.row]
         }
@@ -197,11 +199,13 @@ extension FriendsScreenView: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-//
-//extension FriendsScreenView: DeleteFriendDelegate {
-//    func deletedFriend(at index: IndexPath) {
-//        friends.remove(at: index.row)
-//        listOfFriends.deleteRows(at: [index], with: .automatic)
-//    }
-//}
+
+
+extension FriendsScreenView: DeleteFriendDelegate {
+    func deleteFriend(at index: IndexPath) {
+        friends.remove(at: index.row)
+        listOfFriends.deleteRows(at: [index], with: .automatic)
+        navigationController?.popViewController(animated: true)
+    }
+}
 
