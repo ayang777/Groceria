@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SingleRequestView: UIViewController {
 
@@ -16,10 +17,13 @@ class SingleRequestView: UIViewController {
     @IBOutlet weak var fulfillButton: UIButton!
     @IBOutlet weak var shoppingListTableView: UITableView!
     
+    let db = Firestore.firestore()
+    let userID : String = (Auth.auth().currentUser?.uid)!
+    
     var name: String = ""
     var numItems: Int = 0
     var items: [DashboardRequestModel.ShoppingItem] = []
-    var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [])
+    var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [], userID: "")
     
     var indexPath: IndexPath = IndexPath()
     var delegate: SingleRequestViewDelegate?
@@ -92,6 +96,29 @@ class SingleRequestView: UIViewController {
     
     
     @IBAction func fulfillRequest(_ sender: Any) {
+        //add to user's shopping for array
+        //remove from request dashboard - should it be removed from the database entirely or just the dashboard UI ?
+        //remove from other user's myunfulfilled request
+        //add to other user's inprogress request
+        //change the request's status to in progress
+        
+        
+        let documentRefString = db.collection("dashboardRequests").document("\(request.id)")
+        db.collection("users").document(userID).updateData( [
+            "shoppingForRequests": FieldValue.arrayUnion([documentRefString])
+        ]);
+        
+        
+//        self.db.collection("dashboardRequests").document("\(self.request.id)").delete() { err in
+//            if let err = err {
+//                print("Error removing document: \(err)")
+//            } else {
+//                print("Document successfully removed!")
+//                _ = self.navigationController?.popViewController(animated: true)
+//            }
+//        }
+        
+        
         let navController = tabBarController?.viewControllers![1] as! UINavigationController
         let vc = navController.topViewController as! InitialShoppingForScreen
         
@@ -99,7 +126,7 @@ class SingleRequestView: UIViewController {
         vc.listOfRequests.append(request)
         vc.setUpConditionalScreen()
         
-        self.delegate?.deleteRequestOnFulfillment(at: indexPath)
+        //self.delegate?.deleteRequestOnFulfillment(at: indexPath)
         
         
         tabBarController?.selectedIndex = 1

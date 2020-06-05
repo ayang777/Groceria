@@ -10,7 +10,7 @@ import UIKit
 
 class ShoppingForSingleRequestView: UIViewController {
     
-    var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [])
+    var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [], userID: "")
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var storeLabel: UILabel!

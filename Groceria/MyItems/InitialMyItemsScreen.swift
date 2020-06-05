@@ -172,6 +172,9 @@ class InitialMyItemsScreen: UIViewController {
                     return
                 }
                 if let myRequests = data["myUnfulfilledRequests"] as? [DocumentReference] {
+                    if myRequests.count == 0 && self.listOfRequestsInProgress.count == 0 {
+                        self.hasItems = false
+                    }
                     for request in myRequests {
                         request.getDocument(completion: { document, error in
                             guard let requestData = document?.data() else {
@@ -185,7 +188,7 @@ class InitialMyItemsScreen: UIViewController {
                                 itemsToAdd.append(shoppingItem)
                             }
                             let uuid = UUID(uuidString: request.documentID)
-                            let requestToAdd = DashboardRequestModel(id: uuid, namePerson: requestData["nameOfPerson"] as! String, nameRequest: requestData["nameOfRequest"] as! String, store: requestData["storeName"] as! String == "" ? nil : requestData["storeName"] as? String , numberOfItems: requestData["numItems"] as! Int, items: itemsToAdd)
+                            let requestToAdd = DashboardRequestModel(id: uuid, namePerson: requestData["nameOfPerson"] as! String, nameRequest: requestData["nameOfRequest"] as! String, store: requestData["storeName"] as! String == "" ? nil : requestData["storeName"] as? String , numberOfItems: requestData["numItems"] as! Int, items: itemsToAdd, userID: self.userID)
                             self.listOfUnfulfilledRequests.append(requestToAdd)
                             self.hasItems = true
                             self.collectionView?.reloadData()

@@ -161,9 +161,7 @@ class CreateNewRequestScreen: UIViewController {
     }
     
     @IBAction func submitRequest(_ sender: Any) {
-        //TODO: update user's my items in Firebase
-        self.dismiss(animated: true, completion: nil)
-        
+                
         var nameRequest = nameTextField.text ?? ""
         if nameRequest == "" {
             nameRequest = "Unnamed"
@@ -174,7 +172,7 @@ class CreateNewRequestScreen: UIViewController {
         }
         
         
-        let newRequest = DashboardRequestModel(namePerson: namePerson, nameRequest: nameRequest, store: storeName, numberOfItems: shoppingItems.count, items: shoppingItems)
+        let newRequest = DashboardRequestModel(namePerson: namePerson, nameRequest: nameRequest, store: storeName, numberOfItems: shoppingItems.count, items: shoppingItems, userID: userID)
         
         var itemsToAdd = [[String: Any]]()
         for item in shoppingItems {
@@ -187,12 +185,14 @@ class CreateNewRequestScreen: UIViewController {
             "numItems": newRequest.numberOfItems,
             "storeName": newRequest.store ?? "",
             "status": "unfulfilled",
-            "items": itemsToAdd
+            "items": itemsToAdd,
+            "userID": userID
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
             } else {
                 print("Document added with ID: \(newRequest.id)")
+                self.dismiss(animated: true, completion: nil)
             }
         }
         
@@ -207,6 +207,7 @@ class CreateNewRequestScreen: UIViewController {
         db.collection("users").document(userID).updateData( [
             "myUnfulfilledRequests": FieldValue.arrayUnion([documentRefString])
         ]);
+        
         
         //will probably no longer need anything below soon
         let navController = tabBar!.viewControllers![2] as! UINavigationController

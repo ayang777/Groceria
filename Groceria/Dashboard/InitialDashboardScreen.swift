@@ -15,7 +15,7 @@ class InitialDashboardScreen: UIViewController {
     var cellName: String = ""
     var cellNumItems: Int = 0
     var requestItems: [DashboardRequestModel.ShoppingItem] = []
-    var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [])
+    var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [], userID: "")
     
     let db = Firestore.firestore()
     
@@ -67,17 +67,20 @@ class InitialDashboardScreen: UIViewController {
                     return
                 }
                 let requests = documents.map { $0 }
+                print(requests.count)
                 for request in requests {
                     var itemsToAdd = [DashboardRequestModel.ShoppingItem]()
                     for item in request["items"] as! [[String: Any]] {
-                        let shoppingItem = DashboardRequestModel.ShoppingItem(title: item["title"] as! String, extraInfo: item["extraInfo"] as! String == "" ? nil : item["extraInfo"] as? String, picture: nil)
+                        let shoppingUUID = UUID(uuidString: item["id"] as! String)
+                        let shoppingItem = DashboardRequestModel.ShoppingItem(id: shoppingUUID, title: item["title"] as! String, extraInfo: item["extraInfo"] as! String == "" ? nil : item["extraInfo"] as? String, picture: nil)
                         itemsToAdd.append(shoppingItem)
                     }
-                    let requestToAdd = DashboardRequestModel(namePerson: request["nameOfPerson"] as! String, nameRequest: request["nameOfRequest"] as! String, store: request["storeName"] as! String == "" ? nil : request["storeName"] as? String , numberOfItems: request["numItems"] as! Int, items: itemsToAdd)
+                    let uuid = UUID(uuidString: request.documentID)
+                    let requestToAdd = DashboardRequestModel(id: uuid, namePerson: request["nameOfPerson"] as! String, nameRequest: request["nameOfRequest"] as! String, store: request["storeName"] as! String == "" ? nil : request["storeName"] as? String , numberOfItems: request["numItems"] as! Int, items: itemsToAdd, userID: request["userID"] as! String)
                     self.requests.append(requestToAdd)
                     self.listOfRequests.reloadData()
                 }
-                
+
             }
         }
 

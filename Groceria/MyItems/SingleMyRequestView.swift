@@ -24,7 +24,7 @@ class SingleMyRequestView: UIViewController {
     let db = Firestore.firestore()
     let userID : String = (Auth.auth().currentUser?.uid)!
     
-    var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [])
+    var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [], userID: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
