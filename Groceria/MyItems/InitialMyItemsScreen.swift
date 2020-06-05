@@ -7,42 +7,52 @@
 //
 
 import UIKit
+import Firebase
 
 class InitialMyItemsScreen: UIViewController {
     
-    @Published var hasItems: Bool = false
+    @Published var hasItems: Bool = true
     
     var listOfUnfulfilledRequests: [DashboardRequestModel] = []
     
     var listOfRequestsInProgress: [DashboardRequestModel] = []
     
     var isInProgressClicked = false
+    let db = Firestore.firestore()
+    let userID : String = (Auth.auth().currentUser?.uid)!
     
     var collectionView: UICollectionView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpConditionalScreen()
-        
+        fetchMyRequestsFromFirebase()
         listOfRequestsInProgress = createFakeRequests()
+        
+        if listOfRequestsInProgress.count == 0 && listOfUnfulfilledRequests.count == 0 {
+            hasItems = false
+        } else {
+            hasItems = true
+        }
     }
+    
     
     func createFakeRequests() -> [DashboardRequestModel] {
         var tempRequests: [DashboardRequestModel] = []
         
-        let sampleItems1 = [DashboardRequestModel.ShoppingItem(title: "Eggs", extraInfo: "one dozen, triple A eggs"), DashboardRequestModel.ShoppingItem(title: "Bread"), DashboardRequestModel.ShoppingItem(title: "Milk", extraInfo: "2 percent"), DashboardRequestModel.ShoppingItem(title: "Water")]
-        
-        let sampleItems2 = [DashboardRequestModel.ShoppingItem(title: "Carrots"), DashboardRequestModel.ShoppingItem(title: "Squash")]
-        
-        let sampleItems3 = [DashboardRequestModel.ShoppingItem(title: "Granola Bars")]
-        
-        let request1 = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: "Quick Run", store: "Safeway", numberOfItems: 4, items: sampleItems1)
-        let request2 = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: "Unnamed", numberOfItems: 2, items: sampleItems2)
-        let request3 = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: "Cheap Eats", store: "Walmart", numberOfItems: 1, items:sampleItems3)
-
-        tempRequests.append(request1)
-        tempRequests.append(request2)
-        tempRequests.append(request3)
+//        let sampleItems1 = [DashboardRequestModel.ShoppingItem(title: "Eggs", extraInfo: "one dozen, triple A eggs"), DashboardRequestModel.ShoppingItem(title: "Bread"), DashboardRequestModel.ShoppingItem(title: "Milk", extraInfo: "2 percent"), DashboardRequestModel.ShoppingItem(title: "Water")]
+//
+//        let sampleItems2 = [DashboardRequestModel.ShoppingItem(title: "Carrots"), DashboardRequestModel.ShoppingItem(title: "Squash")]
+//
+//        let sampleItems3 = [DashboardRequestModel.ShoppingItem(title: "Granola Bars")]
+//
+//        let request1 = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: "Quick Run", store: "Safeway", numberOfItems: 4, items: sampleItems1)
+//        let request2 = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: "Unnamed", numberOfItems: 2, items: sampleItems2)
+//        let request3 = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: "Cheap Eats", store: "Walmart", numberOfItems: 1, items:sampleItems3)
+//
+//        tempRequests.append(request1)
+//        tempRequests.append(request2)
+//        tempRequests.append(request3)
 
         return tempRequests
     }
@@ -99,9 +109,8 @@ class InitialMyItemsScreen: UIViewController {
             button2.addTarget(self, action: #selector(inProgressPressed), for: .touchUpInside)
 
             self.view.addSubview(button2)
-            
-            
             createCollectionView()
+            
         } else {
             setUpEmptyScreen()
         }
@@ -109,15 +118,17 @@ class InitialMyItemsScreen: UIViewController {
     
     @objc func inProgressPressed(sender: UIButton!) {
         self.isInProgressClicked = true
-        collectionView?.reloadData()
         setUpConditionalScreen()
+        //collectionView?.reloadData()
+        
     }
     
     
     @objc func unfulfilledPressed(sender: UIButton!) {
         self.isInProgressClicked = false
-        collectionView?.reloadData()
         setUpConditionalScreen()
+        //collectionView?.reloadData()
+        
     }
     
     @IBAction func goToCreateRequest(_ sender: Any) {
@@ -128,6 +139,7 @@ class InitialMyItemsScreen: UIViewController {
     }
     
     func createCollectionView() {
+        
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         //layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
         layout.itemSize = CGSize(width: 360, height: 84)
@@ -141,6 +153,46 @@ class InitialMyItemsScreen: UIViewController {
         myCollectionView.showsVerticalScrollIndicator = false
         self.view.addSubview(myCollectionView)
 
+    }
+    
+    
+    func fetchMyRequestsFromFirebase() {
+        DispatchQueue.main.async {
+            self.listOfUnfulfilledRequests = []
+            self.db.collection("users").document(self.userID)
+            .addSnapshotListener { documentSnapshot, error in
+                print("inside snapshot")
+                self.listOfUnfulfilledRequests = []
+                guard let document = documentSnapshot else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+                guard let data = document.data() else {
+                    print("Document data was empty.")
+                    return
+                }
+                if let myRequests = data["myRequests"] as? [DocumentReference] {
+                    for request in myRequests {
+                        request.getDocument(completion: { document, error in
+                            guard let requestData = document?.data() else {
+                                print("Document data was empty.")
+                                return
+                            }
+                            var itemsToAdd = [DashboardRequestModel.ShoppingItem]()
+                            for item in requestData["items"] as! [[String: Any]] {
+                                let shoppingItem = DashboardRequestModel.ShoppingItem(title: item["title"] as! String, extraInfo: item["extraInfo"] as! String == "" ? nil : item["extraInfo"] as? String, picture: nil)
+                                itemsToAdd.append(shoppingItem)
+                            }
+                            let requestToAdd = DashboardRequestModel(namePerson: requestData["nameOfPerson"] as! String, nameRequest: requestData["nameOfRequest"] as! String, store: requestData["storeName"] as! String == "" ? nil : requestData["storeName"] as? String , numberOfItems: requestData["numItems"] as! Int, items: itemsToAdd)
+                            self.listOfUnfulfilledRequests.append(requestToAdd)
+                            self.collectionView?.reloadData()
+                        })
+                    }
+                }
+
+                
+            }
+        }
     }
     
     

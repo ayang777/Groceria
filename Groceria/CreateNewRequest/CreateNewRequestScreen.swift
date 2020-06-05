@@ -186,6 +186,7 @@ class CreateNewRequestScreen: UIViewController {
             "nameOfRequest": newRequest.nameOfRequest,
             "numItems": newRequest.numberOfItems,
             "storeName": newRequest.store ?? "",
+            "status": "unfulfilled",
             "items": itemsToAdd
         ]) { err in
             if let err = err {
@@ -194,6 +195,18 @@ class CreateNewRequestScreen: UIViewController {
                 print("Document added with ID: \(newRequest.id)")
             }
         }
+        
+//        var userRef: DocumentReference!
+//
+//        if let documentRefString = db.collection("dashboardRequests").document("\(newRequest.id)") {
+//          self.userRef = db.document("users/\(documentRefString)")
+//        }
+        
+        let documentRefString = db.collection("dashboardRequests").document("\(newRequest.id)")
+        
+        db.collection("users").document(userID).updateData( [
+            "myRequests": FieldValue.arrayUnion([documentRefString])
+        ]);
         
         //will probably no longer need anything below soon
         let navController = tabBar!.viewControllers![2] as! UINavigationController
