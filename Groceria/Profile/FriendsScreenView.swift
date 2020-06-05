@@ -19,6 +19,7 @@ class FriendsScreenView: UIViewController {
     
     var receivedIndex: IndexPath = IndexPath()
     
+    // Note: currently cannot add friend when in notifications tab (it breaks)
     @IBOutlet weak var addFriendView: UIImageView!
     @IBOutlet weak var listOfFriends: UITableView!
     @IBOutlet weak var requestButton: UIButton!
@@ -191,18 +192,24 @@ extension FriendsScreenView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let storyboard = UIStoryboard(name: "Profile", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "SingleFriendViewController") as! SingleFriendViewController
         if friendsClicked {
+            let vc = storyboard.instantiateViewController(withIdentifier: "SingleFriendViewController") as! SingleFriendViewController
             vc.friend = friends[indexPath.row]
             vc.index = indexPath
             vc.delegate = self
-        } else {
+            vc.indexPathSelected = indexPath
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else { // notifs
+            let vc = storyboard.instantiateViewController(withIdentifier: "SingleNotifViewController") as! SingleNotifViewController
             vc.friend = notifs[indexPath.row]
+            vc.accepted = true
+            vc.delegate = self
+            self.navigationController?.pushViewController(vc, animated: true)
         }
-        vc.indexPathSelected = indexPath
+        // vc.indexPathSelected = indexPath
         
         // vc.delegate = self
-        self.navigationController?.pushViewController(vc, animated: true)
+        // self.navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
@@ -212,6 +219,16 @@ extension FriendsScreenView: DeleteFriendDelegate {
     func deleteFriend(at index: IndexPath) {
         friends.remove(at: index.row)
         listOfFriends.deleteRows(at: [index], with: .automatic)
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+extension FriendsScreenView: NotifsDelegate {
+    func checkNotif(accepted: Bool, friend: FriendsViewModel) {
+        print(accepted)
+        print(friend.nameOfPerson)
+        // both: remove from notifs
+        // if true: add to friends table
         navigationController?.popViewController(animated: true)
     }
 }

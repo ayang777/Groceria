@@ -27,6 +27,7 @@
 		671C5A582486262700AE4A2C /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671C5A572486262700AE4A2C /* FriendsCell.swift */; };
 		6723CF7A2484FA76006B6429 /* ShoppingForRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6723CF792484FA76006B6429 /* ShoppingForRequestCell.swift */; };
 		6726A7182488D6D500D902FC /* SingleFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6726A7172488D6D500D902FC /* SingleFriendViewController.swift */; };
+		67379C1F248A462200C4D507 /* SingleNotifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67379C1E248A462200C4D507 /* SingleNotifViewController.swift */; };
 		6754126624896E0400BD32B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6754126524896E0400BD32B4 /* GoogleService-Info.plist */; };
 		675A5C782487632600098D3E /* SingleMyRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675A5C772487632600098D3E /* SingleMyRequestView.swift */; };
 		675A5C7A2487A48500098D3E /* YourShopperIsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675A5C792487A48500098D3E /* YourShopperIsScreen.swift */; };
@@ -70,6 +71,7 @@
 		671C5A572486262700AE4A2C /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		6723CF792484FA76006B6429 /* ShoppingForRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingForRequestCell.swift; sourceTree = "<group>"; };
 		6726A7172488D6D500D902FC /* SingleFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingleFriendViewController.swift; path = Groceria/Profile/SingleFriendViewController.swift; sourceTree = SOURCE_ROOT; };
+		67379C1E248A462200C4D507 /* SingleNotifViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleNotifViewController.swift; sourceTree = "<group>"; };
 		6754126524896E0400BD32B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		675A5C772487632600098D3E /* SingleMyRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMyRequestView.swift; sourceTree = "<group>"; };
 		675A5C792487A48500098D3E /* YourShopperIsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourShopperIsScreen.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				6726A7172488D6D500D902FC /* SingleFriendViewController.swift */,
+				67379C1E248A462200C4D507 /* SingleNotifViewController.swift */,
 				671990E4248373B100F65094 /* SettingsTableViewController.swift */,
 				671C5A5124861B1E00AE4A2C /* FriendsScreenView.swift */,
 				671C5A5524861C5600AE4A2C /* FriendsViewModel.swift */,
@@ -367,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67379C1F248A462200C4D507 /* SingleNotifViewController.swift in Sources */,
 				671990DC2483216F00F65094 /* DashboardRequestModel.swift in Sources */,
 				6766C73324874DD600D54682 /* MyRequestsCell.swift in Sources */,
 				6777D6AE2488FB6500F819DD /* DeliveringToScreen.swift in Sources */,
