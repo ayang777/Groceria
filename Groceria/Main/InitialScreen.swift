@@ -14,8 +14,11 @@ class InitialScreen: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var groceriaTitle: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UILabel!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     
-    let db = Firestore.firestore()
+    var email: String = ""
+    var password: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,22 +61,29 @@ class InitialScreen: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func goToDashboard(_ sender: Any) {
-        // Add a new document with a generated ID
-//        var ref: DocumentReference? = nil
-//        ref = db.collection("users").addDocument(data: [
-//            "first": "Ada",
-//            "last": "Lovelace",
-//            "born": 1815
-//        ]) { err in
-//            if let err = err {
-//                print("Error adding document: \(err)")
-//            } else {
-//                print("Document added with ID: \(ref!.documentID)")
-//            }
-//        }
-//
+        //perform firebase auth
         
-        performSegue(withIdentifier: "goToDashboardFromLogin", sender: nil)
+        email = emailTextField.text ?? ""
+        password = passwordTextField.text ?? ""
+        
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+            guard self != nil else { return }
+            if let error = error, let errorCode = AuthErrorCode(rawValue: error._code) {
+                if errorCode == AuthErrorCode.wrongPassword {
+                    let alert = UIAlertController(title: "Your password is incorrect", message: "Please try again.", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                    self?.present(alert, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "Unable to Login", message: "Please try again.", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                    self?.present(alert, animated: true, completion: nil)
+                }
+            } else if let _ = authResult?.user {
+                self?.performSegue(withIdentifier: "goToDashboardFromLogin", sender: nil)
+            }
+        }
+        
+        
     }
     
     @objc func goToCreateAccount(gestureRecognizer: UIGestureRecognizer) {
@@ -83,40 +93,43 @@ class InitialScreen: UIViewController, UITextFieldDelegate {
         self.present(vc, animated: true, completion: nil)
     }
     
+
+    //MARK: Textfield Delegate
+    // When user press the return key in keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("textFieldShouldReturn")
+        textField.resignFirstResponder()
+        return true
+    }
     
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        print("textFieldShouldReturn")
-//        textField.resignFirstResponder()
-//        return true
-//    }
-//
-//    // It is called before text field become active
-//    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-//        textField.backgroundColor = UIColor.lightGray
-//        return true
-//    }
-//
-//    // It is called when text field activated
-//    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        print("textFieldDidBeginEditing")
-//    }
-//
-//    // It is called when text field going to inactive
-//    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-//        textField.backgroundColor = UIColor.white
-//        return true
-//    }
-//
-//    // It is called when text field is inactive
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        print("textFieldDidEndEditing")
-//    }
-//
-//    // It is called each time user type a character by keyboard
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        print(string)
-//        return true
-//    }
+    // It is called before text field become active
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.backgroundColor = UIColor.lightGray
+        return true
+    }
+    
+    // It is called when text field activated
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("textFieldDidBeginEditing")
+    }
+    
+    // It is called when text field going to inactive
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.backgroundColor = UIColor.white
+        return true
+    }
+    
+    // It is called when text field is inactive
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("textFieldDidEndEditing")
+    }
+    
+    // It is called each time user type a character by keyboard
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        print(string)
+        return true
+    }
 
 
 }

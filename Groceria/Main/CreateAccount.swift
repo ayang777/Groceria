@@ -13,7 +13,14 @@ class CreateAccount: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var nextLabel: UILabel!
     @IBOutlet weak var signInLabel: UILabel!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var verifyPasswordTextField: UITextField!
     
+    var email: String = ""
+    var password: String = ""
+    var name: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,12 +63,69 @@ class CreateAccount: UIViewController, UITextFieldDelegate {
     
     //might want to make this a navigation controller
     @objc func goToAddressPage(gestureRecognizer: UIGestureRecognizer) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "AddressSignUp")
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        if passwordTextField.text?.count == 0 || verifyPasswordTextField.text?.count == 0 || nameTextField.text?.count == 0 || emailTextField.text?.count == 0 {
+            let alert = UIAlertController(title: "All fields are required", message: "", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else if passwordTextField.text ?? "" != verifyPasswordTextField.text ?? "" {
+            let alert = UIAlertController(title: "Passwords Do Not Match", message: "Please try again.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+            email = emailTextField.text ?? ""
+            name = nameTextField.text ?? ""
+            password = passwordTextField.text ?? ""
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "AddressSignUp") as! AddressSignUp
+            vc.email = email
+            vc.name = name
+            vc.password = password
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true, completion: nil)
+        }
+        
     }
-
+    
+    
+    //MARK: Textfield Delegate
+    // When user press the return key in keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("textFieldShouldReturn")
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // It is called before text field become active
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.backgroundColor = UIColor.lightGray
+        return true
+    }
+    
+    // It is called when text field activated
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("textFieldDidBeginEditing")
+    }
+    
+    // It is called when text field going to inactive
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.backgroundColor = UIColor.white
+        return true
+    }
+    
+    // It is called when text field is inactive
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("textFieldDidEndEditing")
+    }
+    
+    // It is called each time user type a character by keyboard
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        print(string)
+        return true
+    }
+    
 
 
 }

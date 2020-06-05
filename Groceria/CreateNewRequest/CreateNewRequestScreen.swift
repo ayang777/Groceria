@@ -18,6 +18,8 @@ class CreateNewRequestScreen: UIViewController {
     @IBOutlet weak var shoppingItemTableView: UITableView!
     
     let db = Firestore.firestore()
+    let userID : String = (Auth.auth().currentUser?.uid)!
+    var namePerson: String = ""
     
     var shoppingItems: [DashboardRequestModel.ShoppingItem] = []
     
@@ -27,6 +29,15 @@ class CreateNewRequestScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let docRef = db.collection("users").document(userID)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.namePerson = document.data()?["name"] as! String
+            } else {
+                print("Document does not exist")
+            }
+        }
         
         shoppingItemTableView.dataSource = self
         shoppingItemTableView.delegate = self
@@ -150,8 +161,7 @@ class CreateNewRequestScreen: UIViewController {
     }
     
     @IBAction func submitRequest(_ sender: Any) {
-        //update dashboard requests
-        //update my items
+        //TODO: update user's my items in Firebase
         self.dismiss(animated: true, completion: nil)
         
         var nameRequest = nameTextField.text ?? ""
@@ -163,7 +173,8 @@ class CreateNewRequestScreen: UIViewController {
             storeName = nil
         }
         
-        let newRequest = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: nameRequest, store: storeName, numberOfItems: shoppingItems.count, items: shoppingItems)
+        
+        let newRequest = DashboardRequestModel(namePerson: namePerson, nameRequest: nameRequest, store: storeName, numberOfItems: shoppingItems.count, items: shoppingItems)
         
         var itemsToAdd = [[String: Any]]()
         for item in shoppingItems {
@@ -184,10 +195,8 @@ class CreateNewRequestScreen: UIViewController {
             }
         }
         
-        
-        
+        //will probably no longer need anything below soon
         let navController = tabBar!.viewControllers![2] as! UINavigationController
-        //let navController = tabBarController?.viewControllers![2] as! UINavigationController
         let vc = navController.topViewController as! InitialMyItemsScreen
         
         vc.hasItems = true

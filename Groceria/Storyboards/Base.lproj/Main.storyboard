@@ -29,7 +29,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="goToDashboard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CIz-r9-sCe"/>
-                                    <segue destination="uOD-rF-vEE" kind="presentation" identifier="goToDashboardFromLogin" animates="NO" modalPresentationStyle="fullScreen" id="Dm4-Ed-lxb"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="kSt-Ii-PEC">
@@ -121,9 +120,12 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="emailTextField" destination="Tzc-6j-JOT" id="PSd-Vb-bvh"/>
                         <outlet property="groceriaTitle" destination="sbF-Vs-bP0" id="7Ak-o9-NKy"/>
                         <outlet property="loginButton" destination="H4F-5K-qOU" id="iNa-M9-yqJ"/>
+                        <outlet property="passwordTextField" destination="ji1-5w-yhz" id="ij7-RW-HdF"/>
                         <outlet property="signUpButton" destination="bop-te-xnV" id="X5T-oA-GqX"/>
+                        <segue destination="uOD-rF-vEE" kind="presentation" identifier="goToDashboardFromLogin" animates="NO" modalPresentationStyle="fullScreen" id="YPD-Qa-uOh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -264,8 +266,12 @@
                     </view>
                     <connections>
                         <outlet property="accountLabel" destination="eCk-g0-tsM" id="o58-OQ-mq4"/>
+                        <outlet property="emailTextField" destination="LSw-XV-1dy" id="bSq-QN-rMu"/>
+                        <outlet property="nameTextField" destination="BVE-df-6v6" id="Jgp-I6-in8"/>
                         <outlet property="nextLabel" destination="oaa-ov-oSr" id="hgn-hE-uqj"/>
+                        <outlet property="passwordTextField" destination="RUF-D8-5GJ" id="fQQ-x4-Z1C"/>
                         <outlet property="signInLabel" destination="Ank-cF-nC0" id="Pfp-Pf-wL3"/>
+                        <outlet property="verifyPasswordTextField" destination="5At-Lr-LCS" id="hAt-am-4YB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nHj-Yg-xqw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -408,7 +414,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="goToDashboard:" destination="PbB-UT-9hI" eventType="touchUpInside" id="TA5-Q7-b5t"/>
-                                    <segue destination="uOD-rF-vEE" kind="presentation" identifier="goToDashboardFromSignUp" animates="NO" modalPresentationStyle="fullScreen" id="vuc-Yc-FdF"/>
                                 </connections>
                             </button>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Go Back" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HN9-4c-rdz">
@@ -423,9 +428,15 @@
                         <viewLayoutGuide key="safeArea" id="8oT-6F-FXg"/>
                     </view>
                     <connections>
+                        <outlet property="address1TextLabel" destination="W1K-U0-YEh" id="hQe-1l-qOR"/>
+                        <outlet property="address2TextField" destination="59J-bt-TA9" id="Axn-1f-eOE"/>
                         <outlet property="addressLabel" destination="DWe-3x-1aT" id="eng-XJ-ovb"/>
+                        <outlet property="cityTextField" destination="nGX-CM-BlZ" id="TbT-9S-RAi"/>
                         <outlet property="goBackLabel" destination="HN9-4c-rdz" id="AQe-Gq-Hgc"/>
                         <outlet property="signUpButton" destination="Soi-aL-z4G" id="SsW-dg-t3b"/>
+                        <outlet property="stateTextField" destination="Z1d-dv-V0O" id="ypn-TF-aBw"/>
+                        <outlet property="zipTextField" destination="djY-gh-45C" id="kYr-P9-frE"/>
+                        <segue destination="uOD-rF-vEE" kind="presentation" identifier="goToDashboardFromSignUp" animates="NO" modalPresentationStyle="fullScreen" id="keo-G3-JFh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6MX-lC-eP1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -495,7 +506,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Dm4-Ed-lxb"/>
+        <segue reference="YPD-Qa-uOh"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="logo" width="513" height="484"/>
