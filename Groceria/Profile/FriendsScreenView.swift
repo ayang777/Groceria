@@ -8,18 +8,25 @@
 
 import Foundation
 import UIKit
+import Firebase
 
+// Note: currently cannot add friend when in notifications tab (it breaks)
 class FriendsScreenView: UIViewController {
+    let db = Firestore.firestore()
+    
+    let userID: String = (Auth.auth().currentUser?.uid)!
+    var namePerson: String = ""
+    
     var friends: [FriendsViewModel] = []
     var notifs: [FriendsViewModel] = []
     var friendsClicked = true
     var cellName: String = ""
     var cellEmail: String = ""
     var indexPathSelected: IndexPath = IndexPath()
+    var friend: FriendsViewModel = FriendsViewModel(name: "", email: "")
     
     var receivedIndex: IndexPath = IndexPath()
     
-    // Note: currently cannot add friend when in notifications tab (it breaks)
     @IBOutlet weak var addFriendView: UIImageView!
     @IBOutlet weak var listOfFriends: UITableView!
     @IBOutlet weak var requestButton: UIButton!
@@ -29,7 +36,6 @@ class FriendsScreenView: UIViewController {
     
     @IBAction func friendsTapped(_ sender: Any) {
         friendsClicked = true
-        //friends = makeFriends()
         friendsButton.backgroundColor = UIColor.lightGray
         notifsButton.backgroundColor = UIColor.white
         listOfFriends.reloadData()
@@ -37,7 +43,6 @@ class FriendsScreenView: UIViewController {
     
     @IBAction func notifsTapped(_ sender: Any) {
         friendsClicked = false
-        // notifs = newFriends()
         notifsButton.backgroundColor = UIColor.lightGray
         friendsButton.backgroundColor = UIColor.white
         listOfFriends.reloadData()
@@ -45,26 +50,34 @@ class FriendsScreenView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let docRef = db.collection("users").document(userID)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.namePerson = document.data()?["name"] as! String
+            } else {
+                print("Document does not exist")
+            }
+        }
+        
         friendsButton.backgroundColor = UIColor.lightGray
         
         // Table view of friends and notifs
         listOfFriends.dataSource = self
         listOfFriends.delegate = self
+        
+        // fetchFriends()
         friends = makeFriends()
-        notifs = newFriends()
+        // notifs = newFriends()
         
         // Delete friend if needed
 //        indexPathSelected = receivedIndex
 //        deletedFriend(index: indexPathSelected)
         
         self.addFriendPopup.layer.cornerRadius = 10
-        
-        // print(friends)
     }
 
     
     // Friend popups
-    
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet var addFriendPopup: UIView!
@@ -94,51 +107,103 @@ class FriendsScreenView: UIViewController {
     }
     
     @IBAction func requestFriendPopup(_ sender: Any) {
+        // Add friend
         if nameField.text?.isEmpty == false && emailField.text?.isEmpty == false {
-            let name = nameField.text!
             let email = emailField.text!
-            friends.append(FriendsViewModel(name: name, email: email))
-            self.listOfFriends.beginUpdates()
-            self.listOfFriends.insertRows(at: [IndexPath.init(row: self.friends.count-1, section: 0)], with: .automatic)
-            self.listOfFriends.endUpdates()
-            self.addFriendPopup.removeFromSuperview()
-            self.blurView.removeFromSuperview()
+            
+            // TODO: check if email exists in database
+            let userRef = db.collection("users").whereField("email", isEqualTo: email).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    // No documents were found matching email (ie user doesn't exist)
+                    if querySnapshot!.documents == [] {
+                        self.addFriendPopup.removeFromSuperview()
+                        self.blurView.removeFromSuperview()
+                        let alert = UIAlertController(title: "Sorry!", message: "This account does not exist.", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "Close", style: UIAlertAction.Style.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    } else { // matching user found
+                        for document in querySnapshot!.documents  {
+                            print("\(document.documentID) => \(document.data())")
+                            
+                            let friendRefString = self.db.collection("users").document("\(document.documentID)")
+                        self.db.collection("users").document(self.userID).updateData(["currFriends": FieldValue.arrayUnion([friendRefString])])
+                        
+                        }
+                        self.addFriendPopup.removeFromSuperview()
+                        self.blurView.removeFromSuperview()
+                    }
+                }
+                //            let query = userRef.whereField("email", isEqualTo: email)
+                            
+                //            friends.append(FriendsViewModel(name: name, email: email))
+                //            self.listOfFriends.beginUpdates()
+                //            self.listOfFriends.insertRows(at: [IndexPath.init(row: self.friends.count-1, section: 0)], with: .automatic)
+                //            self.listOfFriends.endUpdates()
+
+            }
         } else {
+            
             self.addFriendPopup.removeFromSuperview()
             self.blurView.removeFromSuperview()
-            let alert = UIAlertController(title: "Sorry!", message: "This account does not exist.", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "Sorry! We could not find that account.", message: "Please enter a valid name and email.", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "Close", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+        
+        emailField.text = ""
+        nameField.text = ""
     }
     
     
-    // Table for Friends
+//    func fetchFriends() {
+//        DispatchQueue.main.async {
+//            self.db.collection("users")
+//            .addSnapshotListener { querySnapshot, error in
+//                self.friends = []
+//                guard let documents = querySnapshot?.documents else {
+//                    print("Error fetching documents: \(error!)")
+//                    return
+//                }
+//                let friends = documents.map { $0 }
+//                for friend in friends {
+//                    let friendToView = FriendsViewModel(name: friends["name"] as! String, email: friends["email"] as! String)
+//                    self.friends.append(friendToView)
+//                    self.listOfFriends.reloadData()
+//                }
+//
+//            }
+//        }
+    // }
+    
+    
+    // Original Hard-coded Table for Friends
     func makeFriends() -> [FriendsViewModel] {
         var tempFriends: [FriendsViewModel] = []
-    
+
         let request1 = FriendsViewModel(name: "Persis Drell", email: "provost@stanford.edu")
         let request2 = FriendsViewModel(name: "Marc Tessier-Lavigne", email: "marctl@stanford.edu")
         let request3 = FriendsViewModel(name: "Angela Luo", email: "angluo@stanford.edu")
         let request4 = FriendsViewModel(name: "Anna Yang", email: "ayang7@stanford.edu")
-      
+
         tempFriends.append(request1)
         tempFriends.append(request2)
         tempFriends.append(request3)
         tempFriends.append(request4)
-        
+
         return tempFriends
     }
-    
+
     func newFriends() -> [FriendsViewModel] {
         var newFriends: [FriendsViewModel] = []
-    
+
         let request1 = FriendsViewModel(name: "Riva Brubaker-Cole ", email: "stanforddog@stanford.edu")
         let request2 = FriendsViewModel(name: "Susie Brubaker-Cole", email: "vpstudentaffairs@stanford.edu")
-        
+
         newFriends.append(request1)
         newFriends.append(request2)
-        
+
         return newFriends
     }
     
