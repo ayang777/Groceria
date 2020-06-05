@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SingleMyRequestView: UIViewController {
 
@@ -19,6 +20,9 @@ class SingleMyRequestView: UIViewController {
     
     var indexPath: IndexPath = IndexPath()
     var delegate: SingleMyRequestViewDelegate?
+    
+    let db = Firestore.firestore()
+    let userID : String = (Auth.auth().currentUser?.uid)!
     
     var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [])
     
@@ -68,8 +72,27 @@ class SingleMyRequestView: UIViewController {
         let alert = UIAlertController(title: "Are you sure want to delete this request?", message: "", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
         let addAction = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { action in
-            self.delegate?.deleteRequestOnTap(at: self.indexPath)
-            _ = self.navigationController?.popViewController(animated: true)
+            //self.delegate?.deleteRequestOnTap(at: self.indexPath)
+            //delete from Firebase dashboard requests and from user's myrequests
+            print(self.request.id)
+            let documentRefString = self.db.collection("dashboardRequests").document("\(self.request.id)")
+            
+            self.db.collection("users").document(self.userID).updateData( [
+                "myUnfulfilledRequests": FieldValue.arrayRemove([documentRefString])
+            ]);
+            
+            self.db.collection("dashboardRequests").document("\(self.request.id)").delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                } else {
+                    print("Document successfully removed!")
+                    _ = self.navigationController?.popViewController(animated: true)
+                }
+            }
+            
+            
+            
+            
         })
         alert.addAction(addAction)
         self.present(alert, animated: true, completion: nil)

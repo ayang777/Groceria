@@ -205,7 +205,7 @@ class CreateNewRequestScreen: UIViewController {
         let documentRefString = db.collection("dashboardRequests").document("\(newRequest.id)")
         
         db.collection("users").document(userID).updateData( [
-            "myRequests": FieldValue.arrayUnion([documentRefString])
+            "myUnfulfilledRequests": FieldValue.arrayUnion([documentRefString])
         ]);
         
         //will probably no longer need anything below soon

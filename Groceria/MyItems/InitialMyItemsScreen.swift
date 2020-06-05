@@ -26,7 +26,7 @@ class InitialMyItemsScreen: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpConditionalScreen()
-        fetchMyRequestsFromFirebase()
+        fetchMyUnfulfilledRequestsFromFirebase()
         listOfRequestsInProgress = createFakeRequests()
         
         if listOfRequestsInProgress.count == 0 && listOfUnfulfilledRequests.count == 0 {
@@ -156,7 +156,7 @@ class InitialMyItemsScreen: UIViewController {
     }
     
     
-    func fetchMyRequestsFromFirebase() {
+    func fetchMyUnfulfilledRequestsFromFirebase() {
         DispatchQueue.main.async {
             self.listOfUnfulfilledRequests = []
             self.db.collection("users").document(self.userID)
@@ -171,7 +171,7 @@ class InitialMyItemsScreen: UIViewController {
                     print("Document data was empty.")
                     return
                 }
-                if let myRequests = data["myRequests"] as? [DocumentReference] {
+                if let myRequests = data["myUnfulfilledRequests"] as? [DocumentReference] {
                     for request in myRequests {
                         request.getDocument(completion: { document, error in
                             guard let requestData = document?.data() else {
@@ -180,11 +180,14 @@ class InitialMyItemsScreen: UIViewController {
                             }
                             var itemsToAdd = [DashboardRequestModel.ShoppingItem]()
                             for item in requestData["items"] as! [[String: Any]] {
-                                let shoppingItem = DashboardRequestModel.ShoppingItem(title: item["title"] as! String, extraInfo: item["extraInfo"] as! String == "" ? nil : item["extraInfo"] as? String, picture: nil)
+                                let shoppingItemUUID = UUID(uuidString: item["id"] as! String)
+                                let shoppingItem = DashboardRequestModel.ShoppingItem(id: shoppingItemUUID, title: item["title"] as! String, extraInfo: item["extraInfo"] as! String == "" ? nil : item["extraInfo"] as? String, picture: nil)
                                 itemsToAdd.append(shoppingItem)
                             }
-                            let requestToAdd = DashboardRequestModel(namePerson: requestData["nameOfPerson"] as! String, nameRequest: requestData["nameOfRequest"] as! String, store: requestData["storeName"] as! String == "" ? nil : requestData["storeName"] as? String , numberOfItems: requestData["numItems"] as! Int, items: itemsToAdd)
+                            let uuid = UUID(uuidString: request.documentID)
+                            let requestToAdd = DashboardRequestModel(id: uuid, namePerson: requestData["nameOfPerson"] as! String, nameRequest: requestData["nameOfRequest"] as! String, store: requestData["storeName"] as! String == "" ? nil : requestData["storeName"] as? String , numberOfItems: requestData["numItems"] as! Int, items: itemsToAdd)
                             self.listOfUnfulfilledRequests.append(requestToAdd)
+                            self.hasItems = true
                             self.collectionView?.reloadData()
                         })
                     }
@@ -350,6 +353,7 @@ extension InitialMyItemsScreen: UICollectionViewDelegate, UICollectionViewDataSo
         if !isInProgressClicked {
             let vc = storyboard.instantiateViewController(withIdentifier: "SingleMyRequestView") as! SingleMyRequestView
             vc.request = listOfUnfulfilledRequests[indexPath.row]
+            print(vc.request.id)
             vc.indexPath = indexPath
             vc.delegate = self
             self.navigationController?.pushViewController(vc, animated: true)
