@@ -26,8 +26,8 @@ class DashboardRequestModel: Identifiable, Equatable {
     
     var items: [ShoppingItem]
     
-    init(namePerson: String, nameRequest: String, store: String? = nil, numberOfItems: Int, items: [ShoppingItem]) {
-        self.id = UUID()
+    init(id: UUID? = nil, namePerson: String, nameRequest: String, store: String? = nil, numberOfItems: Int, items: [ShoppingItem]) {
+        self.id = id ?? UUID()
         self.nameOfRequest = nameRequest
         self.nameOfPerson = namePerson
         self.numberOfItems = numberOfItems
@@ -43,8 +43,8 @@ class DashboardRequestModel: Identifiable, Equatable {
         var picture: UIImage?
         var checked = false
         
-        init(title: String, extraInfo: String? = nil, picture: UIImage? = nil) {
-            self.id = UUID()
+        init(id: UUID? = nil, title: String, extraInfo: String? = nil, picture: UIImage? = nil) {
+            self.id = id ?? UUID()
             self.title = title
             self.extraInfo = extraInfo
             self.picture = picture
