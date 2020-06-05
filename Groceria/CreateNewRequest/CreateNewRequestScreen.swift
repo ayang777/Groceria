@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CreateNewRequestScreen: UIViewController {
 
@@ -15,6 +16,8 @@ class CreateNewRequestScreen: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var storeTextField: UITextField!
     @IBOutlet weak var shoppingItemTableView: UITableView!
+    
+    let db = Firestore.firestore()
     
     var shoppingItems: [DashboardRequestModel.ShoppingItem] = []
     
@@ -136,6 +139,16 @@ class CreateNewRequestScreen: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    
+    func convertItemToDict(for item: DashboardRequestModel.ShoppingItem) -> [String: Any] {
+        var dict = [String: Any]()
+        dict["title"] = item.title
+        dict["extraInfo"] = item.extraInfo ?? ""
+        dict["checked"] = item.checked
+        dict["id"] = "\(item.id)"
+        return dict
+    }
+    
     @IBAction func submitRequest(_ sender: Any) {
         //update dashboard requests
         //update my items
@@ -152,6 +165,27 @@ class CreateNewRequestScreen: UIViewController {
         
         let newRequest = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: nameRequest, store: storeName, numberOfItems: shoppingItems.count, items: shoppingItems)
         
+        var itemsToAdd = [[String: Any]]()
+        for item in shoppingItems {
+            itemsToAdd.append(convertItemToDict(for: item))
+        }
+        
+        db.collection("dashboardRequests").document("\(newRequest.id)").setData([
+            "nameOfPerson": newRequest.nameOfPerson,
+            "nameOfRequest": newRequest.nameOfRequest,
+            "numItems": newRequest.numberOfItems,
+            "storeName": newRequest.store ?? "",
+            "items": itemsToAdd
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(newRequest.id)")
+            }
+        }
+        
+        
+        
         let navController = tabBar!.viewControllers![2] as! UINavigationController
         //let navController = tabBarController?.viewControllers![2] as! UINavigationController
         let vc = navController.topViewController as! InitialMyItemsScreen
@@ -161,7 +195,7 @@ class CreateNewRequestScreen: UIViewController {
 
         vc.setUpConditionalScreen()
         
-        delegate?.addRequestToDashboard(request: newRequest)
+        //delegate?.addRequestToDashboard(request: newRequest)
         
         
     }
