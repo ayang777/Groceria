@@ -21,7 +21,6 @@ class FriendsScreenView: UIViewController {
     
     @IBOutlet weak var addFriendView: UIImageView!
     @IBOutlet weak var listOfFriends: UITableView!
-    
     @IBOutlet weak var requestButton: UIButton!
     @IBOutlet weak var friendsButton: UIButton!
     @IBOutlet weak var notifsButton: UIButton!
@@ -59,11 +58,14 @@ class FriendsScreenView: UIViewController {
         
         self.addFriendPopup.layer.cornerRadius = 10
         
-        print(friends)
-        
+        // print(friends)
     }
+
     
     // Friend popups
+    
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var nameField: UITextField!
     @IBOutlet var addFriendPopup: UIView!
     let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.dark))
     
@@ -91,8 +93,22 @@ class FriendsScreenView: UIViewController {
     }
     
     @IBAction func requestFriendPopup(_ sender: Any) {
-        self.addFriendPopup.removeFromSuperview()
-        self.blurView.removeFromSuperview()
+        if nameField.text?.isEmpty == false && emailField.text?.isEmpty == false {
+            let name = nameField.text!
+            let email = emailField.text!
+            friends.append(FriendsViewModel(name: name, email: email))
+            self.listOfFriends.beginUpdates()
+            self.listOfFriends.insertRows(at: [IndexPath.init(row: self.friends.count-1, section: 0)], with: .automatic)
+            self.listOfFriends.endUpdates()
+            self.addFriendPopup.removeFromSuperview()
+            self.blurView.removeFromSuperview()
+        } else {
+            self.addFriendPopup.removeFromSuperview()
+            self.blurView.removeFromSuperview()
+            let alert = UIAlertController(title: "Sorry!", message: "This account does not exist.", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Close", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     
@@ -125,17 +141,8 @@ class FriendsScreenView: UIViewController {
         return newFriends
     }
     
-    
-    
-    // delete friend
-//    override func prepare(for segue:UIStoryboardSegue, sender: Any?) {
-//        print("hi")
-//        if segue.identifier == "showSingleFriendViewController" {
-//            let singleFriendViewController = segue.destination as! SingleFriendViewController
-//            singleFriendViewController.delegate = self
-//        }
-//    }
-//
+
+    // DELETE FRIEND
     func deletedFriend(index: IndexPath) {
         if index != [] {
             friends.remove(at: index.row)

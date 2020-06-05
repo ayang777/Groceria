@@ -71,7 +71,7 @@ class InitialScreen: UIViewController, UITextFieldDelegate {
 //                print("Document added with ID: \(ref!.documentID)")
 //            }
 //        }
-//        
+//
         
         performSegue(withIdentifier: "goToDashboardFromLogin", sender: nil)
     }
