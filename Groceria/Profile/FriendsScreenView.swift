@@ -65,8 +65,6 @@ class FriendsScreenView: UIViewController {
         listOfFriends.dataSource = self
         listOfFriends.delegate = self
         
-        // fetchFriends()
-        
         // Delete friend if needed
 //        indexPathSelected = receivedIndex
 //        deletedFriend(index: indexPathSelected)
@@ -140,14 +138,6 @@ class FriendsScreenView: UIViewController {
                         self.blurView.removeFromSuperview()
                     }
                 }
-                // old hard code 
-                //            let query = userRef.whereField("email", isEqualTo: email)
-                            
-                //            friends.append(FriendsViewModel(name: name, email: email))
-                //            self.listOfFriends.beginUpdates()
-                //            self.listOfFriends.insertRows(at: [IndexPath.init(row: self.friends.count-1, section: 0)], with: .automatic)
-                //            self.listOfFriends.endUpdates()
-
             }
         } else {
             
@@ -167,21 +157,20 @@ class FriendsScreenView: UIViewController {
         let docRef = db.collection("users").document(userID)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                let currfriends = document["currFriends"] as? Array ?? [""]
+                let currfriends = document["currFriends"] as? Array ?? []
                 for c_friend in currfriends {
-                    let friendRef = self.db.collection("users").document(c_friend) // find using friend ID
+                    let friendRef = self.db.collection("users").document(c_friend as! String) // find using friend ID
                     friendRef.getDocument { (doc, err) in
                         if let doc = doc, doc.exists {
                             let friendName = doc["name"] as? String ?? ""
                             let friendEmail = doc["email"] as? String ?? ""
-                            
+
                             let friendToView = FriendsViewModel(name: friendName, email: friendEmail)
                             self.friends.append(friendToView)
                             self.listOfFriends.reloadData()
                         }
                     }
                 }
-                
             } else {
                 print("Document does not exist ")
             }
@@ -251,8 +240,50 @@ extension FriendsScreenView: UITableViewDataSource, UITableViewDelegate {
 
 extension FriendsScreenView: DeleteFriendDelegate {
     func deleteFriend(at index: IndexPath, friend: FriendsViewModel) {
+        let deleteEmail = friend.emailOfPerson
         friends.remove(at: index.row)
         listOfFriends.deleteRows(at: [index], with: .automatic)
+        
+        let userRef = db.collection("users").document(userID)
+        userRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                var currfriends = document["currFriends"] as? Array ?? [""] // list of friend ID's
+                for c_friend in currfriends { // check name for ID, if it matches -- delete (also need to delete for friend)
+                    let c_friendRef = self.db.collection("users").document(c_friend as String)
+                    c_friendRef.getDocument { (friendDoc, friendError) in
+                        if let friendDoc = friendDoc, friendDoc.exists {
+                            // Find matching friend email
+                            if (friendDoc["email"] as? String ?? "") == deleteEmail {
+                                // REMOVE FRIEND FOR USER
+                                let index = currfriends.firstIndex(of: c_friend)
+                                currfriends.remove(at: index!)
+                            self.db.collection("users").document(self.userID).updateData( [
+                                    "currFriends": currfriends
+                                ]);
+                                
+                                // REMOVE USER FOR FRIEND
+//                                var friends_currfriends = friendDoc["currFriends"] as? Array ?? [""]
+//                                
+//                                let user_index = friends_currfriends.firstIndex(of: self.userID)
+//                                friends_currfriends.remove(at: user_index!)
+//                                
+//                                self.db.collection("users").document(c_friend).updateData(["currFriends": friends_currfriends]);
+                                
+                                // remove user ID from friends list of currFriends
+                                // clear and reload table
+                                self.friends.removeAll()
+                                self.fetchFriends()
+                            }
+                        } else {
+                            print("Friend does not exist")
+                        }
+                    }
+                }
+            } else {
+                print("Document does not exist ")
+            }
+        }
+            
         navigationController?.popViewController(animated: true)
     }
 }
