@@ -17,6 +17,43 @@ class InitialScreen: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    
+    // FORGOT PASSWORD
+    @IBOutlet var forgotPasswordPopup: UIView!
+    @IBOutlet weak var userTypedEmail: UITextField!
+    @IBOutlet weak var requestPassword: UIButton!
+    let blurView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffect.Style.dark))
+    @IBAction func forgotPassword(_ sender: Any) {
+        blurView.frame = self.view.bounds
+        self.view.addSubview(blurView)
+        self.view.addSubview(forgotPasswordPopup)
+        forgotPasswordPopup.center = self.view.center
+        forgotPasswordPopup.layer.cornerRadius = 5
+        requestPassword.layer.shadowColor = UIColor.black.cgColor
+        requestPassword.layer.shadowRadius = 2.0
+        requestPassword.layer.shadowOpacity = 0.7
+        requestPassword.layer.shadowOffset = CGSize(width: 2, height: 2)
+        requestPassword.layer.masksToBounds = false
+        let buttonColor1 = UIColor(red: 82.0/255.0, green: 152.0/255.0, blue: 217.0/255.0, alpha: 1.0)
+        let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
+        requestPassword.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
+    }
+    
+    // clicked request password
+    @IBAction func clickedRequest(_ sender: Any) {
+       // FIRST CHECK FIREBASE TO SEE IF EMAIL IS EVEN IN DATABASE
+       
+        // if email in database:
+        self.forgotPasswordPopup.removeFromSuperview()
+        self.blurView.removeFromSuperview()
+        let alert = UIAlertController(title: "Password requested!", message: "Please check your email for further information.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Close", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    
+    
     var email: String = ""
     var password: String = ""
     
