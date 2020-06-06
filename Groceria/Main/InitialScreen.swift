@@ -126,7 +126,7 @@ class InitialScreen: UIViewController, UITextFieldDelegate {
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
                     self?.present(alert, animated: true, completion: nil)
                 } else {
-                    let alert = UIAlertController(title: "Unable to Login", message: "Please try again.", preferredStyle: UIAlertController.Style.alert)
+                    let alert = UIAlertController(title: "Unable to Login", message: error.localizedDescription, preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
                     self?.present(alert, animated: true, completion: nil)
                 }

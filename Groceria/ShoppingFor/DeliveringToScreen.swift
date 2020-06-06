@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import MapKit
 
 class DeliveringToScreen: UIViewController {
 
@@ -70,14 +71,17 @@ class DeliveringToScreen: UIViewController {
         
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func openInMaps(_ sender: Any) {
+        let directionsURL = "http://maps.apple.com/?saddr=35.6813023,139.7640529&daddr=35.4657901,139.6201192"
+        guard let url = URL(string: directionsURL) else {
+            return
+        }
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
     }
-    */
+    
 
 }

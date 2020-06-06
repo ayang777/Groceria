@@ -109,7 +109,7 @@ class InitialShoppingForScreen: UIViewController {
             let shoppingForLabel = UILabel(frame: CGRect(x: 38, y: 125, width: 180, height: 34))
             shoppingForLabel.textAlignment = .center
             shoppingForLabel.text = "Shopping for:"
-            shoppingForLabel.textColor = UIColor(red:218.0/255.0, green:93.0/255.0, blue:102.0/255.0, alpha:1.0)
+            shoppingForLabel.textColor = UIColor(red:218.0/255.0, green:93.0/255.0, blue:102.0/255.0, alpha:0.85)
             shoppingForLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 28)
             shoppingForLabel.sizeToFit()
             self.view.addSubview(shoppingForLabel)
@@ -185,9 +185,12 @@ class InitialShoppingForScreen: UIViewController {
         self.view.addSubview(secondLabel)
         
         //set up button
-        let button = UIButton(frame: CGRect(x: 110, y: 500, width: 205, height: 50))
+        let button = UIButton(type: .system) as UIButton
+        button.frame = CGRect(x: 110, y: 500, width: 205, height: 50)
         button.backgroundColor = .green
         button.setTitle("Go to Dashboard", for: .normal)
+        button.tintColor = UIColor.white
+        button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 19)
         button.layer.cornerRadius = 20.0
         button.addTarget(self, action: #selector(goToDashboard), for: .touchUpInside)
         

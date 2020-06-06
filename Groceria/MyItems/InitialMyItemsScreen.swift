@@ -108,26 +108,31 @@ class InitialMyItemsScreen: UIViewController {
             let myItemsLabel = UILabel(frame: CGRect(x: 141, y: 123, width: 132, height: 36))
             myItemsLabel.textAlignment = .center
             myItemsLabel.text = "My Items"
-            myItemsLabel.textColor = UIColor(red:218.0/255.0, green:93.0/255.0, blue:102.0/255.0, alpha:1.0)
+            myItemsLabel.textColor = UIColor(red:218.0/255.0, green:93.0/255.0, blue:102.0/255.0, alpha:0.85)
             myItemsLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 30)
             myItemsLabel.sizeToFit()
             self.view.addSubview(myItemsLabel)
             
-            let button1 = UIButton(frame: CGRect(x: 56, y: 167, width: 151, height: 30))
+            let button1 = UIButton(type: .system) as UIButton
+            button1.frame = CGRect(x: 56, y: 167, width: 151, height: 30)
             button1.layer.borderWidth = 1
             button1.layer.borderColor = UIColor.black.cgColor
             button1.setTitle("Unfulfilled", for: .normal)
+            button1.tintColor = UIColor.black
+            button1.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 17)
             button1.setTitleColor(UIColor.black, for: .normal)
             button1.backgroundColor = !isInProgressClicked ? UIColor.lightGray : UIColor.white
             button1.addTarget(self, action: #selector(unfulfilledPressed), for: .touchUpInside)
 
             self.view.addSubview(button1)
             
-            
-            let button2 = UIButton(frame: CGRect(x: 207, y: 167, width: 151, height: 30))
+            let button2 = UIButton(type: .system) as UIButton
+            button2.frame = CGRect(x: 207, y: 167, width: 151, height: 30)
             button2.layer.borderWidth = 1
             button2.layer.borderColor = UIColor.black.cgColor
             button2.setTitle("In Progress", for: .normal)
+            button2.tintColor = UIColor.black
+            button2.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 17)
             button2.setTitleColor(UIColor.black, for: .normal)
             button2.backgroundColor = isInProgressClicked ? UIColor.lightGray : UIColor.white
             button2.addTarget(self, action: #selector(inProgressPressed), for: .touchUpInside)
@@ -275,9 +280,12 @@ class InitialMyItemsScreen: UIViewController {
         self.view.addSubview(topLabel)
         
         //set up button
-        let button = UIButton(frame: CGRect(x: 110, y: 500, width: 205, height: 50))
+        let button = UIButton(type: .system) as UIButton
+        button.frame = CGRect(x: 110, y: 500, width: 205, height: 50)
         button.backgroundColor = .green
         button.setTitle("Add Request", for: .normal)
+        button.tintColor = UIColor.white
+        button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 21)
         button.layer.cornerRadius = 20.0
         button.addTarget(self, action: #selector(goToCreateRequest), for: .touchUpInside)
         
@@ -309,17 +317,6 @@ class InitialMyItemsScreen: UIViewController {
         navController.modalPresentationStyle = .fullScreen
         self.present(navController, animated: true, completion: nil)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
