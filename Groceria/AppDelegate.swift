@@ -26,6 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use Firebase library to configure APIs
         FirebaseApp.configure()
         
+        if Auth.auth().currentUser != nil {
+            DispatchQueue.main.async {
+                UIApplication.shared.windows.first?.rootViewController!.performSegue(withIdentifier: "goToDashboardFromLogin", sender: nil)
+            }
+        }
         
         return true
     }
