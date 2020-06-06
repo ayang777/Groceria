@@ -38,14 +38,16 @@ class FriendsScreenView: UIViewController {
         friendsClicked = true
         friendsButton.backgroundColor = UIColor.lightGray
         notifsButton.backgroundColor = UIColor.white
-        // listOfFriends.reloadData()
+        fetchFriends()
+        listOfFriends.reloadData()
     }
     
     @IBAction func notifsTapped(_ sender: Any) {
         friendsClicked = false
         notifsButton.backgroundColor = UIColor.lightGray
         friendsButton.backgroundColor = UIColor.white
-        // listOfFriends.reloadData()
+        fetchFriends()
+        listOfFriends.reloadData()
     }
     
     override func viewDidLoad() {
@@ -65,16 +67,12 @@ class FriendsScreenView: UIViewController {
         listOfFriends.dataSource = self
         listOfFriends.delegate = self
         
-        // Delete friend if needed
-//        indexPathSelected = receivedIndex
-//        deletedFriend(index: indexPathSelected)
-        
         self.addFriendPopup.layer.cornerRadius = 10
         fetchFriends()
     }
 
     
-    // Friend popups
+    // Add friend popups
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet var addFriendPopup: UIView!
@@ -120,14 +118,18 @@ class FriendsScreenView: UIViewController {
                         let alert = UIAlertController(title: "Sorry!", message: "This account does not exist.", preferredStyle: UIAlertController.Style.alert)
                         alert.addAction(UIAlertAction(title: "Close", style: UIAlertAction.Style.default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
-                    } else { // matching user found
+                    } else { // matching user found to add
                         for document in querySnapshot!.documents  {
+                            // add friend's ID into user's sent requests
                             let friendRefString = "\(document.documentID)"
-                            // self.db.collection("users").document(self.userID).updateData(["currFriends": ["\(document.documentID)"]])
                             self.db.collection("users").document(self.userID).updateData( [
-                                "currFriends": FieldValue.arrayUnion([friendRefString])
+                                "sentFriendRequests": FieldValue.arrayUnion([friendRefString])
                             ]);
-                            // self.listOfFriends.reloadData()
+                            // add user's ID into notifications
+                            let userRefString = "\(self.userID)"
+                            self.db.collection("users").document(document.documentID).updateData([
+                                "notifications": FieldValue.arrayUnion([userRefString])
+                            ]);
                         }
                         // clear and reload table
                         self.friends.removeAll()
@@ -157,20 +159,38 @@ class FriendsScreenView: UIViewController {
         let docRef = db.collection("users").document(userID)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                let currfriends = document["currFriends"] as? Array ?? []
-                for c_friend in currfriends {
-                    let friendRef = self.db.collection("users").document(c_friend as! String) // find using friend ID
-                    friendRef.getDocument { (doc, err) in
-                        if let doc = doc, doc.exists {
-                            let friendName = doc["name"] as? String ?? ""
-                            let friendEmail = doc["email"] as? String ?? ""
-                            let friendProfileImage = doc["profileImage"] as? String ?? ""
-                            let friendToView = FriendsViewModel(name: friendName, email: friendEmail, profileImage: friendProfileImage)
-                            self.friends.append(friendToView)
-                            self.listOfFriends.reloadData()
+                if self.friendsClicked == true { // DISPLAY FRIENDS
+                    let currfriends = document["currFriends"] as? Array ?? []
+                    for c_friend in currfriends {
+                        let friendRef = self.db.collection("users").document(c_friend as! String) // find using friend ID
+                        friendRef.getDocument { (doc, err) in
+                            if let doc = doc, doc.exists {
+                                let friendName = doc["name"] as? String ?? ""
+                                let friendEmail = doc["email"] as? String ?? ""
+                                let friendProfileImage = doc["profileImage"] as? String ?? ""
+                                let friendToView = FriendsViewModel(name: friendName, email: friendEmail, profileImage: friendProfileImage)
+                                self.friends.append(friendToView)
+                                self.listOfFriends.reloadData()
+                            }
+                        }
+                    }
+                } else { // DISPLAY NOTIFS
+                    let currnotifs = document["notifications"] as? Array ?? []
+                    for c_notif in currnotifs {
+                        let notifRef = self.db.collection("users").document(c_notif as! String) // find using notif ID
+                        notifRef.getDocument { (doc, err) in
+                            if let doc = doc, doc.exists {
+                                let notifName = doc["name"] as? String ?? ""
+                                let notifEmail = doc["email"] as? String ?? ""
+                                let notifProfileImage = doc["profileImage"] as? String ?? ""
+                                let notifToView = FriendsViewModel(name: notifName, email: notifEmail, profileImage: notifProfileImage)
+                                self.friends.append(notifToView)
+                                self.listOfFriends.reloadData()
+                            }                            
                         }
                     }
                 }
+                
             } else {
                 print("Document does not exist ")
             }
