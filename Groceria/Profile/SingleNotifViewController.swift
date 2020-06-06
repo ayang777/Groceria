@@ -16,7 +16,7 @@ class SingleNotifViewController: UIViewController {
     var delegate: NotifsDelegate?
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
-    
+    @IBOutlet weak var profilePicImageView: UIImageView!
     
     @IBAction func acceptNotif(_ sender: Any) {
         accepted = true
@@ -39,6 +39,7 @@ class SingleNotifViewController: UIViewController {
         emailLabel.text = friend.emailOfPerson
         emailLabel.sizeToFit()
         // emailLabel.center.x = self.view.center.x
+        profilePicImageView.downloaded(from: friend.profileImage)
     }
 }
 

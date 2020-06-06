@@ -180,6 +180,7 @@ class FriendsScreenView: UIViewController {
                 } else { // DISPLAY NOTIFS
                     let currnotifs = document["notifications"] as? Array ?? []
                     for c_notif in currnotifs {
+                        print(c_notif)
                         let notifRef = self.db.collection("users").document(c_notif as! String) // find using notif ID
                         notifRef.getDocument { (doc, err) in
                             if let doc = doc, doc.exists {
@@ -296,6 +297,7 @@ extension FriendsScreenView: DeleteFriendDelegate {
                                 // clear and reload table
                                 self.friends.removeAll()
                                 self.fetchFriends()
+                                self.listOfFriends.reloadData()
                             }
                         } else {
                             print("Friend does not exist")
@@ -313,10 +315,60 @@ extension FriendsScreenView: DeleteFriendDelegate {
 
 extension FriendsScreenView: NotifsDelegate {
     func checkNotif(accepted: Bool, friend: FriendsViewModel) {
-        print(accepted)
-        print(friend.nameOfPerson)
-        // both: remove from notifs
-        // if true: add to friends table
+        let friendEmail = friend.emailOfPerson
+        if accepted == true {
+            // move B ID to currFriends for A
+            // move A ID to currFriends for B
+            // remove A from notifications for B
+            // remove B from setFriendRequests for A
+            print(accepted)
+        } else { // did not accept friend request
+            let docRef = db.collection("users").document(userID)
+            var friendID: String = ""
+            
+            let friendRef = db.collection("users").whereField("email", isEqualTo: friendEmail).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for friendDocument in querySnapshot!.documents  {
+                        friendID = friendDocument.documentID
+                        // remove friend (Angela) from user (Anna) notifications
+                        docRef.getDocument {(userdoc, usererror) in
+                            var userNotifs = userdoc!["notifications"] as? Array ?? [""]
+                            for c_notif in userNotifs {
+                                if (c_notif as? String ?? "") == friendID {
+                                    let index = userNotifs.firstIndex(of: c_notif)
+                                    userNotifs.remove(at: index!)
+                                    self.db.collection("users").document(self.userID).updateData( [
+                                        "notifications": userNotifs
+                                    ]);
+                                }
+                                // ensures table is reloaded
+                                self.notifs.removeAll()
+                                self.friendsClicked = false
+                                self.fetchFriends()
+                                self.listOfFriends.reloadData()
+                            }
+                        }
+                        
+                        // remove user (Anna) from friend (Angela)'s sentFriendRequests
+                        let findRef = self.db.collection("users").document(friendID)
+                        findRef.getDocument {( frienddoc, frienderror) in
+                            var currSentRequests = frienddoc!["sentFriendRequests"] as? Array ?? [""]
+                            for c_request in currSentRequests {
+                                if (c_request as? String ?? "") == self.userID {
+                                    let index = currSentRequests.firstIndex(of: c_request)
+                                    currSentRequests.remove(at: index!)
+                                    self.db.collection("users").document(friendID).updateData( [
+                                        "sentFriendRequests": currSentRequests
+                                    ]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
         navigationController?.popViewController(animated: true)
     }
 }

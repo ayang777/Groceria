@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jat-LQ-8AN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jat-LQ-8AN">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -464,11 +464,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8UC-x0-2KR">
-                                <rect key="frame" x="51" y="157" width="316" height="316"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9Y-UM-GbH">
                                 <rect key="frame" x="90" y="674.5" width="55" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -485,6 +480,17 @@
                                     <action selector="removeNotif:" destination="9Jb-mM-EDD" eventType="touchUpInside" id="5h4-bv-GiW"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YRD-9e-ua2">
+                                <rect key="frame" x="51" y="153" width="316" height="316"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vrj-MX-FaY">
+                                        <rect key="frame" x="0.0" y="0.0" width="316" height="316"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Bps-Nn-F24"/>
@@ -492,6 +498,7 @@
                     <connections>
                         <outlet property="emailLabel" destination="05D-dZ-npB" id="ySA-go-KYc"/>
                         <outlet property="nameLabel" destination="ui9-NJ-9eT" id="vJs-9X-TRX"/>
+                        <outlet property="profilePicImageView" destination="Vrj-MX-FaY" id="kKq-DH-Nyh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dsf-l8-7TT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -500,11 +507,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
-        <image name="plus.circle" catalog="system" width="128" height="121"/>
+        <image name="checkmark.circle" catalog="system" width="64" height="60"/>
+        <image name="plus.circle" catalog="system" width="64" height="60"/>
         <image name="profile" width="30" height="30"/>
         <image name="right-arrow" width="50" height="50"/>
-        <image name="xmark" catalog="system" width="128" height="113"/>
-        <image name="xmark.circle" catalog="system" width="128" height="121"/>
+        <image name="xmark" catalog="system" width="64" height="56"/>
+        <image name="xmark.circle" catalog="system" width="64" height="60"/>
     </resources>
 </document>
