@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import Firebase
 
 class YourShopperIsScreen: UIViewController {
     
     var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [], userID: "")
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var shopperNameLabel: UILabel!
+    
+    let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +30,18 @@ class YourShopperIsScreen: UIViewController {
         backgroundView.layer.borderColor = UIColor.gray.cgColor
         view.insertSubview(backgroundView, at: 0)
 
+        if let shopper = request.shopperID {
+            let docRef = db.collection("users").document(shopper)
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    self.shopperNameLabel.text = document.data()?["name"] as? String
+                    self.shopperNameLabel.sizeToFit()
+                } else {
+                    print("Document does not exist")
+                }
+            }
+        }
+        
     }
     
 

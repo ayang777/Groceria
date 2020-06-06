@@ -68,7 +68,7 @@ class InitialMyItemsScreen: UIViewController {
                                 itemsToAdd.append(shoppingItem)
                             }
                             let uuid = UUID(uuidString: request.documentID)
-                            let requestToAdd = DashboardRequestModel(id: uuid, namePerson: requestData["nameOfPerson"] as! String, nameRequest: requestData["nameOfRequest"] as! String, store: requestData["storeName"] as! String == "" ? nil : requestData["storeName"] as? String , numberOfItems: requestData["numItems"] as! Int, items: itemsToAdd, userID: self.userID)
+                            let requestToAdd = DashboardRequestModel(id: uuid, namePerson: requestData["nameOfPerson"] as! String, nameRequest: requestData["nameOfRequest"] as! String, store: requestData["storeName"] as! String == "" ? nil : requestData["storeName"] as? String , numberOfItems: requestData["numItems"] as! Int, items: itemsToAdd, userID: self.userID, shopperID: requestData["shopper"] as? String)
                             self.listOfRequestsInProgress.append(requestToAdd)
                             self.hasItems = true
                             self.collectionView?.reloadData()

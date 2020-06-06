@@ -262,6 +262,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="lE8-KY-LC6"/>
                     <connections>
+                        <outlet property="shopperNameLabel" destination="WCK-7c-ASm" id="KJs-PH-efc"/>
                         <outlet property="tableView" destination="YOO-tj-XNn" id="tSe-8z-cIe"/>
                     </connections>
                 </viewController>

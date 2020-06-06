@@ -54,8 +54,7 @@ class InitialDashboardScreen: UIViewController {
     
     
     func fetchRequests() {
-        //var tempRequests: [DashboardRequestModel] = []
-        
+
         //current problem is that the docs are stored alphabetically in Firebase
         
         DispatchQueue.main.async {
@@ -85,40 +84,6 @@ class InitialDashboardScreen: UIViewController {
 
             }
         }
-
-        
-//        let sampleItems1 = [DashboardRequestModel.ShoppingItem(title: "Eggs", extraInfo: "one dozen, triple A eggs"), DashboardRequestModel.ShoppingItem(title: "Bread"), DashboardRequestModel.ShoppingItem(title: "Milk", extraInfo: "2 percent"), DashboardRequestModel.ShoppingItem(title: "Water")]
-//
-//        let sampleItems2 = [DashboardRequestModel.ShoppingItem(title: "Carrots"), DashboardRequestModel.ShoppingItem(title: "Squash")]
-//
-//        let sampleItems3 = [DashboardRequestModel.ShoppingItem(title: "Granola Bars")]
-//
-//        let sampleItems4 = [DashboardRequestModel.ShoppingItem(title: "Orange Juice"), DashboardRequestModel.ShoppingItem(title: "Twinkies"), DashboardRequestModel.ShoppingItem(title: "Sandies"), DashboardRequestModel.ShoppingItem(title: "Gushers")]
-//
-//        let sampleItems5 = [DashboardRequestModel.ShoppingItem(title: "Oreos"), DashboardRequestModel.ShoppingItem(title: "Milk")]
-//
-//        let request1 = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: "random", store: "Safeway", numberOfItems: 4, items: sampleItems1)
-//        let request2 = DashboardRequestModel(namePerson: "Jim Smith", nameRequest: "random", numberOfItems: 2, items: sampleItems2)
-//        let request3 = DashboardRequestModel(namePerson: "Angela Luo", nameRequest: "random", numberOfItems: 10, items: [])
-//        let request4 = DashboardRequestModel(namePerson: "Anna Yang", nameRequest: "random", numberOfItems: 7, items: [])
-//        let request5 = DashboardRequestModel(namePerson: "Michael Smith", nameRequest: "random", numberOfItems: 1, items: sampleItems3)
-//        let request6 = DashboardRequestModel(namePerson: "Jimmy Neutron", nameRequest: "random", numberOfItems: 11, items: [])
-//        let request7 = DashboardRequestModel(namePerson: "Timmy Turner", nameRequest: "random", numberOfItems: 5, items: [])
-//        let request8 = DashboardRequestModel(namePerson: "Persis Drell", nameRequest: "random", store: "Trader Joes", numberOfItems: 4, items: sampleItems4)
-//        let request9 = DashboardRequestModel(namePerson: "Ariana Grande", nameRequest: "random", numberOfItems: 2, items: sampleItems5)
-//
-//
-//        tempRequests.append(request1)
-//        tempRequests.append(request2)
-//        tempRequests.append(request3)
-//        tempRequests.append(request4)
-//        tempRequests.append(request5)
-//        tempRequests.append(request6)
-//        tempRequests.append(request7)
-//        tempRequests.append(request8)
-//        tempRequests.append(request9)
-        
-        //return tempRequests
     }
     
     

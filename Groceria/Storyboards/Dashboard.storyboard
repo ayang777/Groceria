@@ -37,11 +37,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q6c-sS-DTE">
-                                                    <rect key="frame" x="20" y="12" width="65" height="65"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VjZ-lF-mML">
                                                     <rect key="frame" x="104" y="11" width="225" height="42"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -60,11 +55,16 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="93I-oC-tsr">
+                                                    <rect key="frame" x="20" y="12" width="65" height="65"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameOfPerson" destination="VjZ-lF-mML" id="2wb-5N-Y91"/>
                                             <outlet property="numberOfItems" destination="sJ3-V4-Wjm" id="JfY-B6-ljN"/>
+                                            <outlet property="userProfilePic" destination="93I-oC-tsr" id="ctf-ag-NLH"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -167,11 +167,10 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dTE-zF-c5B">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ODH-5y-Pnn">
                                 <rect key="frame" x="287" y="135" width="90" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="vxr-Ca-pTf"/>
@@ -181,6 +180,7 @@
                         <outlet property="fulfillButton" destination="z0L-ji-Hk9" id="3I4-qr-Eds"/>
                         <outlet property="nameOfPerson" destination="fdv-4O-7Me" id="Ym6-NT-856"/>
                         <outlet property="numberOfItems" destination="IbH-7D-xjr" id="TKN-9z-Jsa"/>
+                        <outlet property="profilePicImageView" destination="ODH-5y-Pnn" id="CaN-HB-z4Q"/>
                         <outlet property="shoppingListTableView" destination="vPX-GY-dcZ" id="cJe-BB-Hbd"/>
                         <outlet property="storeName" destination="sjd-ih-Y4p" id="Con-ce-U9N"/>
                     </connections>

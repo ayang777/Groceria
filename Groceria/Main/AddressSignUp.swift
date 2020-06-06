@@ -94,7 +94,8 @@ class AddressSignUp: UIViewController, UITextFieldDelegate {
                         "address2": self.address2,
                         "city": self.city,
                         "state": self.state,
-                        "zip": self.zip
+                        "zip": self.zip,
+                        "profileImage": "https://thepowerofthedream.org/wp-content/uploads/2015/09/generic-profile-picture.jpg"
                     ]) { err in
                         if let err = err {
                             print("Error adding document: \(err)")

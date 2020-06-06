@@ -16,6 +16,7 @@ class SingleRequestView: UIViewController {
     @IBOutlet weak var numberOfItems: UILabel!
     @IBOutlet weak var fulfillButton: UIButton!
     @IBOutlet weak var shoppingListTableView: UITableView!
+    @IBOutlet weak var profilePicImageView: UIImageView!
     
     let db = Firestore.firestore()
     let userID : String = (Auth.auth().currentUser?.uid)!
@@ -80,6 +81,15 @@ class SingleRequestView: UIViewController {
         }
         storeName.text = "Store: \(store)"
         storeName.sizeToFit()
+        
+        let docRef = db.collection("users").document(request.userID)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.profilePicImageView.downloaded(from: document.data()?["profileImage"] as! String)
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
     
     //convert gradient layer to an image to set the top header's background
@@ -106,10 +116,14 @@ class SingleRequestView: UIViewController {
         let documentRefString = db.collection("dashboardRequests").document("\(request.id)")
         db.collection("users").document(userID).updateData( [
             "shoppingForRequests": FieldValue.arrayUnion([documentRefString])
-        ]);
+            ], completion: { error in
+                self.navigationController?.popViewController(animated: false)
+                self.tabBarController?.selectedIndex = 1
+        });
         
         db.collection("dashboardRequests").document("\(self.request.id)").updateData( [
             "status": "in-progress",
+            "shopper": userID
         ]);
         
 //        self.db.collection("dashboardRequests").document("\(self.request.id)").delete() { err in
@@ -128,7 +142,7 @@ class SingleRequestView: UIViewController {
         ]);
         
         
-        self.tabBarController?.selectedIndex = 1
+        
         
         //might not need some of this
         let navController = tabBarController?.viewControllers![1] as! UINavigationController

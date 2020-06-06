@@ -22,12 +22,13 @@ class DashboardRequestModel: Identifiable, Equatable {
     var store: String?
     var nameOfRequest: String
     var userID: String
+    var shopperID: String?
     
     //need to know if visible to public or not
     
     var items: [ShoppingItem]
     
-    init(id: UUID? = nil, namePerson: String, nameRequest: String, store: String? = nil, numberOfItems: Int, items: [ShoppingItem], userID: String) {
+    init(id: UUID? = nil, namePerson: String, nameRequest: String, store: String? = nil, numberOfItems: Int, items: [ShoppingItem], userID: String, shopperID: String? = nil) {
         self.id = id ?? UUID()
         self.nameOfRequest = nameRequest
         self.nameOfPerson = namePerson
@@ -35,6 +36,7 @@ class DashboardRequestModel: Identifiable, Equatable {
         self.items = items
         self.store = store
         self.userID = userID
+        self.shopperID = shopperID
     }
     
     
