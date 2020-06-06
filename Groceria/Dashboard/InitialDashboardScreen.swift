@@ -66,7 +66,6 @@ class InitialDashboardScreen: UIViewController {
                     return
                 }
                 let requests = documents.map { $0 }
-                print(requests.count)
                 for request in requests {
                     var itemsToAdd = [DashboardRequestModel.ShoppingItem]()
                     for item in request["items"] as! [[String: Any]] {

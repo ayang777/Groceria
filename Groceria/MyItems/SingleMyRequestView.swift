@@ -65,6 +65,26 @@ class SingleMyRequestView: UIViewController {
         storeLabel.text = "Store: \(storeName)"
         storeLabel.sizeToFit()
         
+        
+        let docRef = db.collection("dashboardRequests").document("\(request.id)")
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                if document.data()?["status"] as! String == "completed" {
+                    self.deleteButton.isHidden = true
+                    let amount = document.data()?["totalAmount"] as! Float
+                    let amountLabel = UILabel()
+                    amountLabel.frame = self.deleteButton.frame
+                    amountLabel.text = "Amount Paid: $\(amount.string(fractionDigits: 2))"
+                    amountLabel.sizeToFit()
+                    amountLabel.center.x = self.view.center.x
+                    self.view.addSubview(amountLabel)
+                }
+                
+            } else {
+                print("Document does not exist")
+            }
+        }
+        
     }
     
     
