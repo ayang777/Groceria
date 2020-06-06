@@ -29,7 +29,7 @@ class InitialScreen: UIViewController, UITextFieldDelegate {
         self.view.addSubview(forgotPasswordPopup)
         forgotPasswordPopup.center = self.view.center
         forgotPasswordPopup.layer.cornerRadius = 5
-        requestPassword.layer.shadowColor = UIColor.black.cgColor
+        requestPassword.layer.shadowColor = UIColor.darkGray.cgColor
         requestPassword.layer.shadowRadius = 2.0
         requestPassword.layer.shadowOpacity = 0.7
         requestPassword.layer.shadowOffset = CGSize(width: 2, height: 2)
@@ -46,11 +46,15 @@ class InitialScreen: UIViewController, UITextFieldDelegate {
         // if email in database:
         self.forgotPasswordPopup.removeFromSuperview()
         self.blurView.removeFromSuperview()
-        let alert = UIAlertController(title: "Password requested!", message: "Please check your email for further information.", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "New password requested", message: "Please check your email for further information.", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Close", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func cancelResetPassword(_ sender: Any) {
+        self.forgotPasswordPopup.removeFromSuperview()
+        self.blurView.removeFromSuperview()
+    }
     
     
     

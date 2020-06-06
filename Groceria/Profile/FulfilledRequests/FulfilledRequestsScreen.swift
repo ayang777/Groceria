@@ -70,6 +70,10 @@ class FulfilledRequestsScreen: UIViewController {
     
     
     func createCollectionView() {
+        let line = UIView()
+        line.frame = CGRect(x: 25, y: 160, width: 369, height: 1)
+        line.backgroundColor = UIColor.lightGray
+        self.view.addSubview(line)
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         //layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
         layout.itemSize = CGSize(width: 360, height: 84)
