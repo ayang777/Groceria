@@ -97,7 +97,7 @@ class SingleRequestView: UIViewController {
     
     @IBAction func fulfillRequest(_ sender: Any) {
         //add to user's shopping for array
-        //remove from request dashboard - should it be removed from the database entirely or just the dashboard UI ?
+        //remove from request dashboard - only remove it from dashboard UI
         //remove from other user's myunfulfilled request
         //add to other user's inprogress request
         //change the request's status to in progress
@@ -108,28 +108,40 @@ class SingleRequestView: UIViewController {
             "shoppingForRequests": FieldValue.arrayUnion([documentRefString])
         ]);
         
+        db.collection("dashboardRequests").document("\(self.request.id)").updateData( [
+            "status": "in-progress",
+        ]);
         
 //        self.db.collection("dashboardRequests").document("\(self.request.id)").delete() { err in
 //            if let err = err {
 //                print("Error removing document: \(err)")
 //            } else {
 //                print("Document successfully removed!")
-//                _ = self.navigationController?.popViewController(animated: true)
+//                self.tabBarController?.selectedIndex = 1
 //            }
 //        }
         
         
+        db.collection("users").document(request.userID).updateData( [
+            "myUnfulfilledRequests": FieldValue.arrayRemove([documentRefString]),
+            "myInProgressRequests": FieldValue.arrayUnion([documentRefString])
+        ]);
+        
+        
+        self.tabBarController?.selectedIndex = 1
+        
+        //might not need some of this
         let navController = tabBarController?.viewControllers![1] as! UINavigationController
         let vc = navController.topViewController as! InitialShoppingForScreen
         
-        vc.isShoppingFor = true
-        vc.listOfRequests.append(request)
+//        vc.isShoppingFor = true
+//        vc.listOfRequests.append(request)
         vc.setUpConditionalScreen()
         
         //self.delegate?.deleteRequestOnFulfillment(at: indexPath)
         
         
-        tabBarController?.selectedIndex = 1
+        
     }
     
     

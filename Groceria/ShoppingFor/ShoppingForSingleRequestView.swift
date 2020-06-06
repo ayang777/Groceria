@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ShoppingForSingleRequestView: UIViewController {
     
@@ -16,6 +17,8 @@ class ShoppingForSingleRequestView: UIViewController {
     @IBOutlet weak var storeLabel: UILabel!
     @IBOutlet weak var uploadReceiptButton: UIButton!
     @IBOutlet weak var shoppingListTableView: UITableView!
+    
+    let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +68,24 @@ class ShoppingForSingleRequestView: UIViewController {
         let addAction = UIAlertAction(title: "Add", style: UIAlertAction.Style.default, handler: { action in
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "DeliveringToScreen") as! DeliveringToScreen
             vc.name = self.request.nameOfPerson
-            self.navigationController?.pushViewController(vc, animated: true)
+            
+            let docRef = self.db.collection("users").document(self.request.userID)
+
+            docRef.getDocument { (document, error) in
+                if let document = document, document.exists {
+                    if let data = document.data() {
+                        vc.address1 = data["address1"] as! String
+                        vc.state = data["state"] as! String
+                        vc.city = data["city"] as! String
+                        vc.zip = data["zip"] as! String
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                } else {
+                    print("Document does not exist")
+                }
+            }
+
+            
         })
         
         addAction.isEnabled = false

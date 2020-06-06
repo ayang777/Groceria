@@ -77,7 +77,9 @@ class InitialDashboardScreen: UIViewController {
                     }
                     let uuid = UUID(uuidString: request.documentID)
                     let requestToAdd = DashboardRequestModel(id: uuid, namePerson: request["nameOfPerson"] as! String, nameRequest: request["nameOfRequest"] as! String, store: request["storeName"] as! String == "" ? nil : request["storeName"] as? String , numberOfItems: request["numItems"] as! Int, items: itemsToAdd, userID: request["userID"] as! String)
-                    self.requests.append(requestToAdd)
+                    if request["status"] as! String == "unfulfilled" {
+                         self.requests.append(requestToAdd)
+                    }
                     self.listOfRequests.reloadData()
                 }
 

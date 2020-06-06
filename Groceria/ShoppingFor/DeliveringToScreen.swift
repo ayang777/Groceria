@@ -12,8 +12,14 @@ class DeliveringToScreen: UIViewController {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var deliveredButton: UIButton!
+    @IBOutlet weak var addressLine1Label: UILabel!
+    @IBOutlet weak var addressLine2Label: UILabel!
     
     var name: String = ""
+    var address1: String = ""
+    var city: String = ""
+    var state: String = ""
+    var zip: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +37,12 @@ class DeliveringToScreen: UIViewController {
         let buttonColor1 = UIColor(red: 82.0/255.0, green: 152.0/255.0, blue: 217.0/255.0, alpha: 1.0)
         let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
         deliveredButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
+        
+        addressLine1Label.text = address1
+        addressLine1Label.sizeToFit()
+        
+        addressLine2Label.text = "\(city), \(state) \(zip)"
+        addressLine2Label.sizeToFit()
     }
     
     @IBAction func pressedDelivered(_ sender: Any) {

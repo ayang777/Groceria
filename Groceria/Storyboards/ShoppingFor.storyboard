@@ -163,7 +163,6 @@
         <!--Camera View Controller-->
         <scene sceneID="Hut-SZ-Eqi">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vXR-K2-dja" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="m6B-ZG-9tS" customClass="CameraViewController" customModule="Groceria" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QO1-NZ-cpC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -178,6 +177,7 @@
                         <segue destination="XfK-Vo-KK7" kind="show" id="CnM-FS-7VE"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXR-K2-dja" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2138" y="-12"/>
         </scene>
@@ -247,6 +247,8 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="bsn-Lt-CND"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="addressLine1Label" destination="Ira-hH-lbX" id="P0F-r1-aDm"/>
+                        <outlet property="addressLine2Label" destination="Is8-2J-JBJ" id="VMc-bZ-Jhh"/>
                         <outlet property="deliveredButton" destination="23z-iS-kAG" id="C5p-mQ-53v"/>
                         <outlet property="nameLabel" destination="Waa-e9-caG" id="CUX-TA-B72"/>
                     </connections>
