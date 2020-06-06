@@ -286,12 +286,12 @@ extension FriendsScreenView: DeleteFriendDelegate {
                                 ]);
                                 
                                 // REMOVE USER FOR FRIEND
-//                                var friends_currfriends = friendDoc["currFriends"] as? Array ?? [""]
-//                                
-//                                let user_index = friends_currfriends.firstIndex(of: self.userID)
-//                                friends_currfriends.remove(at: user_index!)
-//                                
-//                                self.db.collection("users").document(c_friend).updateData(["currFriends": friends_currfriends]);
+                                var friends_currfriends = friendDoc["currFriends"] as? Array ?? [""]
+                                
+                                let user_index = friends_currfriends.firstIndex(of: self.userID)
+                                friends_currfriends.remove(at: user_index!)
+                                
+                                self.db.collection("users").document(c_friend).updateData(["currFriends": friends_currfriends]);
                                 
                                 // remove user ID from friends list of currFriends
                                 // clear and reload table
