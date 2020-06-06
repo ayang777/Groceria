@@ -49,9 +49,13 @@ class YourShopperIsScreen: UIViewController {
         let docRef = db.collection("dashboardRequests").document("\(request.id)")
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                let amount = document.data()?["totalAmount"] as! Float
-                self.yourTotalLabel.text = "Your total is $\(amount)"
-                self.yourTotalLabel.sizeToFit()
+                if document.data()?["status"] as! String == "finished-shopping" || document.data()?["status"] as! String == "delivered" {
+                    let amount = document.data()?["totalAmount"] as! Float
+                    self.yourTotalLabel.text = "Your total is $\(amount.string(fractionDigits: 2))"
+                    self.yourTotalLabel.sizeToFit()
+                    self.yourTotalLabel.center.x = self.view.center.x
+                }
+                
             } else {
                 print("Document does not exist")
             }
@@ -124,4 +128,14 @@ extension YourShopperIsScreen: UITableViewDataSource, UITableViewDelegate {
 //        }
 //
 //    }
+}
+
+
+extension Float {
+    func string(fractionDigits:Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = fractionDigits
+        formatter.maximumFractionDigits = fractionDigits
+        return formatter.string(from: NSNumber(value: self)) ?? "\(self)"
+    }
 }
