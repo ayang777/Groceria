@@ -10,13 +10,12 @@ import UIKit
 
 
 class SingleNotifViewController: UIViewController {
-    var friend: FriendsViewModel = FriendsViewModel(name: "", email: "")
+    var friend: FriendsViewModel = FriendsViewModel(name: "", email: "", profileImage: "")
 
     var accepted: Bool = true
     var delegate: NotifsDelegate?
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
-    
     
     
     @IBAction func acceptNotif(_ sender: Any) {
@@ -40,7 +39,6 @@ class SingleNotifViewController: UIViewController {
         emailLabel.text = friend.emailOfPerson
         emailLabel.sizeToFit()
         // emailLabel.center.x = self.view.center.x
-    
     }
 }
 

@@ -13,10 +13,13 @@ class FriendsCell: UITableViewCell {
 
     @IBOutlet weak var friendsView: UIView!
     @IBOutlet weak var nameOfPerson: UILabel!
+    @IBOutlet weak var profilePicImageView: UIImageView!
     
     func setFriend(currfriend: FriendsViewModel) {
         nameOfPerson.text = currfriend.nameOfPerson
         nameOfPerson.sizeToFit()
+        let imageURL = currfriend.profileImage
+        self.profilePicImageView.downloaded(from: imageURL)
     }
 
 }

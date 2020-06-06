@@ -11,10 +11,11 @@ import UIKit
 
 class SingleFriendViewController: UIViewController {
     var indexPathSelected: IndexPath = IndexPath()
-    var friend: FriendsViewModel = FriendsViewModel(name: "", email: "")
+    var friend: FriendsViewModel = FriendsViewModel(name: "", email: "", profileImage: "")
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var profilePicImageView: UIImageView!
     
 
     var index: IndexPath = IndexPath()
@@ -31,6 +32,8 @@ class SingleFriendViewController: UIViewController {
         emailLabel.text = friend.emailOfPerson
         emailLabel.sizeToFit()
         // emailLabel.center.x = self.view.center.x
+        profilePicImageView.downloaded(from: friend.profileImage)
+
     
     }
     

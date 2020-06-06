@@ -13,9 +13,11 @@ import UIKit
 class FriendsViewModel {
     var nameOfPerson: String
     var emailOfPerson: String
+    var profileImage: String
         
-    init(name: String, email: String) {
+    init(name: String, email: String, profileImage: String) {
         self.nameOfPerson = name
         self.emailOfPerson = email
+        self.profileImage = profileImage
     }
 }

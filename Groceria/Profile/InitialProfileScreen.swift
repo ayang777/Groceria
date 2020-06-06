@@ -12,6 +12,11 @@ import Firebase
 class InitialProfileScreen: UIViewController {
     
     @IBOutlet weak var signOutButton: UIButton!
+    @IBOutlet weak var profileNameLabel: UILabel!
+    @IBOutlet weak var profilePicImageView: UIImageView!
+    
+    let db = Firestore.firestore()
+    let userID : String = (Auth.auth().currentUser?.uid)!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +47,17 @@ class InitialProfileScreen: UIViewController {
         let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
         signOutButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
         
-        
+        let docRef = db.collection("users").document(userID)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                self.profileNameLabel.text = document.data()?["name"] as? String
+                self.profileNameLabel.sizeToFit()
+                self.profileNameLabel.center.x = self.view.center.x
+                self.profilePicImageView.downloaded(from: document.data()?["profileImage"] as! String)
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
     
     @IBAction func pressedSignOut(_ sender: Any) {
@@ -69,4 +84,28 @@ class InitialProfileScreen: UIViewController {
     }
     
     
+}
+
+
+
+extension UIImageView {
+    func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {  // for swift 4.2 syntax just use ===> mode: UIView.ContentMode
+        contentMode = mode
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async() { [weak self] in
+                self?.image = image
+            }
+        }.resume()
+    }
+    
+    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {  // for swift 4.2 syntax just use ===> mode: UIView.ContentMode
+        guard let url = URL(string: link) else { return }
+        downloaded(from: url, contentMode: mode)
+    }
 }

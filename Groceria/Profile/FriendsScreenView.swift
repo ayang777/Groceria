@@ -23,7 +23,7 @@ class FriendsScreenView: UIViewController {
     var cellName: String = ""
     var cellEmail: String = ""
     var indexPathSelected: IndexPath = IndexPath()
-    var friend: FriendsViewModel = FriendsViewModel(name: "", email: "")
+    var friend: FriendsViewModel = FriendsViewModel(name: "", email: "", profileImage: "")
     
     var receivedIndex: IndexPath = IndexPath()
     
@@ -164,8 +164,8 @@ class FriendsScreenView: UIViewController {
                         if let doc = doc, doc.exists {
                             let friendName = doc["name"] as? String ?? ""
                             let friendEmail = doc["email"] as? String ?? ""
-
-                            let friendToView = FriendsViewModel(name: friendName, email: friendEmail)
+                            let friendProfileImage = doc["profileImage"] as? String ?? ""
+                            let friendToView = FriendsViewModel(name: friendName, email: friendEmail, profileImage: friendProfileImage)
                             self.friends.append(friendToView)
                             self.listOfFriends.reloadData()
                         }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jat-LQ-8AN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jat-LQ-8AN">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,18 +15,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jane Doe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBO-Xj-ORY">
-                                <rect key="frame" x="117" y="129" width="181" height="48"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBO-Xj-ORY">
+                                <rect key="frame" x="117" y="129" width="0.0" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="40"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jci-Az-3Lu">
-                                <rect key="frame" x="132" y="196" width="150" height="150"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOV-qa-J9u">
                                 <rect key="frame" x="105" y="740" width="205" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -51,6 +46,10 @@
                                     <segue destination="hwG-P6-7TZ" kind="embed" id="DWb-sc-hVU"/>
                                 </connections>
                             </containerView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ET2-gP-bvK">
+                                <rect key="frame" x="132" y="196" width="150" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="xGf-nS-Rpa"/>
@@ -59,6 +58,8 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="ewX-9H-YdB"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="profileNameLabel" destination="CBO-Xj-ORY" id="8Sg-2z-5Oj"/>
+                        <outlet property="profilePicImageView" destination="ET2-gP-bvK" id="4EE-6j-bQ5"/>
                         <outlet property="signOutButton" destination="sOV-qa-J9u" id="Zzc-VQ-toM"/>
                         <segue destination="flQ-lA-y1u" kind="presentation" identifier="logOut" animates="NO" modalPresentationStyle="fullScreen" id="1mB-35-5Pf"/>
                     </connections>
@@ -182,21 +183,20 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="right-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="umx-yf-62X">
-                                                            <rect key="frame" x="356" y="24" width="31" height="29"/>
+                                                            <rect key="frame" x="361" y="22" width="31" height="29"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         </imageView>
-                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aFT-RW-X61">
-                                                            <rect key="frame" x="25" y="8" width="53" height="53"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <color key="backgroundColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUg-An-sxb">
-                                                            <rect key="frame" x="97" y="19" width="142" height="30"/>
+                                                            <rect key="frame" x="97" y="22" width="142" height="30"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="25"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CMk-Dw-W7n">
+                                                            <rect key="frame" x="25" y="8" width="53" height="53"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 </view>
@@ -205,6 +205,7 @@
                                         <connections>
                                             <outlet property="friendsView" destination="xkT-fv-5Ih" id="nh3-CQ-CVF"/>
                                             <outlet property="nameOfPerson" destination="VUg-An-sxb" id="klM-mZ-TVs"/>
+                                            <outlet property="profilePicImageView" destination="CMk-Dw-W7n" id="EeP-3e-uV3"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -388,7 +389,13 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PvJ-uQ-fbe">
                                 <rect key="frame" x="51" y="157" width="316" height="316"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N4U-HA-ARR">
+                                        <rect key="frame" x="0.0" y="0.0" width="316" height="316"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -398,6 +405,7 @@
                         <outlet property="deletedFriend" destination="ZVg-e2-LIk" id="JfX-s8-tPD"/>
                         <outlet property="emailLabel" destination="urN-a3-zrd" id="fZy-vv-B07"/>
                         <outlet property="nameLabel" destination="FFX-2f-tts" id="wnv-yd-fvV"/>
+                        <outlet property="profilePicImageView" destination="N4U-HA-ARR" id="6qI-IA-8VB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T52-e2-7oW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -492,11 +500,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkmark.circle" catalog="system" width="64" height="60"/>
-        <image name="plus.circle" catalog="system" width="64" height="60"/>
+        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+        <image name="plus.circle" catalog="system" width="128" height="121"/>
         <image name="profile" width="30" height="30"/>
         <image name="right-arrow" width="50" height="50"/>
-        <image name="xmark" catalog="system" width="64" height="56"/>
-        <image name="xmark.circle" catalog="system" width="64" height="60"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <image name="xmark.circle" catalog="system" width="128" height="121"/>
     </resources>
 </document>
