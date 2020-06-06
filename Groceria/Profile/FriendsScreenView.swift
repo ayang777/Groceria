@@ -38,14 +38,14 @@ class FriendsScreenView: UIViewController {
         friendsClicked = true
         friendsButton.backgroundColor = UIColor.lightGray
         notifsButton.backgroundColor = UIColor.white
-        listOfFriends.reloadData()
+        // listOfFriends.reloadData()
     }
     
     @IBAction func notifsTapped(_ sender: Any) {
         friendsClicked = false
         notifsButton.backgroundColor = UIColor.lightGray
         friendsButton.backgroundColor = UIColor.white
-        listOfFriends.reloadData()
+        // listOfFriends.reloadData()
     }
     
     override func viewDidLoad() {
@@ -66,14 +66,13 @@ class FriendsScreenView: UIViewController {
         listOfFriends.delegate = self
         
         // fetchFriends()
-        friends = makeFriends()
-        // notifs = newFriends()
         
         // Delete friend if needed
 //        indexPathSelected = receivedIndex
 //        deletedFriend(index: indexPathSelected)
         
         self.addFriendPopup.layer.cornerRadius = 10
+        fetchFriends()
     }
 
     
@@ -125,16 +124,23 @@ class FriendsScreenView: UIViewController {
                         self.present(alert, animated: true, completion: nil)
                     } else { // matching user found
                         for document in querySnapshot!.documents  {
-                            print("\(document.documentID) => \(document.data())")
-                            
-                            let friendRefString = self.db.collection("users").document("\(document.documentID)")
-                        self.db.collection("users").document(self.userID).updateData(["currFriends": FieldValue.arrayUnion([friendRefString])])
-                        
+                            let friendRefString = "\(document.documentID)"
+                            // self.db.collection("users").document(self.userID).updateData(["currFriends": ["\(document.documentID)"]])
+                            self.db.collection("users").document(self.userID).updateData( [
+                                "currFriends": FieldValue.arrayUnion([friendRefString])
+                            ]);
+                            // self.listOfFriends.reloadData()
                         }
+                        // clear and reload table
+                        self.friends.removeAll()
+                        self.fetchFriends()
+                        
+                        // deal with views
                         self.addFriendPopup.removeFromSuperview()
                         self.blurView.removeFromSuperview()
                     }
                 }
+                // old hard code 
                 //            let query = userRef.whereField("email", isEqualTo: email)
                             
                 //            friends.append(FriendsViewModel(name: name, email: email))
@@ -157,55 +163,60 @@ class FriendsScreenView: UIViewController {
     }
     
     
-//    func fetchFriends() {
-//        DispatchQueue.main.async {
-//            self.db.collection("users")
-//            .addSnapshotListener { querySnapshot, error in
-//                self.friends = []
-//                guard let documents = querySnapshot?.documents else {
-//                    print("Error fetching documents: \(error!)")
-//                    return
-//                }
-//                let friends = documents.map { $0 }
-//                for friend in friends {
-//                    let friendToView = FriendsViewModel(name: friends["name"] as! String, email: friends["email"] as! String)
-//                    self.friends.append(friendToView)
-//                    self.listOfFriends.reloadData()
-//                }
-//
-//            }
-//        }
-    // }
+    func fetchFriends() {
+        let docRef = db.collection("users").document(userID)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let currfriends = document["currFriends"] as? Array ?? [""]
+                for c_friend in currfriends {
+                    let friendRef = self.db.collection("users").document(c_friend) // find using friend ID
+                    friendRef.getDocument { (doc, err) in
+                        if let doc = doc, doc.exists {
+                            let friendName = doc["name"] as? String ?? ""
+                            let friendEmail = doc["email"] as? String ?? ""
+                            
+                            let friendToView = FriendsViewModel(name: friendName, email: friendEmail)
+                            self.friends.append(friendToView)
+                            self.listOfFriends.reloadData()
+                        }
+                    }
+                }
+                
+            } else {
+                print("Document does not exist ")
+            }
+        }
+     }
     
     
     // Original Hard-coded Table for Friends
-    func makeFriends() -> [FriendsViewModel] {
-        var tempFriends: [FriendsViewModel] = []
-
-        let request1 = FriendsViewModel(name: "Persis Drell", email: "provost@stanford.edu")
-        let request2 = FriendsViewModel(name: "Marc Tessier-Lavigne", email: "marctl@stanford.edu")
-        let request3 = FriendsViewModel(name: "Angela Luo", email: "angluo@stanford.edu")
-        let request4 = FriendsViewModel(name: "Anna Yang", email: "ayang7@stanford.edu")
-
-        tempFriends.append(request1)
-        tempFriends.append(request2)
-        tempFriends.append(request3)
-        tempFriends.append(request4)
-
-        return tempFriends
-    }
-
-    func newFriends() -> [FriendsViewModel] {
-        var newFriends: [FriendsViewModel] = []
-
-        let request1 = FriendsViewModel(name: "Riva Brubaker-Cole ", email: "stanforddog@stanford.edu")
-        let request2 = FriendsViewModel(name: "Susie Brubaker-Cole", email: "vpstudentaffairs@stanford.edu")
-
-        newFriends.append(request1)
-        newFriends.append(request2)
-
-        return newFriends
-    }
+//    func makeFriends() -> [FriendsViewModel] {
+//        var tempFriends: [FriendsViewModel] = []
+//
+//        let request1 = FriendsViewModel(name: "Persis Drell", email: "provost@stanford.edu")
+//        let request2 = FriendsViewModel(name: "Marc Tessier-Lavigne", email: "marctl@stanford.edu")
+//        let request3 = FriendsViewModel(name: "Angela Luo", email: "angluo@stanford.edu")
+//        let request4 = FriendsViewModel(name: "Anna Yang", email: "ayang7@stanford.edu")
+//
+//        tempFriends.append(request1)
+//        tempFriends.append(request2)
+//        tempFriends.append(request3)
+//        tempFriends.append(request4)
+//
+//        return tempFriends
+//    }
+//
+//    func newFriends() -> [FriendsViewModel] {
+//        var newFriends: [FriendsViewModel] = []
+//
+//        let request1 = FriendsViewModel(name: "Riva Brubaker-Cole ", email: "stanforddog@stanford.edu")
+//        let request2 = FriendsViewModel(name: "Susie Brubaker-Cole", email: "vpstudentaffairs@stanford.edu")
+//
+//        newFriends.append(request1)
+//        newFriends.append(request2)
+//
+//        return newFriends
+//    }
     
 
     // DELETE FRIEND
