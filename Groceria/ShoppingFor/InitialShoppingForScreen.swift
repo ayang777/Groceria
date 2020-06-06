@@ -7,20 +7,76 @@
 //
 
 import UIKit
+import Firebase
 
 class InitialShoppingForScreen: UIViewController {
     
     @Published var isShoppingFor: Bool = false
+    let db = Firestore.firestore()
+    let userID : String = (Auth.auth().currentUser?.uid)!
+    
+    var collectionView: UICollectionView?
     
     var listOfRequests: [DashboardRequestModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpConditionalScreen()
+        fetchMyInProgressRequestsFromFirebase()
+        if listOfRequests.count == 0 {
+            isShoppingFor = false
+        } else {
+            isShoppingFor = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setUpConditionalScreen()
+    }
+    
+    
+    func fetchMyInProgressRequestsFromFirebase() {
+        DispatchQueue.main.async {
+            self.listOfRequests = []
+            self.db.collection("users").document(self.userID)
+            .addSnapshotListener { documentSnapshot, error in
+                self.listOfRequests = []
+                guard let document = documentSnapshot else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+                guard let data = document.data() else {
+                    print("Document data was empty.")
+                    return
+                }
+                if let myRequests = data["shoppingForRequests"] as? [DocumentReference] {
+                    if myRequests.count == 0 {
+                        self.isShoppingFor = false
+                    }
+                    for request in myRequests {
+                        request.getDocument(completion: { document, error in
+                            guard let requestData = document?.data() else {
+                                print("Document data was empty.")
+                                return
+                            }
+                            var itemsToAdd = [DashboardRequestModel.ShoppingItem]()
+                            for item in requestData["items"] as! [[String: Any]] {
+                                let shoppingItemUUID = UUID(uuidString: item["id"] as! String)
+                                let shoppingItem = DashboardRequestModel.ShoppingItem(id: shoppingItemUUID, title: item["title"] as! String, extraInfo: item["extraInfo"] as! String == "" ? nil : item["extraInfo"] as? String, picture: nil)
+                                itemsToAdd.append(shoppingItem)
+                            }
+                            let uuid = UUID(uuidString: request.documentID)
+                            let requestToAdd = DashboardRequestModel(id: uuid, namePerson: requestData["nameOfPerson"] as! String, nameRequest: requestData["nameOfRequest"] as! String, store: requestData["storeName"] as! String == "" ? nil : requestData["storeName"] as? String , numberOfItems: requestData["numItems"] as! Int, items: itemsToAdd, userID: requestData["userID"] as! String)
+                            self.listOfRequests.append(requestToAdd)
+                            self.isShoppingFor = true
+                            self.collectionView?.reloadData()
+                        })
+                    }
+                }
+
+                
+            }
+        }
     }
     
     func clearScreen() {
@@ -68,6 +124,7 @@ class InitialShoppingForScreen: UIViewController {
         layout.itemSize = CGSize(width: 360, height: 84)
         
         let myCollectionView:UICollectionView = UICollectionView(frame: CGRect(x: 20, y: 177, width: 374, height: 636), collectionViewLayout: layout)
+        collectionView = myCollectionView
         myCollectionView.dataSource = self
         myCollectionView.delegate = self
         myCollectionView.register(ShoppingForRequestCell.self, forCellWithReuseIdentifier: "shoppingForCell")

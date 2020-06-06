@@ -27,7 +27,7 @@ class InitialMyItemsScreen: UIViewController {
         super.viewDidLoad()
         setUpConditionalScreen()
         fetchMyUnfulfilledRequestsFromFirebase()
-        listOfRequestsInProgress = createFakeRequests()
+        fetchMyInProgressRequestsFromFirebase()
         
         if listOfRequestsInProgress.count == 0 && listOfUnfulfilledRequests.count == 0 {
             hasItems = false
@@ -37,24 +37,48 @@ class InitialMyItemsScreen: UIViewController {
     }
     
     
-    func createFakeRequests() -> [DashboardRequestModel] {
-        var tempRequests: [DashboardRequestModel] = []
-        
-//        let sampleItems1 = [DashboardRequestModel.ShoppingItem(title: "Eggs", extraInfo: "one dozen, triple A eggs"), DashboardRequestModel.ShoppingItem(title: "Bread"), DashboardRequestModel.ShoppingItem(title: "Milk", extraInfo: "2 percent"), DashboardRequestModel.ShoppingItem(title: "Water")]
-//
-//        let sampleItems2 = [DashboardRequestModel.ShoppingItem(title: "Carrots"), DashboardRequestModel.ShoppingItem(title: "Squash")]
-//
-//        let sampleItems3 = [DashboardRequestModel.ShoppingItem(title: "Granola Bars")]
-//
-//        let request1 = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: "Quick Run", store: "Safeway", numberOfItems: 4, items: sampleItems1)
-//        let request2 = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: "Unnamed", numberOfItems: 2, items: sampleItems2)
-//        let request3 = DashboardRequestModel(namePerson: "Jane Doe", nameRequest: "Cheap Eats", store: "Walmart", numberOfItems: 1, items:sampleItems3)
-//
-//        tempRequests.append(request1)
-//        tempRequests.append(request2)
-//        tempRequests.append(request3)
+    func fetchMyInProgressRequestsFromFirebase() {
+        DispatchQueue.main.async {
+            self.listOfRequestsInProgress = []
+            self.db.collection("users").document(self.userID)
+            .addSnapshotListener { documentSnapshot, error in
+                self.listOfRequestsInProgress = []
+                guard let document = documentSnapshot else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+                guard let data = document.data() else {
+                    print("Document data was empty.")
+                    return
+                }
+                if let myRequests = data["myInProgressRequests"] as? [DocumentReference] {
+                    if myRequests.count == 0 && self.listOfUnfulfilledRequests.count == 0 {
+                        self.hasItems = false
+                    }
+                    for request in myRequests {
+                        request.getDocument(completion: { document, error in
+                            guard let requestData = document?.data() else {
+                                print("Document data was empty.")
+                                return
+                            }
+                            var itemsToAdd = [DashboardRequestModel.ShoppingItem]()
+                            for item in requestData["items"] as! [[String: Any]] {
+                                let shoppingItemUUID = UUID(uuidString: item["id"] as! String)
+                                let shoppingItem = DashboardRequestModel.ShoppingItem(id: shoppingItemUUID, title: item["title"] as! String, extraInfo: item["extraInfo"] as! String == "" ? nil : item["extraInfo"] as? String, picture: nil)
+                                itemsToAdd.append(shoppingItem)
+                            }
+                            let uuid = UUID(uuidString: request.documentID)
+                            let requestToAdd = DashboardRequestModel(id: uuid, namePerson: requestData["nameOfPerson"] as! String, nameRequest: requestData["nameOfRequest"] as! String, store: requestData["storeName"] as! String == "" ? nil : requestData["storeName"] as? String , numberOfItems: requestData["numItems"] as! Int, items: itemsToAdd, userID: self.userID)
+                            self.listOfRequestsInProgress.append(requestToAdd)
+                            self.hasItems = true
+                            self.collectionView?.reloadData()
+                        })
+                    }
+                }
 
-        return tempRequests
+                
+            }
+        }
     }
 
     

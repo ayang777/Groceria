@@ -196,12 +196,6 @@ class CreateNewRequestScreen: UIViewController {
             }
         }
         
-//        var userRef: DocumentReference!
-//
-//        if let documentRefString = db.collection("dashboardRequests").document("\(newRequest.id)") {
-//          self.userRef = db.document("users/\(documentRefString)")
-//        }
-        
         let documentRefString = db.collection("dashboardRequests").document("\(newRequest.id)")
         
         db.collection("users").document(userID).updateData( [
