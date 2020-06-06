@@ -154,7 +154,6 @@
                             </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="clickedRequest:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DJT-VI-Rvm"/>
-                                <action selector="goToDashboard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dv4-Qr-tq4"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Es4-ju-lIy">

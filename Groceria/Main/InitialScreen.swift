@@ -41,14 +41,25 @@ class InitialScreen: UIViewController, UITextFieldDelegate {
     
     // clicked request password
     @IBAction func clickedRequest(_ sender: Any) {
-       // FIRST CHECK FIREBASE TO SEE IF EMAIL IS EVEN IN DATABASE
-       
-        // if email in database:
-        self.forgotPasswordPopup.removeFromSuperview()
-        self.blurView.removeFromSuperview()
-        let alert = UIAlertController(title: "New password requested", message: "Please check your email for further information.", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Close", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        let email = userTypedEmail.text ?? ""
+        Auth.auth().sendPasswordReset(withEmail: email, completion: { (error) in
+            //Make sure you execute the following code on the main queue
+            DispatchQueue.main.async {
+                //Use "if let" to access the error, if it is non-nil
+                if let error = error {
+                    let resetFailedAlert = UIAlertController(title: "Reset Failed", message: error.localizedDescription, preferredStyle: .alert)
+                    resetFailedAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(resetFailedAlert, animated: true, completion: nil)
+                } else {
+                    // if email in database:
+                    self.forgotPasswordPopup.removeFromSuperview()
+                    self.blurView.removeFromSuperview()
+                    let alert = UIAlertController(title: "New password requested", message: "Please check your email for further information.", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Close", style: UIAlertAction.Style.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        })
     }
     
     @IBAction func cancelResetPassword(_ sender: Any) {

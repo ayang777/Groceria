@@ -25,7 +25,7 @@ class InitialMyItemsScreen: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpConditionalScreen()
+        //setUpConditionalScreen()
         fetchMyUnfulfilledRequestsFromFirebase()
         fetchMyInProgressRequestsFromFirebase()
         
@@ -215,8 +215,10 @@ class InitialMyItemsScreen: UIViewController {
                             self.listOfUnfulfilledRequests.append(requestToAdd)
                             self.hasItems = true
                             self.collectionView?.reloadData()
+                            self.setUpConditionalScreen()
                         })
                     }
+                    self.setUpConditionalScreen()
                 }
 
                 
@@ -379,7 +381,6 @@ extension InitialMyItemsScreen: UICollectionViewDelegate, UICollectionViewDataSo
         if !isInProgressClicked {
             let vc = storyboard.instantiateViewController(withIdentifier: "SingleMyRequestView") as! SingleMyRequestView
             vc.request = listOfUnfulfilledRequests[indexPath.row]
-            print(vc.request.id)
             vc.indexPath = indexPath
             vc.delegate = self
             self.navigationController?.pushViewController(vc, animated: true)

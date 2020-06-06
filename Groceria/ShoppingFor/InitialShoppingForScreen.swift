@@ -21,7 +21,7 @@ class InitialShoppingForScreen: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpConditionalScreen()
+        //setUpConditionalScreen()
         fetchMyInProgressRequestsFromFirebase()
         if listOfRequests.count == 0 {
             isShoppingFor = false
@@ -70,8 +70,10 @@ class InitialShoppingForScreen: UIViewController {
                             self.listOfRequests.append(requestToAdd)
                             self.isShoppingFor = true
                             self.collectionView?.reloadData()
+                             self.setUpConditionalScreen()
                         })
                     }
+                     self.setUpConditionalScreen()
                 }
 
                 
