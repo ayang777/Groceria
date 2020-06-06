@@ -37,12 +37,12 @@ class SingleFriendViewController: UIViewController {
     @IBOutlet weak var deletedFriend: UIButton!
 
     @IBAction func deleteFriend(_ sender: Any) {
-        delegate?.deleteFriend(at: index)
+        delegate?.deleteFriend(at: index, friend: friend)
         
     }
     
 }
 
 protocol DeleteFriendDelegate {
-    func deleteFriend(at index: IndexPath)
+    func deleteFriend(at index: IndexPath, friend: FriendsViewModel)
 }

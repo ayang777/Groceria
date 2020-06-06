@@ -186,45 +186,6 @@ class FriendsScreenView: UIViewController {
                 print("Document does not exist ")
             }
         }
-     }
-    
-    
-    // Original Hard-coded Table for Friends
-//    func makeFriends() -> [FriendsViewModel] {
-//        var tempFriends: [FriendsViewModel] = []
-//
-//        let request1 = FriendsViewModel(name: "Persis Drell", email: "provost@stanford.edu")
-//        let request2 = FriendsViewModel(name: "Marc Tessier-Lavigne", email: "marctl@stanford.edu")
-//        let request3 = FriendsViewModel(name: "Angela Luo", email: "angluo@stanford.edu")
-//        let request4 = FriendsViewModel(name: "Anna Yang", email: "ayang7@stanford.edu")
-//
-//        tempFriends.append(request1)
-//        tempFriends.append(request2)
-//        tempFriends.append(request3)
-//        tempFriends.append(request4)
-//
-//        return tempFriends
-//    }
-//
-//    func newFriends() -> [FriendsViewModel] {
-//        var newFriends: [FriendsViewModel] = []
-//
-//        let request1 = FriendsViewModel(name: "Riva Brubaker-Cole ", email: "stanforddog@stanford.edu")
-//        let request2 = FriendsViewModel(name: "Susie Brubaker-Cole", email: "vpstudentaffairs@stanford.edu")
-//
-//        newFriends.append(request1)
-//        newFriends.append(request2)
-//
-//        return newFriends
-//    }
-    
-
-    // DELETE FRIEND
-    func deletedFriend(index: IndexPath) {
-        if index != [] {
-            friends.remove(at: index.row)
-            listOfFriends.deleteRows(at: [index], with: .automatic)
-        }
     }
 }
 
@@ -283,16 +244,13 @@ extension FriendsScreenView: UITableViewDataSource, UITableViewDelegate {
             self.navigationController?.pushViewController(vc, animated: true)
         }
         // vc.indexPathSelected = indexPath
-        
-        // vc.delegate = self
-        // self.navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 
 extension FriendsScreenView: DeleteFriendDelegate {
-    func deleteFriend(at index: IndexPath) {
+    func deleteFriend(at index: IndexPath, friend: FriendsViewModel) {
         friends.remove(at: index.row)
         listOfFriends.deleteRows(at: [index], with: .automatic)
         navigationController?.popViewController(animated: true)
@@ -309,3 +267,44 @@ extension FriendsScreenView: NotifsDelegate {
     }
 }
 
+
+
+
+// DELETED CODE
+// Original Hard-coded Table for Friends
+//    func makeFriends() -> [FriendsViewModel] {
+//        var tempFriends: [FriendsViewModel] = []
+//
+//        let request1 = FriendsViewModel(name: "Persis Drell", email: "provost@stanford.edu")
+//        let request2 = FriendsViewModel(name: "Marc Tessier-Lavigne", email: "marctl@stanford.edu")
+//        let request3 = FriendsViewModel(name: "Angela Luo", email: "angluo@stanford.edu")
+//        let request4 = FriendsViewModel(name: "Anna Yang", email: "ayang7@stanford.edu")
+//
+//        tempFriends.append(request1)
+//        tempFriends.append(request2)
+//        tempFriends.append(request3)
+//        tempFriends.append(request4)
+//
+//        return tempFriends
+//    }
+//
+//    func newFriends() -> [FriendsViewModel] {
+//        var newFriends: [FriendsViewModel] = []
+//
+//        let request1 = FriendsViewModel(name: "Riva Brubaker-Cole ", email: "stanforddog@stanford.edu")
+//        let request2 = FriendsViewModel(name: "Susie Brubaker-Cole", email: "vpstudentaffairs@stanford.edu")
+//
+//        newFriends.append(request1)
+//        newFriends.append(request2)
+//
+//        return newFriends
+//    }
+    
+
+    // DELETE FRIEND
+//    func deletedFriend(index: IndexPath, friend: FriendsViewModel) {
+//        if index != [] {
+//            friends.remove(at: index.row)
+//            listOfFriends.deleteRows(at: [index], with: .automatic)
+//        }
+//    }
