@@ -35,7 +35,6 @@ class InitialProfileScreen: UIViewController {
             self.navigationController?.navigationBar.layoutIfNeeded()
         }
         
-        
         //create drop shadow effect for login button
         signOutButton.layer.shadowColor = UIColor.black.cgColor
         signOutButton.layer.shadowRadius = 2.0
@@ -82,11 +81,7 @@ class InitialProfileScreen: UIViewController {
         UIGraphicsEndImageContext()
         return gradientImage
     }
-    
-    
 }
-
-
 
 extension UIImageView {
     func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {  // for swift 4.2 syntax just use ===> mode: UIView.ContentMode

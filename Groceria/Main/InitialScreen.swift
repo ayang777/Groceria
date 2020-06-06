@@ -3,7 +3,7 @@
 //  Groceria
 //
 //  Created by Angela Luo, Anna Yang.
-//  Copyright © 2020 Angela Luo, Anna Yang. All rights reserved.
+//  Copyright © 2020 Angela Luo. All rights reserved.
 //
 
 import UIKit

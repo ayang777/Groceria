@@ -49,6 +49,7 @@
 		67B0F41A2486DC9400CDC7CD /* NewShoppingItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B0F4192486DC9400CDC7CD /* NewShoppingItemCell.swift */; };
 		67B3959E24857C760071EB2C /* ShoppingForSingleRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B3959D24857C760071EB2C /* ShoppingForSingleRequestView.swift */; };
 		67B395A02485841E0071EB2C /* ShoppingForActiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B3959F2485841E0071EB2C /* ShoppingForActiveCell.swift */; };
+		67CB3AC0248C3A8300705FDF /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CB3ABF248C3A8300705FDF /* SettingsScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		67B0F4192486DC9400CDC7CD /* NewShoppingItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewShoppingItemCell.swift; sourceTree = "<group>"; };
 		67B3959D24857C760071EB2C /* ShoppingForSingleRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingForSingleRequestView.swift; sourceTree = "<group>"; };
 		67B3959F2485841E0071EB2C /* ShoppingForActiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingForActiveCell.swift; sourceTree = "<group>"; };
+		67CB3ABF248C3A8300705FDF /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		69F3E552D67591159F969A44 /* Pods-Groceria.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceria.debug.xcconfig"; path = "Target Support Files/Pods-Groceria/Pods-Groceria.debug.xcconfig"; sourceTree = "<group>"; };
 		F47DFEDF080CBBD4B06CE2D3 /* Pods-Groceria.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Groceria.release.xcconfig"; path = "Target Support Files/Pods-Groceria/Pods-Groceria.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +152,7 @@
 		671990E6248374BF00F65094 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				67CB3ABE248C3A5700705FDF /* Settings */,
 				67594C72248B8804009875A2 /* FriendsNotifs */,
 				67594C71248B87F2009875A2 /* FulfilledRequests */,
 				671990D524826C0B00F65094 /* InitialProfileScreen.swift */,
@@ -258,6 +261,14 @@
 				6777D6AD2488FB6500F819DD /* DeliveringToScreen.swift */,
 			);
 			path = ShoppingFor;
+			sourceTree = "<group>";
+		};
+		67CB3ABE248C3A5700705FDF /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				67CB3ABF248C3A8300705FDF /* SettingsScreen.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		FB207837D78D3467668DBEF1 /* Frameworks */ = {
@@ -396,6 +407,7 @@
 				671990D82482F72700F65094 /* InitialDashboardScreen.swift in Sources */,
 				671C5A5624861C5600AE4A2C /* FriendsViewModel.swift in Sources */,
 				6726A7182488D6D500D902FC /* SingleFriendViewController.swift in Sources */,
+				67CB3AC0248C3A8300705FDF /* SettingsScreen.swift in Sources */,
 				67A3D5BD246DC96700E05DC2 /* InitialScreen.swift in Sources */,
 				67B0F41A2486DC9400CDC7CD /* NewShoppingItemCell.swift in Sources */,
 				67AF5AF124838C0C0076A876 /* InitialShoppingForScreen.swift in Sources */,

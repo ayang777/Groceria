@@ -168,5 +168,4 @@ extension FulfilledRequestsScreen: UICollectionViewDelegate, UICollectionViewDat
             }
         }
     }
-
 }
