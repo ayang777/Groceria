@@ -18,6 +18,7 @@ class YourShopperIsScreen: UIViewController {
     @IBOutlet weak var yourTotalLabel: UILabel!
     
     let db = Firestore.firestore()
+    let userID : String = (Auth.auth().currentUser?.uid)!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,15 +76,32 @@ class YourShopperIsScreen: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
+    @IBAction func markAsDelivered(_ sender: Any) {
+        //remove from myinprogress requests
+        //add to mycompleted requests
+        //change its status to completed
+        //return to previous screen
+        
+        let documentRefString = db.collection("dashboardRequests").document("\(request.id)")
+//        db.collection("users").document(userID).updateData( [
+//            "shoppingForRequests": FieldValue.arrayUnion([documentRefString])
+//            ], completion: { error in
+//                self.navigationController?.popViewController(animated: false)
+//                self.tabBarController?.selectedIndex = 1
+//        });
+//
+        db.collection("dashboardRequests").document("\(self.request.id)").updateData( [
+            "status": "completed",
+        ]);
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        db.collection("users").document(userID).updateData( [
+            "myCompletedRequests": FieldValue.arrayUnion([documentRefString]),
+            "myInProgressRequests": FieldValue.arrayRemove([documentRefString])
+            ], completion: { error in
+                self.navigationController?.popViewController(animated: false)
+        });
     }
-    */
+    
 
 }
 
