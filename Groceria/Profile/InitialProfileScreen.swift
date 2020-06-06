@@ -49,10 +49,11 @@ class InitialProfileScreen: UIViewController {
         do {
             try Auth.auth().signOut()
             //navigationController?.popToRootViewController(animated: true)
+            performSegue(withIdentifier: "logOut", sender: nil)
         }
         catch { print("already logged out") }
         
-        //performSegue(withIdentifier: "logOut", sender: nil)
+        
     }
     
     //convert gradient layer to an image to set the top header's background
