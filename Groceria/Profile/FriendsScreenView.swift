@@ -35,6 +35,7 @@ class FriendsScreenView: UIViewController {
     
     
     @IBAction func friendsTapped(_ sender: Any) {
+        self.friends.removeAll()
         friendsClicked = true
         friendsButton.backgroundColor = UIColor.lightGray
         notifsButton.backgroundColor = UIColor.white
@@ -43,6 +44,7 @@ class FriendsScreenView: UIViewController {
     }
     
     @IBAction func notifsTapped(_ sender: Any) {
+        self.notifs.removeAll()
         friendsClicked = false
         notifsButton.backgroundColor = UIColor.lightGray
         friendsButton.backgroundColor = UIColor.white
@@ -133,6 +135,7 @@ class FriendsScreenView: UIViewController {
                         }
                         // clear and reload table
                         self.friends.removeAll()
+                        self.notifs.removeAll()
                         self.fetchFriends()
                         
                         // deal with views
@@ -184,9 +187,9 @@ class FriendsScreenView: UIViewController {
                                 let notifEmail = doc["email"] as? String ?? ""
                                 let notifProfileImage = doc["profileImage"] as? String ?? ""
                                 let notifToView = FriendsViewModel(name: notifName, email: notifEmail, profileImage: notifProfileImage)
-                                self.friends.append(notifToView)
+                                self.notifs.append(notifToView)
                                 self.listOfFriends.reloadData()
-                            }                            
+                            }
                         }
                     }
                 }
