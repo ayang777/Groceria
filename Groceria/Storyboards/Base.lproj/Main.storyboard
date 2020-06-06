@@ -486,7 +486,7 @@
         <!--MainTabBarController-->
         <scene sceneID="vIo-HH-Mnu">
             <objects>
-                <tabBarController title="MainTabBarController" id="uOD-rF-vEE" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" title="MainTabBarController" id="uOD-rF-vEE" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="nOC-Sn-cpW"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ifH-2F-Yge">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
