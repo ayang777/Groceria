@@ -47,6 +47,35 @@ class ShoppingForSingleRequestView: UIViewController {
         let buttonColor1 = UIColor(red: 82.0/255.0, green: 152.0/255.0, blue: 217.0/255.0, alpha: 1.0)
         let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
         uploadReceiptButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
+        
+        let docRef = db.collection("dashboardRequests").document("\(request.id)")
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let status = document.data()?["status"] as! String
+                if status == "finished-shopping" {
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "DeliveringToScreen") as! DeliveringToScreen
+                    vc.name = self.request.nameOfPerson
+                    vc.request = self.request
+                    let docRef = self.db.collection("users").document(self.request.userID)
+
+                    docRef.getDocument { (document, error) in
+                        if let document = document, document.exists {
+                            if let data = document.data() {
+                                vc.address1 = data["address1"] as! String
+                                vc.state = data["state"] as! String
+                                vc.city = data["city"] as! String
+                                vc.zip = data["zip"] as! String
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
+                        } else {
+                            print("Document does not exist")
+                        }
+                    }
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
     
     @objc func alertTextFieldDidChange(field: UITextField){
@@ -68,9 +97,16 @@ class ShoppingForSingleRequestView: UIViewController {
         let addAction = UIAlertAction(title: "Add", style: UIAlertAction.Style.default, handler: { action in
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "DeliveringToScreen") as! DeliveringToScreen
             vc.name = self.request.nameOfPerson
-            
+            vc.request = self.request
             let docRef = self.db.collection("users").document(self.request.userID)
 
+            let firstTextField = alert.textFields![0] as UITextField
+            
+            self.db.collection("dashboardRequests").document("\(self.request.id)").updateData( [
+                "totalAmount": Float(firstTextField.text ?? "0")!,
+                "status": "finished-shopping"
+            ]);
+            
             docRef.getDocument { (document, error) in
                 if let document = document, document.exists {
                     if let data = document.data() {

@@ -14,18 +14,22 @@ class YourShopperIsScreen: UIViewController {
     var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [], userID: "")
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var shopperNameLabel: UILabel!
+    @IBOutlet weak var markDeliveredButton: UIButton!
+    @IBOutlet weak var yourTotalLabel: UILabel!
     
     let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        yourTotalLabel.text = ""
+        
         tableView.dataSource = self
         tableView.delegate = self
         
         //create border around table view
         let backgroundView = UIView()
-        backgroundView.frame = CGRect(x: 35, y: 213, width: 344, height: 553)
+        backgroundView.frame = CGRect(x: 35, y: 213, width: 344, height: 415)
         backgroundView.layer.borderWidth = 1
         backgroundView.layer.borderColor = UIColor.gray.cgColor
         view.insertSubview(backgroundView, at: 0)
@@ -41,6 +45,28 @@ class YourShopperIsScreen: UIViewController {
                 }
             }
         }
+        
+        let docRef = db.collection("dashboardRequests").document("\(request.id)")
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let amount = document.data()?["totalAmount"] as! Float
+                self.yourTotalLabel.text = "Your total is $\(amount)"
+                self.yourTotalLabel.sizeToFit()
+            } else {
+                print("Document does not exist")
+            }
+        }
+        
+        //create drop shadow effect for login button
+        markDeliveredButton.layer.shadowColor = UIColor.black.cgColor
+        markDeliveredButton.layer.shadowRadius = 2.0
+        markDeliveredButton.layer.shadowOpacity = 0.7
+        markDeliveredButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        markDeliveredButton.layer.masksToBounds = false
+        
+        let buttonColor1 = UIColor(red: 82.0/255.0, green: 152.0/255.0, blue: 217.0/255.0, alpha: 1.0)
+        let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
+        markDeliveredButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
         
     }
     

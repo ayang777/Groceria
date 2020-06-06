@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class DeliveringToScreen: UIViewController {
 
@@ -15,11 +16,17 @@ class DeliveringToScreen: UIViewController {
     @IBOutlet weak var addressLine1Label: UILabel!
     @IBOutlet weak var addressLine2Label: UILabel!
     
+    let userID : String = (Auth.auth().currentUser?.uid)!
+    
     var name: String = ""
     var address1: String = ""
     var city: String = ""
     var state: String = ""
     var zip: String = ""
+    
+    let db = Firestore.firestore()
+    
+    var request: DashboardRequestModel = DashboardRequestModel(namePerson: "", nameRequest: "", numberOfItems: 0, items: [], userID: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +53,21 @@ class DeliveringToScreen: UIViewController {
     }
     
     @IBAction func pressedDelivered(_ sender: Any) {
-        self.navigationController?.popToRootViewController(animated: true)
+        //remove from shopping for requests
+        //update status of request to "delivered"
+        
+        let documentRefString = db.collection("dashboardRequests").document("\(request.id)")
+        db.collection("users").document(userID).updateData( [
+            "shoppingForRequests": FieldValue.arrayRemove([documentRefString])
+            ], completion: { error in
+                self.navigationController?.popToRootViewController(animated: true)
+        });
+        
+        db.collection("dashboardRequests").document("\(self.request.id)").updateData( [
+            "status": "delivered",
+        ]);
+        
+        
     }
     
     /*
