@@ -31,6 +31,10 @@ class SettingsTableViewController: UITableViewController {
             let storyboard = UIStoryboard(name: "Profile", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "FriendsScreenView") as! FriendsScreenView
             self.navigationController?.pushViewController(vc, animated: true)
+        } else if indexPath.row == 2 {
+            let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "FulfilledRequestsScreen") as! FulfilledRequestsScreen
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

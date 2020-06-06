@@ -185,7 +185,6 @@ class InitialMyItemsScreen: UIViewController {
             self.listOfUnfulfilledRequests = []
             self.db.collection("users").document(self.userID)
             .addSnapshotListener { documentSnapshot, error in
-                print("inside snapshot")
                 self.listOfUnfulfilledRequests = []
                 guard let document = documentSnapshot else {
                     print("Error fetching documents: \(error!)")

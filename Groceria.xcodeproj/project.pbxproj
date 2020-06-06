@@ -29,6 +29,7 @@
 		6726A7182488D6D500D902FC /* SingleFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6726A7172488D6D500D902FC /* SingleFriendViewController.swift */; };
 		67379C1F248A462200C4D507 /* SingleNotifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67379C1E248A462200C4D507 /* SingleNotifViewController.swift */; };
 		6754126624896E0400BD32B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6754126524896E0400BD32B4 /* GoogleService-Info.plist */; };
+		67594C74248B8830009875A2 /* FulfilledRequestsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67594C73248B8830009875A2 /* FulfilledRequestsScreen.swift */; };
 		675A5C782487632600098D3E /* SingleMyRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675A5C772487632600098D3E /* SingleMyRequestView.swift */; };
 		675A5C7A2487A48500098D3E /* YourShopperIsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675A5C792487A48500098D3E /* YourShopperIsScreen.swift */; };
 		6766C73324874DD600D54682 /* MyRequestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6766C73224874DD600D54682 /* MyRequestsCell.swift */; };
@@ -70,9 +71,10 @@
 		671C5A5524861C5600AE4A2C /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
 		671C5A572486262700AE4A2C /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		6723CF792484FA76006B6429 /* ShoppingForRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingForRequestCell.swift; sourceTree = "<group>"; };
-		6726A7172488D6D500D902FC /* SingleFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingleFriendViewController.swift; path = Groceria/Profile/SingleFriendViewController.swift; sourceTree = SOURCE_ROOT; };
+		6726A7172488D6D500D902FC /* SingleFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingleFriendViewController.swift; path = Groceria/Profile/FriendsNotifs/SingleFriendViewController.swift; sourceTree = SOURCE_ROOT; };
 		67379C1E248A462200C4D507 /* SingleNotifViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleNotifViewController.swift; sourceTree = "<group>"; };
 		6754126524896E0400BD32B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		67594C73248B8830009875A2 /* FulfilledRequestsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FulfilledRequestsScreen.swift; sourceTree = "<group>"; };
 		675A5C772487632600098D3E /* SingleMyRequestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleMyRequestView.swift; sourceTree = "<group>"; };
 		675A5C792487A48500098D3E /* YourShopperIsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourShopperIsScreen.swift; sourceTree = "<group>"; };
 		6766C73224874DD600D54682 /* MyRequestsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRequestsCell.swift; sourceTree = "<group>"; };
@@ -148,13 +150,10 @@
 		671990E6248374BF00F65094 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				6726A7172488D6D500D902FC /* SingleFriendViewController.swift */,
-				67379C1E248A462200C4D507 /* SingleNotifViewController.swift */,
-				671990E4248373B100F65094 /* SettingsTableViewController.swift */,
-				671C5A5124861B1E00AE4A2C /* FriendsScreenView.swift */,
-				671C5A5524861C5600AE4A2C /* FriendsViewModel.swift */,
-				671C5A572486262700AE4A2C /* FriendsCell.swift */,
+				67594C72248B8804009875A2 /* FriendsNotifs */,
+				67594C71248B87F2009875A2 /* FulfilledRequests */,
 				671990D524826C0B00F65094 /* InitialProfileScreen.swift */,
+				671990E4248373B100F65094 /* SettingsTableViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -167,6 +166,26 @@
 				671990CA248252AD00F65094 /* AddressSignUp.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		67594C71248B87F2009875A2 /* FulfilledRequests */ = {
+			isa = PBXGroup;
+			children = (
+				67594C73248B8830009875A2 /* FulfilledRequestsScreen.swift */,
+			);
+			path = FulfilledRequests;
+			sourceTree = "<group>";
+		};
+		67594C72248B8804009875A2 /* FriendsNotifs */ = {
+			isa = PBXGroup;
+			children = (
+				6726A7172488D6D500D902FC /* SingleFriendViewController.swift */,
+				67379C1E248A462200C4D507 /* SingleNotifViewController.swift */,
+				671C5A5124861B1E00AE4A2C /* FriendsScreenView.swift */,
+				671C5A5524861C5600AE4A2C /* FriendsViewModel.swift */,
+				671C5A572486262700AE4A2C /* FriendsCell.swift */,
+			);
+			path = FriendsNotifs;
 			sourceTree = "<group>";
 		};
 		6766C7302487484B00D54682 /* CreateNewRequest */ = {
@@ -381,6 +400,7 @@
 				67B0F41A2486DC9400CDC7CD /* NewShoppingItemCell.swift in Sources */,
 				67AF5AF124838C0C0076A876 /* InitialShoppingForScreen.swift in Sources */,
 				67A3D5B9246DC96700E05DC2 /* AppDelegate.swift in Sources */,
+				67594C74248B8830009875A2 /* FulfilledRequestsScreen.swift in Sources */,
 				671990E32483657A00F65094 /* ShoppingItemInactiveCell.swift in Sources */,
 				67B3959E24857C760071EB2C /* ShoppingForSingleRequestView.swift in Sources */,
 				671990D624826C0B00F65094 /* InitialProfileScreen.swift in Sources */,
