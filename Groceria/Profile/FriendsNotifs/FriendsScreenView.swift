@@ -69,7 +69,7 @@ class FriendsScreenView: UIViewController {
         listOfFriends.dataSource = self
         listOfFriends.delegate = self
         
-        self.addFriendPopup.layer.cornerRadius = 10
+        self.addFriendPopup.layer.cornerRadius = 8
         fetchFriends()
     }
 

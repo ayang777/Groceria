@@ -349,9 +349,9 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
         changePasswordView.layer.borderWidth = 0.25
         changePasswordView.layer.borderColor = UIColor.lightGray.cgColor
         
-        self.changeAddressPopup.layer.cornerRadius = 10
-        self.changeEmailPopup.layer.cornerRadius = 10
-        self.changeProfilePopup.layer.cornerRadius = 10
+        self.changeAddressPopup.layer.cornerRadius = 8
+        self.changeEmailPopup.layer.cornerRadius = 8
+        self.changeProfilePopup.layer.cornerRadius = 8
 
     }
     
