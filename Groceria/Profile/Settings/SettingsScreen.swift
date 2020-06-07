@@ -130,23 +130,23 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
         let docRef = db.collection("users").document(userID)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {                    self.db.collection("users").document(self.userID).updateData( [
-                "address1": newAddress1
+                    "address1": newAddress1
                 ]);
-            self.db.collection("users").document(self.userID).updateData( [
-                "address2": newAddress2
-                ]);
-                
-            self.db.collection("users").document(self.userID).updateData( [
-                "city": newCity
+                self.db.collection("users").document(self.userID).updateData( [
+                    "address2": newAddress2
                 ]);
                 
-            self.db.collection("users").document(self.userID).updateData( [
-                "state": newState
+                self.db.collection("users").document(self.userID).updateData( [
+                    "city": newCity
                 ]);
                 
-            self.db.collection("users").document(self.userID).updateData( [
-                "zip": newZip
+                self.db.collection("users").document(self.userID).updateData( [
+                    "state": newState
                 ]);
+                
+                self.db.collection("users").document(self.userID).updateData( [
+                    "zip": newZip
+                    ]);
                 self.refreshData()
             } else {
                 print("Document does not exist")
@@ -201,50 +201,36 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
     
     // Change button for name and email
     @IBAction func changeButtonPopup(_ sender: Any) {
-        print("current: \(current)")
-        // send information back to firebase
-        print(userID)
-        
         if current == "email" {
             let email = newEmailPlaceholder.text ?? ""
-            print(email)
-            self.changeEmailPopup.removeFromSuperview()
-//            let credential = EmailAuthProvider.credential(withEmail: oldEmail, password: "password")
-//            if let user = Auth.auth().currentUser {
-//                // re authenticate the user
-//                user.reauthenticate(with: credential) { error in
-//                    if let error = error {
-//                        // An error happened.
-//                    } else {
-//                        // User re-authenticated.
-//                        user.updateEmail(to: "email") { (error) in
-//                            // email updated
-//                        }
-//                    }
-//                }
-//            }
-//
-//
-//            user?.updateEmail(to: email) { error in
-//                print(error)
-//                if error != nil {
-//                    let alert = UIAlertController(title: "Unable to Change Email", message: error?.localizedDescription, preferredStyle: UIAlertController.Style.alert)
-//                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-//                    self.present(alert, animated: true, completion: nil)
-//                } else {
-//                    let alert = UIAlertController(title: "Email updated successfully", message: "", preferredStyle: UIAlertController.Style.alert)
-//                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
-//                        self.db.collection("users").document(self.userID).updateData( [
-//                            "email": email
-//                        ]);
-//                        self.changeProfilePopup.removeFromSuperview()
-//                        self.blurView.removeFromSuperview()
-//                    }))
-//                    self.present(alert, animated: true, completion: nil)
-//                    //need to also update database
-//                }
-//            }
-            
+            let password = enterPasswordPlaceholder.text ?? ""
+            let credential = EmailAuthProvider.credential(withEmail: oldEmail, password: password)
+            Auth.auth().currentUser?.reauthenticate(with: credential, completion: { result, error in
+                if let reauthError = error {
+                    let alert = UIAlertController(title: "Something went wrong.", message: reauthError.localizedDescription, preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                } else {
+                    Auth.auth().currentUser?.updateEmail(to: email) { error in
+                        if error != nil {
+                            let alert = UIAlertController(title: "Unable to Change Email", message: error?.localizedDescription, preferredStyle: UIAlertController.Style.alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                        } else {
+                            let alert = UIAlertController(title: "Email updated successfully", message: "", preferredStyle: UIAlertController.Style.alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
+                                self.db.collection("users").document(self.userID).updateData( [
+                                    "email": email
+                                ]);
+                                self.changeEmailPopup.removeFromSuperview()
+                                self.blurView.removeFromSuperview()
+                                self.refreshData()
+                            }))
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                }
+            })
+
         } else {
             //change name in database
             let newName = placeHolderChange.text ?? ""
@@ -257,23 +243,22 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
                 docRef.getDocument { (document, error) in
                     if let document = document, document.exists {                    self.db.collection("users").document(self.userID).updateData( [
                         "name": newName
-                        ]);
+                    ]);
                         // self.namePerson = newName
-                        
+                        self.blurView.removeFromSuperview()
+                        self.changeProfilePopup.removeFromSuperview()
                         self.refreshData()
                     } else {
                         print("Document does not exist")
                     }
                 }
             }
-
-            self.changeProfilePopup.removeFromSuperview()
         }
         
-        self.blurView.removeFromSuperview()
+        
     }
     
-    func refreshData () {
+    func refreshData() {
         let docRef = db.collection("users").document(userID)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {

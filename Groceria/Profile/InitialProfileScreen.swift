@@ -46,16 +46,21 @@ class InitialProfileScreen: UIViewController {
         let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
         signOutButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
         
-        let docRef = db.collection("users").document(userID)
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                self.profileNameLabel.text = document.data()?["name"] as? String
+        db.collection("users").document(userID)
+            .addSnapshotListener { documentSnapshot, error in
+                guard let document = documentSnapshot else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+                guard let data = document.data() else {
+                    print("Document data was empty.")
+                    return
+                }
+                self.profileNameLabel.text = data["name"] as? String
                 self.profileNameLabel.sizeToFit()
                 self.profileNameLabel.center.x = self.view.center.x
-                self.profilePicImageView.downloaded(from: document.data()?["profileImage"] as! String)
-            } else {
-                print("Document does not exist")
-            }
+                self.profilePicImageView.downloaded(from: data["profileImage"] as! String)
+                
         }
     }
     
