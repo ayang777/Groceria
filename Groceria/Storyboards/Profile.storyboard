@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jat-LQ-8AN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jat-LQ-8AN">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -526,14 +526,17 @@
                         <outlet property="changeAddressButton" destination="Fo5-NA-ONh" id="EUa-Eb-9Sg"/>
                         <outlet property="changeAddressPopup" destination="g9p-OG-5KF" id="hgs-5y-R2I"/>
                         <outlet property="changeButton" destination="34P-hY-aOu" id="gzF-v0-Dwv"/>
+                        <outlet property="changeEmailPopup" destination="tow-il-PXx" id="cA7-5P-nF2"/>
                         <outlet property="changePasswordView" destination="5NB-6e-lWp" id="n6p-7i-Swa"/>
                         <outlet property="changeProfilePopup" destination="h58-IM-BSX" id="W3W-wh-U2L"/>
                         <outlet property="cityStateTextField" destination="cNt-UX-rzA" id="tF3-A6-EpV"/>
                         <outlet property="cityTextField" destination="Ynf-yv-ikM" id="hI1-Bf-pwH"/>
                         <outlet property="emailTextField" destination="E3U-oh-I0R" id="eWS-4D-08h"/>
                         <outlet property="emailView" destination="SXu-Y9-wTj" id="0Ec-Uv-dIM"/>
+                        <outlet property="enterPasswordPlaceholder" destination="1cd-b3-A41" id="ggL-VK-GCs"/>
                         <outlet property="nameTextField" destination="dwe-7t-Eay" id="ZHv-Ov-O3q"/>
                         <outlet property="nameView" destination="4AI-XR-yrE" id="FUN-7N-Jl7"/>
+                        <outlet property="newEmailPlaceholder" destination="qvO-Su-Zcf" id="knb-Dv-AVe"/>
                         <outlet property="placeHolderChange" destination="eUn-tJ-3M5" id="eFs-0u-A5x"/>
                         <outlet property="stateTextField" destination="OIQ-yK-N2D" id="Soa-yL-gLF"/>
                         <outlet property="titleLabelChangePopup" destination="RBH-hw-jxn" id="Gmd-Zl-kn5"/>
@@ -559,7 +562,6 @@
                             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <state key="normal" backgroundImage="xmark" catalog="system"/>
                             <connections>
-                                <action selector="closeFriendPopup:" destination="dRl-BD-Wz1" eventType="touchUpInside" id="vss-9F-5gb"/>
                                 <action selector="closeProfilePopup:" destination="mpX-Ac-zG5" eventType="touchUpInside" id="PTz-OH-27J"/>
                             </connections>
                         </button>
@@ -601,6 +603,80 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <viewLayoutGuide key="safeArea" id="2mU-qI-G2V"/>
                 </view>
+                <view contentMode="scaleToFill" id="tow-il-PXx">
+                    <rect key="frame" x="0.0" y="0.0" width="273" height="273"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Change Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PgC-XX-y19">
+                            <rect key="frame" x="16" y="17" width="200" height="31"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="26"/>
+                            <color key="textColor" red="0.85490196080000003" green="0.36470588240000001" blue="0.40000000000000002" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t8K-qZ-O5g">
+                            <rect key="frame" x="237" y="23" width="20" height="19"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <state key="normal" backgroundImage="xmark" catalog="system"/>
+                            <connections>
+                                <action selector="closeProfilePopup:" destination="mpX-Ac-zG5" eventType="touchUpInside" id="wg0-f1-aBD"/>
+                            </connections>
+                        </button>
+                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="New Email" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qvO-Su-Zcf" colorLabel="IBBuiltInLabel-Green">
+                            <rect key="frame" x="16" y="83" width="241" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="15"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </textField>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wj3-uk-fPc">
+                            <rect key="frame" x="16" y="114" width="240" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1cd-b3-A41" colorLabel="IBBuiltInLabel-Green">
+                            <rect key="frame" x="16" y="141" width="241" height="34"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="15"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UuJ-hy-SIg">
+                            <rect key="frame" x="67" y="220" width="139" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.058823529409999999" green="0.2156862745" blue="0.38431372549999998" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="displayP3"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="Change">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="1"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="15"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="changeButtonPopup:" destination="mpX-Ac-zG5" eventType="touchUpInside" id="Rk7-r4-qgG"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NIM-kT-i7J">
+                            <rect key="frame" x="16" y="174" width="240" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <viewLayoutGuide key="safeArea" id="yws-o1-SMl"/>
+                </view>
                 <view contentMode="scaleToFill" id="g9p-OG-5KF">
                     <rect key="frame" x="0.0" y="0.0" width="273" height="357"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -619,7 +695,6 @@
                             <state key="normal" backgroundImage="xmark" catalog="system"/>
                             <connections>
                                 <action selector="closeAddressPopup:" destination="mpX-Ac-zG5" eventType="touchUpInside" id="dgC-6u-mgF"/>
-                                <action selector="closeFriendPopup:" destination="dRl-BD-Wz1" eventType="touchUpInside" id="guI-RS-RKH"/>
                             </connections>
                         </button>
                         <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address 1" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mmx-Kv-Zld" colorLabel="IBBuiltInLabel-Green">
@@ -654,7 +729,6 @@
                             </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="changeAddress:" destination="mpX-Ac-zG5" eventType="touchUpInside" id="fbe-wa-WGL"/>
-                                <action selector="requestFriendPopup:" destination="dRl-BD-Wz1" eventType="touchUpInside" id="DpZ-PV-0u7"/>
                             </connections>
                         </button>
                         <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address 2" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HV3-y4-5aQ" colorLabel="IBBuiltInLabel-Green">
@@ -918,11 +992,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
-        <image name="plus.circle" catalog="system" width="128" height="121"/>
+        <image name="checkmark.circle" catalog="system" width="64" height="60"/>
+        <image name="plus.circle" catalog="system" width="64" height="60"/>
         <image name="profile" width="30" height="30"/>
         <image name="right-arrow" width="50" height="50"/>
-        <image name="xmark" catalog="system" width="128" height="113"/>
-        <image name="xmark.circle" catalog="system" width="128" height="121"/>
+        <image name="xmark" catalog="system" width="64" height="56"/>
+        <image name="xmark.circle" catalog="system" width="64" height="60"/>
     </resources>
 </document>

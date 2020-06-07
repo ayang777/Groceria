@@ -34,9 +34,16 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var cityStateTextField: UITextField!
+    
+    // name popup
     @IBOutlet weak var titleLabelChangePopup: UILabel!
     @IBOutlet var changeProfilePopup: UIView!
     @IBOutlet weak var placeHolderChange: UITextField!
+    
+    // email popup
+    @IBOutlet var changeEmailPopup: UIView!
+    @IBOutlet weak var newEmailPlaceholder: UITextField!
+    @IBOutlet weak var enterPasswordPlaceholder: UITextField!
     
     // Address popup variables
     @IBOutlet var changeAddressPopup: UIView!
@@ -77,13 +84,13 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
         popupDesign(current: current)
     }
 
-    // Change Email
+    // Popup email
     @IBAction func popEmailButton(_ sender: Any) {
         current = "email"
         blurView.frame = self.view.bounds
         self.view.addSubview(blurView)
-        self.view.addSubview(changeProfilePopup)
-        changeProfilePopup.center = self.view.center
+        self.view.addSubview(changeEmailPopup)
+        changeEmailPopup.center = self.view.center
         popupDesign(current: current)
         
     }
@@ -97,13 +104,67 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
     // Change address popup
     @IBAction func changeAddress(_ sender: Any) {
         // send address information back to firebase
-        print("current: \(current)")
+        var newAddress1 = address1TextField.text ?? ""
+        var newAddress2 = address2TextField.text ?? ""
+        var newCity = cityTextField.text ?? ""
+        var newState = stateTextField.text ?? ""
+        var newZip = zipTextField.text ?? ""
+        
+        if newAddress1 == "" {
+            newAddress1 = self.address1Person
+        }
+        if newAddress2 == "" {
+            newAddress2 = self.address2Person
+        }
+        if newCity == "" {
+            newCity = self.cityPerson
+        }
+        if newState == "" {
+            newState = self.statePerson
+        }
+        if newZip == "" {
+            newZip = self.zipPerson
+        }
+
+            
+        let docRef = db.collection("users").document(userID)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {                    self.db.collection("users").document(self.userID).updateData( [
+                "address1": newAddress1
+                ]);
+            self.db.collection("users").document(self.userID).updateData( [
+                "address2": newAddress2
+                ]);
+                
+            self.db.collection("users").document(self.userID).updateData( [
+                "city": newCity
+                ]);
+                
+            self.db.collection("users").document(self.userID).updateData( [
+                "state": newState
+                ]);
+                
+            self.db.collection("users").document(self.userID).updateData( [
+                "zip": newZip
+                ]);
+                self.refreshData()
+            } else {
+                print("Document does not exist")
+            }
+        }
         self.changeAddressPopup.removeFromSuperview()
         self.blurView.removeFromSuperview()
     }
     
     // Popup address
     @IBAction func popAddressButton(_ sender: Any) {
+        // clear text in placeholders
+        self.address1TextField.text = ""
+        self.address2TextField.text = ""
+        self.cityTextField.text = ""
+        self.stateTextField.text = ""
+        self.zipTextField.text = ""
+        
         current = "address"
         blurView.frame = self.view.bounds
         self.view.addSubview(blurView)
@@ -129,7 +190,11 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
     
     // Close button for name and email
     @IBAction func closeProfilePopup(_ sender: Any) {
-        self.changeProfilePopup.removeFromSuperview()
+        if current == "name" {
+            self.changeProfilePopup.removeFromSuperview()
+        } else if current == "email" {
+            self.changeEmailPopup.removeFromSuperview()
+        }
         self.blurView.removeFromSuperview()
 
     }
@@ -141,8 +206,9 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
         print(userID)
         
         if current == "email" {
-            let email = placeHolderChange.text ?? ""
+            let email = newEmailPlaceholder.text ?? ""
             print(email)
+            self.changeEmailPopup.removeFromSuperview()
 //            let credential = EmailAuthProvider.credential(withEmail: oldEmail, password: "password")
 //            if let user = Auth.auth().currentUser {
 //                // re authenticate the user
@@ -178,25 +244,71 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
 //                    //need to also update database
 //                }
 //            }
+            
         } else {
             //change name in database
-            
+            let newName = placeHolderChange.text ?? ""
+            if newName == "" {
+                let alert = UIAlertController(title: "Error!", message: "Name cannot be empty.", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Close", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                let docRef = db.collection("users").document(userID)
+                docRef.getDocument { (document, error) in
+                    if let document = document, document.exists {                    self.db.collection("users").document(self.userID).updateData( [
+                        "name": newName
+                        ]);
+                        // self.namePerson = newName
+                        
+                        self.refreshData()
+                    } else {
+                        print("Document does not exist")
+                    }
+                }
+            }
+
+            self.changeProfilePopup.removeFromSuperview()
         }
         
-
-        
-        self.changeProfilePopup.removeFromSuperview()
         self.blurView.removeFromSuperview()
+    }
+    
+    func refreshData () {
+        let docRef = db.collection("users").document(userID)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                // grab information and change label placeholders
+                self.namePerson = document.data()?["name"] as! String
+                self.nameTextField.attributedPlaceholder = NSAttributedString(string: self.namePerson)
+                
+                self.emailPerson = document.data()?["email"] as! String
+                self.emailTextField.attributedPlaceholder = NSAttributedString(string: self.emailPerson)
+                
+                self.address1Person = document.data()?["address1"] as! String
+                self.address2Person = document.data()?["address2"] as! String
+                self.cityPerson = document.data()?["city"] as! String
+                self.statePerson = document.data()?["state"] as! String
+                self.zipPerson = document.data()?["zip"] as! String
+                self.cityStateTextField.attributedPlaceholder = NSAttributedString(string: self.cityPerson + ", " + self.statePerson)
+            } else {
+                print("Document does not exist")
+            }
+        }
     }
     
     // Popup for name, email, and address
     func popupDesign (current: String) {
+        // clear text in placeholders
+        self.placeHolderChange.text = ""
+        self.newEmailPlaceholder.text = ""
+        self.enterPasswordPlaceholder.text = ""
+        
         if current == "name" {
             self.titleLabelChangePopup.text = "Change Name"
             self.placeHolderChange.attributedPlaceholder = NSAttributedString(string: self.namePerson)
         } else if current == "email" {
-            self.titleLabelChangePopup.text = "Change Email"
-            self.placeHolderChange.attributedPlaceholder = NSAttributedString(string: self.emailPerson)
+            self.newEmailPlaceholder.attributedPlaceholder = NSAttributedString(string: "New Email")
+            self.enterPasswordPlaceholder.attributedPlaceholder = NSAttributedString(string: "Password")
         }
         
         changeButton.layer.shadowColor = UIColor.black.cgColor
@@ -236,6 +348,7 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
                 print("Document does not exist")
             }
         }
+        
                 
         // add borders for cells
         nameView.layer.borderWidth = 0.25
