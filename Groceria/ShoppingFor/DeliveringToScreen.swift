@@ -72,7 +72,7 @@ class DeliveringToScreen: UIViewController {
     }
     
     @IBAction func openInMaps(_ sender: Any) {
-        let directionsURL = "http://maps.apple.com/?saddr=35.6813023,139.7640529&daddr=35.4657901,139.6201192"
+        let directionsURL = "http://maps.apple.com/?saddr=37.765919,-121.903075&daddr=37.748590,-121.896250"
         guard let url = URL(string: directionsURL) else {
             return
         }
