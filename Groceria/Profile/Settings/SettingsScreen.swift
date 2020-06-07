@@ -28,6 +28,7 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
     // Name + email popup variables
     @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var changeButton: UIButton!
+    @IBOutlet weak var changeNameButton: UIButton!
     @IBOutlet weak var emailView: UIView!
     @IBOutlet weak var addressView: UIView!
     @IBOutlet weak var changePasswordView: UIView!
@@ -286,23 +287,30 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
         self.newEmailPlaceholder.text = ""
         self.enterPasswordPlaceholder.text = ""
         
+        let buttonColor1 = UIColor(red: 82.0/255.0, green: 152.0/255.0, blue: 217.0/255.0, alpha: 1.0)
+        let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
+        
         if current == "name" {
             self.titleLabelChangePopup.text = "Change Name"
             self.placeHolderChange.attributedPlaceholder = NSAttributedString(string: self.namePerson)
+            changeNameButton.layer.shadowColor = UIColor.black.cgColor
+            changeNameButton.layer.shadowRadius = 2.0
+            changeNameButton.layer.shadowOpacity = 0.7
+            changeNameButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+            changeNameButton.layer.masksToBounds = false
+            changeNameButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
         } else if current == "email" {
             self.newEmailPlaceholder.attributedPlaceholder = NSAttributedString(string: "New Email")
             self.enterPasswordPlaceholder.attributedPlaceholder = NSAttributedString(string: "Password")
+            changeButton.layer.shadowColor = UIColor.black.cgColor
+            changeButton.layer.shadowRadius = 2.0
+            changeButton.layer.shadowOpacity = 0.7
+            changeButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+            changeButton.layer.masksToBounds = false
+            changeButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
         }
         
-        changeButton.layer.shadowColor = UIColor.black.cgColor
-        changeButton.layer.shadowRadius = 2.0
-        changeButton.layer.shadowOpacity = 0.7
-        changeButton.layer.shadowOffset = CGSize(width: 2, height: 2)
-        changeButton.layer.masksToBounds = false
-        
-        let buttonColor1 = UIColor(red: 82.0/255.0, green: 152.0/255.0, blue: 217.0/255.0, alpha: 1.0)
-        let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
-        changeButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
+
     }
     
     

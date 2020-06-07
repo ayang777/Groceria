@@ -534,6 +534,7 @@
                         <outlet property="changeAddressPopup" destination="g9p-OG-5KF" id="hgs-5y-R2I"/>
                         <outlet property="changeButton" destination="UuJ-hy-SIg" id="TLl-we-Tgy"/>
                         <outlet property="changeEmailPopup" destination="tow-il-PXx" id="cA7-5P-nF2"/>
+                        <outlet property="changeNameButton" destination="34P-hY-aOu" id="klr-Vp-OVq"/>
                         <outlet property="changePasswordView" destination="5NB-6e-lWp" id="n6p-7i-Swa"/>
                         <outlet property="changeProfilePopup" destination="h58-IM-BSX" id="W3W-wh-U2L"/>
                         <outlet property="cityStateTextField" destination="cNt-UX-rzA" id="tF3-A6-EpV"/>
