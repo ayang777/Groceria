@@ -254,8 +254,6 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
                 }
             }
         }
-        
-        
     }
     
     func refreshData() {
@@ -305,6 +303,14 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
         let buttonColor1 = UIColor(red: 82.0/255.0, green: 152.0/255.0, blue: 217.0/255.0, alpha: 1.0)
         let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
         changeButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
+    }
+    
+    
+    @IBAction func changePasswordButton(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "ChangePasswordScreen") as! ChangePasswordScreen
+        self.navigationController?.pushViewController(vc, animated: true)
+
     }
     
     
@@ -386,3 +392,4 @@ class SettingsScreen: UIViewController, UITextFieldDelegate {
 
 
 }
+
