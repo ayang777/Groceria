@@ -110,6 +110,8 @@ class InitialScreen: UIViewController, UITextFieldDelegate {
         //add gesture to sign up button
         let signUpGesture = UITapGestureRecognizer(target: self, action: #selector(InitialScreen.goToCreateAccount))
         signUpButton.addGestureRecognizer(signUpGesture)
+        
+        self.forgotPasswordPopup.layer.cornerRadius = 8 
     }
     
     @IBAction func goToDashboard(_ sender: Any) {
