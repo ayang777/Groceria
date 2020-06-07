@@ -20,6 +20,7 @@ class ChangePasswordScreen: UIViewController {
     @IBOutlet weak var oldPasswordTextField: UITextField!
     @IBOutlet weak var newPasswordTextField: UITextField!
     @IBOutlet weak var verifyNewPasswordTextField: UITextField!
+    @IBOutlet weak var changeButton: UIButton!
     
     @IBAction func changePasswordButton(_ sender: Any) {
         let oldPassword = oldPasswordTextField.text ?? ""
@@ -60,9 +61,16 @@ class ChangePasswordScreen: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("hi")
         
-
+        changeButton.layer.shadowColor = UIColor.black.cgColor
+        changeButton.layer.shadowRadius = 2.0
+        changeButton.layer.shadowOpacity = 0.7
+        changeButton.layer.shadowOffset = CGSize(width: 2, height: 2)
+        changeButton.layer.masksToBounds = false
+        
+        let buttonColor1 = UIColor(red: 82.0/255.0, green: 152.0/255.0, blue: 217.0/255.0, alpha: 1.0)
+        let buttonColor2 = UIColor(red: 15.0/255.0, green: 55.0/255.0, blue: 98.0/255.0, alpha: 1.0)
+        changeButton.applyGradient(colors: [buttonColor1.cgColor, buttonColor2.cgColor])
     }
 
 }

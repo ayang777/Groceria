@@ -76,7 +76,6 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Palo Alto" id="7ah-U8-jiN">
                         <barButtonItem key="backBarButtonItem" title=" " id="QPI-v2-zST"/>
-                        <barButtonItem key="leftBarButtonItem" title="Filter" id="3Dc-nX-ol0"/>
                         <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="ynG-7m-1OZ">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
