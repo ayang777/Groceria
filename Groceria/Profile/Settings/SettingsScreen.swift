@@ -9,11 +9,13 @@
 import UIKit
 import Firebase
 
-class SettingsScreen: UIViewController {
+class SettingsScreen: UIViewController, UITextFieldDelegate {
     let db = Firestore.firestore()
     
     // Stored information from firebase
     let userID: String = (Auth.auth().currentUser?.uid)!
+    let oldEmail: String = (Auth.auth().currentUser?.email)!
+    
     var namePerson: String = ""
     var emailPerson: String = ""
     var address1Person: String = ""
@@ -48,8 +50,18 @@ class SettingsScreen: UIViewController {
     
     // Delete account from system
     @IBAction func deleteAccount(_ sender: Any) {
-        print("Delete account")
-        // popup asking to Are you sure you want to delete your account?
+        let alert = UIAlertController(title: "Are you sure you want to delete your account?", message: "This action cannot be undone.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
+            //delete from firebase ?
+            do {
+                try Auth.auth().signOut()
+                //navigationController?.popToRootViewController(animated: true)
+                self.performSegue(withIdentifier: "DeleteAccount", sender: nil)
+            }
+            catch { print("already logged out") }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     // Change Name, Email, Address popups
@@ -73,6 +85,7 @@ class SettingsScreen: UIViewController {
         self.view.addSubview(changeProfilePopup)
         changeProfilePopup.center = self.view.center
         popupDesign(current: current)
+        
     }
     
     // Close address popup
@@ -118,6 +131,7 @@ class SettingsScreen: UIViewController {
     @IBAction func closeProfilePopup(_ sender: Any) {
         self.changeProfilePopup.removeFromSuperview()
         self.blurView.removeFromSuperview()
+
     }
     
     // Change button for name and email
@@ -125,6 +139,52 @@ class SettingsScreen: UIViewController {
         print("current: \(current)")
         // send information back to firebase
         print(userID)
+        
+        if current == "email" {
+            let email = placeHolderChange.text ?? ""
+            print(email)
+//            let credential = EmailAuthProvider.credential(withEmail: oldEmail, password: "password")
+//            if let user = Auth.auth().currentUser {
+//                // re authenticate the user
+//                user.reauthenticate(with: credential) { error in
+//                    if let error = error {
+//                        // An error happened.
+//                    } else {
+//                        // User re-authenticated.
+//                        user.updateEmail(to: "email") { (error) in
+//                            // email updated
+//                        }
+//                    }
+//                }
+//            }
+//
+//
+//            user?.updateEmail(to: email) { error in
+//                print(error)
+//                if error != nil {
+//                    let alert = UIAlertController(title: "Unable to Change Email", message: error?.localizedDescription, preferredStyle: UIAlertController.Style.alert)
+//                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+//                    self.present(alert, animated: true, completion: nil)
+//                } else {
+//                    let alert = UIAlertController(title: "Email updated successfully", message: "", preferredStyle: UIAlertController.Style.alert)
+//                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { action in
+//                        self.db.collection("users").document(self.userID).updateData( [
+//                            "email": email
+//                        ]);
+//                        self.changeProfilePopup.removeFromSuperview()
+//                        self.blurView.removeFromSuperview()
+//                    }))
+//                    self.present(alert, animated: true, completion: nil)
+//                    //need to also update database
+//                }
+//            }
+        } else {
+            //change name in database
+            
+        }
+        
+
+        
         self.changeProfilePopup.removeFromSuperview()
         self.blurView.removeFromSuperview()
     }
@@ -186,5 +246,45 @@ class SettingsScreen: UIViewController {
         changePasswordView.layer.borderColor = UIColor.lightGray.cgColor
 
     }
+    
+    
+    
+    //MARK: Textfield Delegate
+    // When user press the return key in keyboard
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("textFieldShouldReturn")
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // It is called before text field become active
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.backgroundColor = UIColor.lightGray
+        return true
+    }
+    
+    // It is called when text field activated
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("textFieldDidBeginEditing")
+    }
+    
+    // It is called when text field going to inactive
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.backgroundColor = UIColor.white
+        return true
+    }
+    
+    // It is called when text field is inactive
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("textFieldDidEndEditing")
+    }
+    
+    // It is called each time user type a character by keyboard
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        print(string)
+        return true
+    }
+
 
 }

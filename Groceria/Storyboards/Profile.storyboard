@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jat-LQ-8AN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jat-LQ-8AN">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -538,6 +538,7 @@
                         <outlet property="stateTextField" destination="OIQ-yK-N2D" id="Soa-yL-gLF"/>
                         <outlet property="titleLabelChangePopup" destination="RBH-hw-jxn" id="Gmd-Zl-kn5"/>
                         <outlet property="zipTextField" destination="lnO-mh-dCl" id="tun-fM-8HS"/>
+                        <segue destination="JQx-Wb-io6" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="dah-EZ-nts"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lsD-JE-bhX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -594,7 +595,6 @@
                             </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="changeButtonPopup:" destination="mpX-Ac-zG5" eventType="touchUpInside" id="1ce-UE-TIl"/>
-                                <action selector="requestFriendPopup:" destination="dRl-BD-Wz1" eventType="touchUpInside" id="HgQ-Xp-ck6"/>
                             </connections>
                         </button>
                     </subviews>
@@ -727,6 +727,16 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="1927.5362318840582" y="1119.6428571428571"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="SAB-bf-MsS">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="JQx-Wb-io6" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="r96-9o-Do0"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3ed-gw-Fix" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2692" y="1120"/>
         </scene>
         <!--Single Friend View Controller-->
         <scene sceneID="LgV-ZO-N3Z">
@@ -908,11 +918,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkmark.circle" catalog="system" width="64" height="60"/>
-        <image name="plus.circle" catalog="system" width="64" height="60"/>
+        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
+        <image name="plus.circle" catalog="system" width="128" height="121"/>
         <image name="profile" width="30" height="30"/>
         <image name="right-arrow" width="50" height="50"/>
-        <image name="xmark" catalog="system" width="64" height="56"/>
-        <image name="xmark.circle" catalog="system" width="64" height="60"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
+        <image name="xmark.circle" catalog="system" width="128" height="121"/>
     </resources>
 </document>
