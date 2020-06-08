@@ -109,7 +109,7 @@ class FriendsScreenView: UIViewController {
             let email = emailField.text!
             
             // TODO: check if email exists in database
-            let userRef = db.collection("users").whereField("email", isEqualTo: email).getDocuments() { (querySnapshot, err) in
+            _ = db.collection("users").whereField("email", isEqualTo: email).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
